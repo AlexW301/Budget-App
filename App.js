@@ -15,7 +15,7 @@ import { useFonts, Rubik_300Light, Rubik_300Light_Italic, Rubik_400Regular, Rubi
         Rubik_700Bold, Rubik_700Bold_Italic, Rubik_900Black, Rubik_900Black_Italic} from '@expo-google-fonts/rubik';
 import AppLoading from 'expo';
 
-
+//test changes
 // GLOBAL VARIABLES ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 global.shortid = require('shortid');
