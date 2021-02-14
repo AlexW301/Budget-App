@@ -55,7 +55,7 @@ export default function MyBudget({navigation}) {
                 color: colors.text, fontFamily: 'Rubik_400Regular'}}>Your Budget is ${myBudget}</Text>
             </TouchableOpacity>
             <Text style={{alignContent: 'center', justifyContent: 'center', position: 'relative', marginTop: '-3%', color: colors.text, fontSize: 20,
-                    fontFamily: 'Rubik_400Regular_Italic'}}>you have...</Text>
+                    fontFamily: 'Rubik_400Regular_Italic'}}>you still have...</Text>
             <Text style={{alignContent: 'center', justifyContent: 'center', position: 'relative', fontSize: 50, fontFamily: 'Rubik_700Bold',
                     color: colors.text}}>${currentBudget}</Text>
             <View style={styles.buttonView}>
