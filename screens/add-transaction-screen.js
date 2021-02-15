@@ -1,8 +1,9 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, Keyboard } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
+
 
 
 global.colors = {
@@ -16,6 +17,27 @@ export default function AddTransaction({navigation}) {
   const isFocused = useIsFocused();
   const [description, updateDescription] = useState('')
   const [amount, updateAmount] = useState()
+  const [currentDate, setCurrentDate] = useState('')
+
+  useEffect(() => {
+    var date = new Date().getDate(); //Current Date
+    var month = new Date().getMonth() + 1; //Current Month
+    var year = new Date().getFullYear(); //Current Year
+    var hours = new Date().getHours(); //Current Hours
+    var min = new Date().getMinutes(); //Current Minutes
+    var sec = new Date().getSeconds(); //Current Seconds
+    setCurrentDate(
+      month + '/' + date + '/' + year 
+      + ' ' + hours + ':' + min + ':' + sec
+    );
+  }, []);
+
+  var date = new Date().getDate(); //Current Date
+    var month = new Date().getMonth() + 1; //Current Month
+    var year = new Date().getFullYear(); //Current Year
+    var hours = new Date().getHours(); //Current Hours
+    var min = new Date().getMinutes(); //Current Minutes
+    var sec = new Date().getSeconds(); //Current Seconds
 
   if(isFocused) {
     
@@ -65,6 +87,7 @@ export default function AddTransaction({navigation}) {
           createTransaction = true
           transaction.type = "expense"
           transaction.name = transaction.name
+          transaction.date = currentDate
           transaction.amount = Number(transaction.amount).toFixed(2)
           if (transaction.name && transaction.amount) {
             navigation.navigate('MyBudget', transaction)

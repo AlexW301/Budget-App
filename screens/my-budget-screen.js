@@ -98,7 +98,8 @@ export default function MyBudget({navigation}) {
                                     //Alert.alert(pos)
                                 }}>
                                     <View style={styles.transactionItem}>
-                                        <Text style={styles.itemName}>{item.name} </Text>
+                                        <Text style={styles.itemDate}>{item.date}</Text>
+                                        <Text style={styles.itemName}>{item.name}</Text>
                                         <View style={styles.buffer}><Text style={styles.itemAmount}>-${item.amount}</Text></View>
                                     </View>
 
@@ -179,7 +180,17 @@ export default function MyBudget({navigation}) {
         fontFamily: 'Rubik_400Regular',
         color: colors.text,
         left: 15,
-        top: 5
+        bottom: 20
+    },
+
+    itemDate: {
+        alignContent: 'center',
+        marginTop: 10,
+        fontSize: 15,
+        fontFamily: 'Rubik_400Regular',
+        color: 'black',
+        left: 215,
+        bottom: 32
     },
 
     itemAmount: {
@@ -187,7 +198,8 @@ export default function MyBudget({navigation}) {
       marginTop: 10,
       fontSize: 30,
       color: colors.text,
-      fontFamily: 'Rubik_500Medium'
+      fontFamily: 'Rubik_500Medium',
+      bottom: 25
     },
 
     buffer: {

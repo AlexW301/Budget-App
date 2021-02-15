@@ -24,7 +24,8 @@ global.transaction = {
   name: "",
   amount: 0,
   type: "expense",
-  key: ""
+  key: "",
+  date: ""
 }
 global.createTransaction = false
 global.transactionsArray = []
@@ -182,3 +183,4 @@ const styles = StyleSheet.create({
     fontFamily: 'Rubik_400Regular'
   } 
 });
+

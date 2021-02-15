@@ -14,7 +14,7 @@ export default function SetBudget({navigation}) {
   let newBudget
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#0E6251' }}>
-        <Text style={{ position: 'relative', color: colors.text, fontSize: 35, fontFamily: 'Rubik_300Light'}}>What is your budget?</Text>
+        <Text style={{ position: 'relative', color: colors.text, fontSize: 35, fontFamily: 'Rubik_300Light', bottom: '38%'}}>What is your budget?</Text>
         <TextInput
           style={styles.budgetInput}
           keyboardType= 'numeric'
@@ -43,16 +43,19 @@ export default function SetBudget({navigation}) {
 
   const styles = StyleSheet.create({
     budgetInput: {
-      height: 40,
-      width: 150, 
-      fontSize: 20,
+      position: 'relative',
+      width: '50%',
+      fontSize: 35,
       borderColor: 'gray',
       borderWidth: 2,
-      borderRadius: 25,
-      fontFamily: 'Rubik_500Medium',
+      top: '0%',
       color: colors.text,
-      marginBottom: '5%',
-      marginTop: '5%'
+      borderRadius: 50,
+      paddingStart: 0,
+      height: '9%',
+      textAlign: 'center',
+      marginTop: '-30%',
+      marginBottom: '20%'
     }
   });
   
