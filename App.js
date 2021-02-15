@@ -158,7 +158,8 @@ global.displayData = async () => {
           name: transactionsArrayParsed[i].name,
           amount: transactionsArrayParsed[i].amount,
           type: transactionsArrayParsed[i].type,
-          key: transactionsArrayParsed[i].key
+          key: transactionsArrayParsed[i].key,
+          date: transactionsArrayParsed[i].date
         }
         recreatedTransactionsArray.push(newTransaction)
       }
