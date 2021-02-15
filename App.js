@@ -71,7 +71,7 @@ function HomeScreen({ navigation, route}) {
   } else {
     
     return (
-      <Stack.Navigator initialRouteName='LoadingScreen' HeaderTitle="My Budget Screen" >
+      <Stack.Navigator initialRouteName='LoadingScreen' HeaderTitle="My Budget Screen">
         <Stack.Screen name="MyBudget" component={MyBudget} options={{ title: 'My Budget', headerLeft: null, 
         headerTitleAlign: 'center', headerStyle: styles.header, headerTitleStyle: styles.headerTitle}} />
         <Stack.Screen name="SetBudget" component={SetBudget} options={{ title: 'Set My Budget', headerStyle: styles.header, headerTitleStyle: styles.headerTitle,
@@ -121,7 +121,7 @@ export default function App() {
 
   
     return (
-      <NavigationContainer>
+      <NavigationContainer >
       <Tab.Navigator initialRouteName="MyBudget" tabBarOptions={{activeTintColor: colors.text, inactiveTintColor: colors.text, activeBackgroundColor: '#117864', inactiveBackgroundColor: '#148F77'}}>
         <Tab.Screen name="MyBudget" component={HomeScreen} options={{ title: 'My Budget', tabBarVisible: true}} />
         <Tab.Screen name="AddTransaction" component={AddTransactionScreen} options={{ title: 'Add Transaction' }} />

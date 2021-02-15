@@ -13,7 +13,7 @@ global.colors = {
 export default function SetBudget({navigation}) { 
   let newBudget
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.main }}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#0E6251' }}>
         <Text style={{ position: 'relative', color: colors.text, fontSize: 35, fontFamily: 'Rubik_300Light'}}>What is your budget?</Text>
         <TextInput
           style={styles.budgetInput}

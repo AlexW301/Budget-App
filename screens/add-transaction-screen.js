@@ -23,7 +23,7 @@ export default function AddTransaction({navigation}) {
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.main }}>
-        <View style={{justifyContent: 'center', position: 'relative', bottom: '27%'}}>
+        <View style={{justifyContent: 'center', position: 'relative', bottom: '17%'}}>
           <Text style={{
             textAlign: 'center',
             fontSize: 40,
@@ -33,12 +33,13 @@ export default function AddTransaction({navigation}) {
           }}>Add A Transaction</Text>
         <Text style={{justifyContent: 'center', position: 'relative', top: '30%', textAlign: 'center', fontFamily: 'Rubik_400Regular_Italic', color: colors.text, fontSize: 18}}>Your Current Balance is ${currentBudget}</Text>
         </View>
-        <View style={{position: 'relative', top: '-15%'}}>
+        <View style={{position: 'relative', top: '-5%'}}>
         <Text style={{position: 'relative', textAlign: 'center', fontSize: 20, bottom: '5%', fontFamily: 'Rubik_400Regular', color: colors.text}}>New Transaction</Text>
         <TextInput
           id='descriptionInput'
-          style={{position: 'relative', width: 330, fontSize: 15, borderColor: colors.text, borderWidth: 2, top: '0%', color: colors.text}}
+          style={{position: 'relative', width: 330, fontSize: 15, borderColor: 'gray', borderWidth: 2, top: '0%', color: colors.text, borderRadius: 50, paddingStart: 10, height: '15%'}}
           placeholder=' Description'
+          placeholderTextColor= {colors.text}
           onChangeText={(value) => {
             updateDescription(value)
             transaction.name = value
@@ -46,9 +47,10 @@ export default function AddTransaction({navigation}) {
           value={description}
           />
         <TextInput
-          style={{position: 'relative', width: 330, fontSize: 15, borderColor: colors.text, borderWidth: 2, top: '10%', color: colors.text}}
+          style={{position: 'relative', width: 330, fontSize: 15, borderColor: 'gray', borderWidth: 2, top: '0%', color: colors.text, borderRadius: 50, paddingStart: 10, height: '15%', top: '5%'}}
           keyboardType= 'numeric'
           placeholder= ' Amount'
+          placeholderTextColor= {colors.text}
           onChangeText={(value) => {
             updateAmount(value)
             transaction.amount = value
@@ -111,7 +113,7 @@ export default function AddTransaction({navigation}) {
       fontSize: 15,
       borderColor: 'gray',
       borderWidth: 2,
-      top: '0%',
+      top: '0%'
     },
     addBtn: {
       top: 280
