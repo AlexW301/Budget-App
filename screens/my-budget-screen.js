@@ -51,10 +51,10 @@ export default function MyBudget({navigation}) {
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.main}}>
             <TouchableOpacity
                 onPress={() => { navigation.navigate('SetBudget') }}>
-                <Text style={{alignContent: 'center', justifyContent: 'center', position: 'relative', width: '100%', bottom: '40%', fontSize: 30,
+                <Text style={{alignContent: 'center', justifyContent: 'center', position: 'relative', width: '100%', top: '220%', fontSize: 30,
                 color: colors.text, fontFamily: 'Rubik_400Regular'}}>Your Budget is ${myBudget}</Text>
             </TouchableOpacity>
-            <Text style={{alignContent: 'center', justifyContent: 'center', position: 'relative', marginTop: '-3%', color: colors.text, fontSize: 20,
+            <Text style={{alignContent: 'center', justifyContent: 'center', position: 'relative', marginTop: '23%', color: colors.text, fontSize: 20,
                     fontFamily: 'Rubik_400Regular_Italic'}}>you have...</Text>
             <Text style={{alignContent: 'center', justifyContent: 'center', position: 'relative', fontSize: 50, fontFamily: 'Rubik_700Bold',
                     color: colors.text}}>${currentBudget}</Text>
@@ -139,6 +139,7 @@ export default function MyBudget({navigation}) {
                                 //Alert.alert(pos)
                             }}>
                                 <View style={styles.transactionItem}>
+                                <Text style={styles.itemDate}>{item.date}</Text>
                                     <Text style={styles.itemName}>{item.name} </Text>
                                     <View style={styles.buffer}><Text style={styles.itemAmount}>${item.amount}</Text></View>
                                 </View>
@@ -167,8 +168,8 @@ export default function MyBudget({navigation}) {
         alignContent: 'center',
         position: 'relative',
         bottom: '-5%',
-        height: '100%',
-        maxHeight: 500,
+        height: '86%',
+        maxHeight: '86%',
         maxWidth: 375,
         width: 375,
     }, 
@@ -188,8 +189,8 @@ export default function MyBudget({navigation}) {
         marginTop: 10,
         fontSize: 15,
         fontFamily: 'Rubik_400Regular',
-        color: 'black',
-        left: 215,
+        color: '#464646',
+        left: 265,
         bottom: 32
     },
 

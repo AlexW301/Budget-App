@@ -27,8 +27,7 @@ export default function AddTransaction({navigation}) {
     var min = new Date().getMinutes(); //Current Minutes
     var sec = new Date().getSeconds(); //Current Seconds
     setCurrentDate(
-      month + '/' + date + '/' + year 
-      + ' ' + hours + ':' + min + ':' + sec
+      month + '/' + date + '/' + year
     );
   }, []);
 
@@ -106,6 +105,7 @@ export default function AddTransaction({navigation}) {
           Keyboard.dismiss()
           createTransaction = true
           transaction.type = "deposit"
+          transaction.date = currentDate
           transaction.amount = Number(transaction.amount).toFixed(2)
           if (transaction.name && transaction.amount) {
           navigation.navigate('MyBudget', transaction)
