@@ -170,7 +170,7 @@ export default function MyBudget({navigation}) {
         bottom: '-5%',
         height: '86%',
         maxHeight: '86%',
-        maxWidth: 375,
+        maxWidth: '90%',
         width: 375,
     }, 
     
