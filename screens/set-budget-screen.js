@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Alert, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { color } from 'react-native-reanimated';
+import SimpleButton from '../components/simple-button';
 
 global.colors = {
   main: '#0E6251',
@@ -19,7 +20,6 @@ export default function SetBudget({navigation}) {
           style={styles.budgetInput}
           keyboardType= 'numeric'
           onChangeText={(value) => newBudget = value}
-          
           />
           <Button
           onPress={() => {

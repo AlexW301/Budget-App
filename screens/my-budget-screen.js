@@ -49,9 +49,9 @@ export default function MyBudget({navigation}) {
     }
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.main}}>
-            <TouchableOpacity
+            <TouchableOpacity style={{alignContent: 'center', justifyContent: 'center', position: 'relative', width: '100%', top: '13%'}}
                 onPress={() => { navigation.navigate('SetBudget') }}>
-                <Text style={{alignContent: 'center', justifyContent: 'center', position: 'relative', width: '100%', top: '220%', fontSize: 30,
+                <Text style={{fontSize: 30, textAlign: 'center',
                 color: colors.text, fontFamily: 'Rubik_400Regular'}}>Your Budget is ${myBudget}</Text>
             </TouchableOpacity>
             <Text style={{alignContent: 'center', justifyContent: 'center', position: 'relative', marginTop: '23%', color: colors.text, fontSize: 20,
