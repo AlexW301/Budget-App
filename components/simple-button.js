@@ -2,6 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, Alert, TouchableOpacity } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
+global.colors = {
+    main: '#0E6251',
+    text: '#E8F8F5',
+    shade1: '#117864'
+  }
+  
+
 export default function SimpleButton({title, onPress}) {
 
     return (
@@ -17,17 +24,23 @@ export default function SimpleButton({title, onPress}) {
 
 const styles = StyleSheet.create({
     button: {
-        borderColor: 'black',
+        borderColor: colors.text,
         borderWidth: 2,
-        width: 130,
-        height: 50,
-        backgroundColor: colors.text
+        borderRadius: 25,
+        backgroundColor: '#117864',
+        alignContent: 'center',
+        paddingHorizontal: 105,
+        paddingVertical: 14,
+        
+        
     },
 
     buttonText: {
         position: 'relative',
         justifyContent: 'center',
         textAlign: 'center',
-        color: '#464646'
+        color: colors.text,
+        fontFamily: 'Rubik_400Regular',
+        fontSize: 27
     }
 })
