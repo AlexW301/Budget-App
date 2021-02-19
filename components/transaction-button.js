@@ -9,10 +9,10 @@ global.colors = {
   }
   
 
-export default function SimpleButton({title, onPress}) {
+export default function TransactionButton({title, onPress, style}) {
 
     return (
-        <View style={{flex: 1, position: 'relative', justifyContent: 'center'}}>
+        <View style={style}>
             <TouchableOpacity onPress={onPress}>
                 <View style={styles.button}>
                     <Text style={styles.buttonText}>{title}</Text>
@@ -27,10 +27,10 @@ const styles = StyleSheet.create({
         borderColor: colors.text,
         borderWidth: 2,
         borderRadius: 25,
-        backgroundColor: '#117864',
+        backgroundColor: '#0B5345',
         alignContent: 'center',
-        paddingHorizontal: 105,
-        paddingVertical: 14,
+        paddingHorizontal: 15,
+        paddingVertical: 9,
         
         
     },
@@ -41,6 +41,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: colors.text,
         fontFamily: 'Rubik_400Regular',
-        fontSize: 27
+        fontSize: 20
     }
 })

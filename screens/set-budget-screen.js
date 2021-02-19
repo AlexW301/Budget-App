@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Alert, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { color } from 'react-native-reanimated';
-import SimpleButton from '../components/simple-button';
+import SetBudgetButton from '../components/set-budget-button';
 
 global.colors = {
   main: '#0E6251',
@@ -22,7 +22,7 @@ export default function SetBudget({navigation}) {
           onChangeText={(value) => newBudget = value}
           />
           <View style={{position: 'relative', justifyContent: 'center', alignContent: 'center', bottom: '25%'}}>
-          <SimpleButton title='Set Budget' onPress={() => {
+          <SetBudgetButton title='Set Budget' onPress={() => {
             myBudget = newBudget
             currentBudget = newBudget
             for (var i = 0; i < transactionsArray.length; i++) {
