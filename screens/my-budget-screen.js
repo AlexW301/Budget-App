@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Alert, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import AddTransaction from './add-transaction-screen';
@@ -17,6 +17,18 @@ export default function MyBudget({navigation}) {
     const [visible, setVisible] = useState(false);
   
     const [refresh, initRefresh] = useState(1)
+
+    const [currentDate, setCurrentDate] = useState("");
+
+    useEffect(() => {
+      var date = new Date().getDate(); //Current Date
+      var month = new Date().getMonth() + 1; //Current Month
+      var year = new Date().getFullYear(); //Current Year
+      var hours = new Date().getHours(); //Current Hours
+      var min = new Date().getMinutes(); //Current Minutes
+      var sec = new Date().getSeconds(); //Current Seconds
+      setCurrentDate(date);
+    }, []);
    
     /////////// ADD TRANSACTION VARIABLE TO THE ARRAY //////////////////////////////////////////
 
@@ -55,9 +67,9 @@ export default function MyBudget({navigation}) {
                 color: colors.text, fontFamily: 'Rubik_400Regular'}}>Your Budget is ${myBudget}</Text>
             </TouchableOpacity>
             <Text style={{alignContent: 'center', justifyContent: 'center', position: 'relative', marginTop: '23%', color: colors.text, fontSize: 20,
-                    fontFamily: 'Rubik_400Regular_Italic'}}>you have...</Text>
+                    fontFamily: 'Rubik_400Regular_Italic'}}>you have...{currentDate}</Text>
             <Text style={{alignContent: 'center', justifyContent: 'center', position: 'relative', fontSize: 50, fontFamily: 'Rubik_700Bold',
-                    color: colors.text}}>${currentBudget}</Text>
+                    color: colors.text}}>${Number(currentBudget).toFixed(2)}</Text>
             <View style={styles.buttonView}>
                 <FlatList
                     style={styles.flatList}
