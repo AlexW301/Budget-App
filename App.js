@@ -25,6 +25,7 @@ import {
   Rubik_900Black_Italic,
 } from "@expo-google-fonts/rubik";
 import AppLoading from "expo";
+import MonthlyReportScreen from "./screens/monthly-report-screen";
 
 // GLOBAL VARIABLES ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -42,12 +43,16 @@ global.createTransaction = false;
 global.transactionsArray = [];
 
 global.recreatedTransactionsArray = [];
+global.budgetsByMonth = [];
+global.monthsBudgeted = [];
 
 global.colors = {
   main: "#0E6251",
   text: "#E8F8F5",
   shade1: "#117864",
 };
+
+global.firstDayOfMonth = true
 // NAVIGATION STACK ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const Stack = createStackNavigator();
@@ -100,6 +105,11 @@ function HomeScreen({ navigation, route }) {
           component={LoadingScreen}
           options={{ title: "Loading Screen", headerShown: false }}
         />
+        <Stack.Screen
+          name="MonthlyReportScreen"
+          component={MonthlyReportScreen}
+          options={{ title: "Monthly Report", headerShown: true }}
+        />
       </Stack.Navigator>
     );
   } else {
@@ -133,6 +143,11 @@ function HomeScreen({ navigation, route }) {
           name="LoadingScreen"
           component={LoadingScreen}
           options={{ title: "Loading Screen", headerShown: false }}
+        />
+        <Stack.Screen
+          name="MonthlyReportScreen"
+          component={MonthlyReportScreen}
+          options={{ title: "Monthly Report", headerShown: true }}
         />
       </Stack.Navigator>
     );

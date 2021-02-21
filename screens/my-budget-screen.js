@@ -20,6 +20,10 @@ export default function MyBudget({navigation}) {
 
     const [currentDate, setCurrentDate] = useState("");
 
+    const [daysLeft, setDaysLeft] = useState();
+
+    const [currentMonth, setCurrentMonth] = useState();
+
     useEffect(() => {
       var date = new Date().getDate(); //Current Date
       var month = new Date().getMonth() + 1; //Current Month
@@ -27,7 +31,37 @@ export default function MyBudget({navigation}) {
       var hours = new Date().getHours(); //Current Hours
       var min = new Date().getMinutes(); //Current Minutes
       var sec = new Date().getSeconds(); //Current Seconds
+      var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
       setCurrentDate(date);
+      setCurrentMonth(`${month}/${year}`);
+      setDaysLeft(daysInMonth[month - 1] - date);
+      if(monthsBudgeted.length === 0) {
+        monthsBudgeted.unshift(currentMonth)
+        alert(monthsBudgeted)
+      }
+      if(monthsBudgeted.indexOf(currentMonth) === -1) {
+          //Add Current Month to monthsBudgeted array, so that this does not run again this month until next month
+          monthsBudgeted.unshift(currentMonth)
+          // Get Last Months info/year
+          let lastMonth = `${month - 1}/${month = 1 ? year - 1 : year}`
+          // Create Object containing all budget data from last month
+          var budgetData = {
+              month: lastMonth,
+              budget: myBudget,
+              spent: myBudget - currentBudget,
+              transactions: transactionsArray 
+          }
+          // Push last months data object to the global month budget array
+          budgetsByMonth.unshift(budgetData)
+          // Save Budget Data to local storage
+
+          // Clear Current Budget and Array
+          transactionsArray = []
+          currentBudget = myBudget
+          // Navigate to new screen showing last months spending
+          navigation.navigate("MonthlyReportScreen", budgetData)
+          // Reset
+      }
     }, []);
    
     /////////// ADD TRANSACTION VARIABLE TO THE ARRAY //////////////////////////////////////////
@@ -67,7 +101,7 @@ export default function MyBudget({navigation}) {
                 color: colors.text, fontFamily: 'Rubik_400Regular'}}>Your Budget is ${myBudget}</Text>
             </TouchableOpacity>
             <Text style={{alignContent: 'center', justifyContent: 'center', position: 'relative', marginTop: '23%', color: colors.text, fontSize: 20,
-                    fontFamily: 'Rubik_400Regular_Italic'}}>you have...{currentDate}</Text>
+                    fontFamily: 'Rubik_400Regular_Italic'}}>you have {daysLeft} days left...</Text>
             <Text style={{alignContent: 'center', justifyContent: 'center', position: 'relative', fontSize: 50, fontFamily: 'Rubik_700Bold',
                     color: colors.text}}>${Number(currentBudget).toFixed(2)}</Text>
             <View style={styles.buttonView}>
