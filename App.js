@@ -43,7 +43,7 @@ global.createTransaction = false;
 global.transactionsArray = [];
 
 global.recreatedTransactionsArray = [];
-global.budgetsByMonth = [];
+global.budgetsByMonth = ['init'];
 global.monthsBudgeted = ['init'];
 
 global.colors = {
