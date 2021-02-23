@@ -5,6 +5,7 @@ import {StackActions} from '@react-navigation/native';
 
 export default function LoadingScreen({navigation}) {
     displayData();
+    displayBudgetsArray();
       setTimeout(() => {
         // Replaces LoadingScreen with MyBudget screen on the stack
         navigation.dispatch(

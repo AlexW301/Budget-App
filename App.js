@@ -43,8 +43,9 @@ global.createTransaction = false;
 global.transactionsArray = [];
 
 global.recreatedTransactionsArray = [];
-global.budgetsByMonth = ['init'];
+global.budgetsByMonth = [];
 global.monthsBudgeted = ['init'];
+global.budgetsArray = [];
 
 global.colors = {
   main: "#0E6251",
@@ -247,6 +248,18 @@ global.saveData = () => {
   AsyncStorage.setItem("transactionsArray", JSON.stringify(transactionsArray));
   AsyncStorage.setItem("budgetsByMonth", JSON.stringify(budgetsByMonth));
 };
+
+global.saveBudgetsArray = () => {
+  AsyncStorage.setItem("budgetsArray", JSON.stringify(budgetsArray));
+  AsyncStorage.setItem("monthsBudgeted", JSON.stringify(monthsBudgeted));
+}
+
+global.displayBudgetsArray = async () => {
+  let budgetsArraySave = await AsyncStorage.getItem("budgetsArray");
+  let monthsBudgetedSave = await AsyncStorage.getItem("monthsBudgeted");
+  budgetsArray = JSON.parse(budgetsArraySave);
+  monthsBudgeted = JSON.parse(monthsBudgetedSave);
+}
 
 global.displayData = async () => {
   try {

@@ -11,7 +11,7 @@ global.colors = {
     text: '#E8F8F5',
     shade1: '#117864'
   }
-global.budgetsByMonth = []
+
 export default function MyBudget({navigation}) {
 
     const [visible, setVisible] = useState(false);
@@ -37,12 +37,11 @@ export default function MyBudget({navigation}) {
       setDaysLeft(daysInMonth[month - 1] - date);
       if(monthsBudgeted.length === 1) {
         monthsBudgeted.push(currentMonth)
-        alert(monthsBudgeted)
       }
       if(monthsBudgeted.indexOf('3/2021') === -1) {
           //Add Current Month to monthsBudgeted array, so that this does not run again this month until next month
           monthsBudgeted.unshift(currentMonth)
-          alert(monthsBudgeted)
+          alert(`Months Budgeted ${monthsBudgeted}`)
           // Get Last Months info/year
           let lastMonth = `${month - 1}/${month = 0 ? year - 1 : year}`
           // Create Object containing all budget data from last month
@@ -53,10 +52,10 @@ export default function MyBudget({navigation}) {
               transactions: transactionsArray 
           }
           // Push last months data object to the global month budget array
-          budgetsByMonth.unshift(budgetData)
-          alert(JSON.stringify(budgetsByMonth))
+          budgetsArray.unshift(budgetData)
+          alert('Budgets Array' + JSON.stringify(budgetsArray))
           // Save Budget Data to local storage
-          
+          saveBudgetsArray();
           // Clear Current Budget and Array
           transactionsArray = []
           currentBudget = myBudget
