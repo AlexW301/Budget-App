@@ -44,7 +44,7 @@ global.transactionsArray = [];
 
 global.recreatedTransactionsArray = [];
 global.budgetsByMonth = [];
-global.monthsBudgeted = ['init'];
+
 global.budgetsArray = [];
 
 global.colors = {
