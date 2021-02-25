@@ -30,8 +30,8 @@ import MonthlyReportScreen from "./screens/monthly-report-screen";
 // GLOBAL VARIABLES ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 global.shortid = require("shortid");
-global.currentBudget = 500;
-global.myBudget = "500";
+global.currentBudget = 0;
+global.myBudget = "0";
 global.transaction = {
   name: "",
   amount: 0,
@@ -287,7 +287,7 @@ global.displayData = async () => {
       transactionsArray = recreatedTransactionsArray;
     }
   } catch (error) {
-    alert(error);
+    //alert(error);
   }
 };
 
@@ -305,3 +305,7 @@ const styles = StyleSheet.create({
     fontFamily: "Rubik_400Regular",
   },
 });
+saveBudgetsArray();
+displayBudgetsArray();
+
+//clearAsyncStorage();
