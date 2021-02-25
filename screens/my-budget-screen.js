@@ -62,7 +62,7 @@ export default function MyBudget({navigation}) {
           transactionsArray = []
           currentBudget = myBudget
           // Navigate to new screen showing last months spending
-          navigation.navigate("MonthlyReportScreen", budgetsByMonth)
+          navigation.navigate("MonthlyReportScreen", budgetsArray)
           // Reset
       }
     }, []);

@@ -43,7 +43,7 @@ global.createTransaction = false;
 global.transactionsArray = [];
 
 global.recreatedTransactionsArray = [];
-global.budgetsByMonth = [];
+//global.budgetsByMonth = [];
 
 global.budgetsArray = [];
 
@@ -59,61 +59,7 @@ global.firstDayOfMonth = true
 const Stack = createStackNavigator();
 
 function HomeScreen({ navigation, route }) {
-  const [isFirstLaunch, setIsFirstLaunch] = React.useState(null);
-
-  useEffect(() => {
-    AsyncStorage.getItem("alreadyLaunched").then((value) => {
-      if (value == null) {
-        AsyncStorage.setItem("alreadyLaunched", "true");
-        setIsFirstLaunch(true);
-      } else {
-        setIsFirstLaunch(false);
-      }
-    });
-  }, []);
-
-  if (isFirstLaunch === null) {
-    return null;
-  } else if (isFirstLaunch === true) {
-    return (
-      <Stack.Navigator
-        initialRouteName="SetBudget"
-        HeaderTitle="My Budget Screen"
-      >
-        <Stack.Screen
-          name="SetBudget"
-          component={SetBudget}
-          options={{
-            title: "Set My Budget",
-            headerTitleAlign: "center",
-            headerStyle: styles.header,
-            headerTitleStyle: styles.headerTitle,
-          }}
-        />
-        <Stack.Screen
-          name="MyBudget"
-          component={MyBudget}
-          options={{
-            title: "My Budget",
-            headerLeft: null,
-            headerTitleAlign: "center",
-            headerStyle: styles.header,
-            headerTitleStyle: styles.headerTitle,
-          }}
-        />
-        <Stack.Screen
-          name="LoadingScreen"
-          component={LoadingScreen}
-          options={{ title: "Loading Screen", headerShown: false }}
-        />
-        <Stack.Screen
-          name="MonthlyReportScreen"
-          component={MonthlyReportScreen}
-          options={{ title: "Monthly Report", headerShown: true }}
-        />
-      </Stack.Navigator>
-    );
-  } else {
+  {   
     return (
       <Stack.Navigator
         initialRouteName="LoadingScreen"
@@ -239,6 +185,7 @@ export default function App() {
 
 // LOCAL STORAGE AND SAVING ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// DELETE budgetsByMonth ////////////// old variable, not using it
 global.saveData = () => {
   let myBudgetSave = myBudget;
   let currentBudgetSave = JSON.stringify(currentBudget);
@@ -246,7 +193,7 @@ global.saveData = () => {
   AsyncStorage.setItem("myBudget", myBudgetSave);
   AsyncStorage.setItem("currentBudget", currentBudgetSave);
   AsyncStorage.setItem("transactionsArray", JSON.stringify(transactionsArray));
-  AsyncStorage.setItem("budgetsByMonth", JSON.stringify(budgetsByMonth));
+  //AsyncStorage.setItem("budgetsByMonth", JSON.stringify(budgetsByMonth));
 };
 
 global.saveBudgetsArray = () => {
@@ -266,9 +213,9 @@ global.displayData = async () => {
     let myBudgetSave = await AsyncStorage.getItem("myBudget");
     let currentBudgetSave = await AsyncStorage.getItem("currentBudget");
     let transactionsArraySave = await AsyncStorage.getItem("transactionsArray");
-    let budgetsByMonthSave = await AsyncStorage.getItem("budgetsByMonth");
-    budgetsByMonth = budgetsByMonthSave;
-    alert(budgetsByMonth)
+    //let budgetsByMonthSave = await AsyncStorage.getItem("budgetsByMonth");
+    //budgetsByMonth = budgetsByMonthSave;
+    //alert(budgetsByMonth)
     myBudget = myBudgetSave;
     currentBudget = JSON.parse(currentBudgetSave);
     let transactionsArrayParsed = JSON.parse(transactionsArraySave);

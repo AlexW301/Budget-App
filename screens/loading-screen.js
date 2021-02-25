@@ -8,7 +8,7 @@ export default function LoadingScreen({navigation}) {
     displayBudgetsArray();
       setTimeout(() => {
         // Replaces LoadingScreen with MyBudget screen on the stack
-        if (myBudget == null) {
+        if (myBudget == 0) {
           navigation.dispatch(
             StackActions.replace('SetBudget'))
           // navigation.navigate('MyBudget')
