@@ -40,7 +40,7 @@ export default function MyBudget({navigation}) {
       if(monthsBudgeted.length === 1) {
         monthsBudgeted.unshift(currentMonth)
       }
-      if(monthsBudgeted.indexOf('currentMonth') === -1) {
+      if(monthsBudgeted.indexOf(currentMonth) === -1) {
           //Add Current Month to monthsBudgeted array, so that this does not run again this month until next month
           monthsBudgeted.unshift(currentMonth)
           alert(`Months Budgeted ${monthsBudgeted}`)
