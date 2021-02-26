@@ -36,6 +36,35 @@ export default function MyBudget({navigation}) {
       setCurrentDate(date);
       setCurrentMonth(`${month}/${year}`);
       setDaysLeft(daysInMonth[month - 1] - date);
+      displayBudgetsArray();
+      if(monthsBudgeted.length === 1) {
+        monthsBudgeted.unshift(currentMonth)
+      }
+      if(monthsBudgeted.indexOf('currentMonth') === -1) {
+          //Add Current Month to monthsBudgeted array, so that this does not run again this month until next month
+          monthsBudgeted.unshift(currentMonth)
+          alert(`Months Budgeted ${monthsBudgeted}`)
+          // Get Last Months info/year
+          let lastMonth = `${month - 1}/${month = 0 ? year - 1 : year}`
+          // Create Object containing all budget data from last month
+          var budgetData = {
+              month: lastMonth,
+              budget: myBudget,
+              spent: myBudget - currentBudget,
+              transactions: transactionsArray 
+          }
+          // Push last months data object to the global month budget array
+          budgetsArray.push(budgetData)
+          alert('Budgets Array' + JSON.stringify(budgetsArray))
+          // Save Budget Data to local storage
+          saveBudgetsArray();
+          // Clear Current Budget and Array
+          transactionsArray = []
+          currentBudget = myBudget
+          // Navigate to new screen showing last months spending
+          navigation.navigate("MonthlyReportScreen", budgetsArray)
+          // Reset
+      }
     }, []);
    
     /////////// ADD TRANSACTION VARIABLE TO THE ARRAY //////////////////////////////////////////

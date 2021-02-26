@@ -53,13 +53,13 @@ global.colors = {
   shade1: "#117864",
 };
 
-global.firstDayOfMonth = true
+global.firstDayOfMonth = true;
 // NAVIGATION STACK ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const Stack = createStackNavigator();
 
 function HomeScreen({ navigation, route }) {
-  {   
+  {
     return (
       <Stack.Navigator
         initialRouteName="LoadingScreen"
@@ -94,7 +94,13 @@ function HomeScreen({ navigation, route }) {
         <Stack.Screen
           name="MonthlyReportScreen"
           component={MonthlyReportScreen}
-          options={{ title: "Monthly Report", headerShown: true }}
+          options={{
+            title: "Monthly Report",
+            headerShown: true,
+            headerTitleAlign: "center",
+            headerStyle: styles.header,
+            headerTitleStyle: styles.headerTitle,
+          }}
         />
       </Stack.Navigator>
     );
@@ -199,14 +205,14 @@ global.saveData = () => {
 global.saveBudgetsArray = () => {
   AsyncStorage.setItem("budgetsArray", JSON.stringify(budgetsArray));
   AsyncStorage.setItem("monthsBudgeted", JSON.stringify(monthsBudgeted));
-}
+};
 
 global.displayBudgetsArray = async () => {
   let budgetsArraySave = await AsyncStorage.getItem("budgetsArray");
   let monthsBudgetedSave = await AsyncStorage.getItem("monthsBudgeted");
   budgetsArray = JSON.parse(budgetsArraySave);
   monthsBudgeted = JSON.parse(monthsBudgetedSave);
-}
+};
 
 global.displayData = async () => {
   try {
