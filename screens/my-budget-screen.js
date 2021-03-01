@@ -101,11 +101,11 @@ export default function MyBudget({navigation}) {
     }
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.main}}>
-            <TouchableOpacity style={{alignContent: 'center', justifyContent: 'center', position: 'relative', width: '100%', top: '13%'}}
-                onPress={() => { navigation.navigate('SetBudget') }}>
+            <TouchableScale activeScale={0.9} style={{alignContent: 'center', justifyContent: 'center', position: 'relative', width: '100%', top: '13%'}}
+                onLongPress={() => { navigation.navigate('SetBudget') }}>
                 <Text style={{fontSize: 30, textAlign: 'center',
                 color: colors.text, fontFamily: 'Rubik_400Regular'}}>Your Budget is ${myBudget}</Text>
-            </TouchableOpacity>
+            </TouchableScale>
             <Text style={{alignContent: 'center', justifyContent: 'center', position: 'relative', marginTop: '23%', color: colors.text, fontSize: 20,
                     fontFamily: 'Rubik_400Regular_Italic'}}>you have {daysLeft} days left...</Text>
             <Text style={{alignContent: 'center', justifyContent: 'center', position: 'relative', fontSize: 50, fontFamily: 'Rubik_700Bold',
@@ -118,7 +118,7 @@ export default function MyBudget({navigation}) {
                         item.type === 'expense' ?
                             (
                                 // EXPENSE ITEM
-                                <TouchableOpacity onLongPress={() => {
+                                <TouchableScale activeScale={0.9} onLongPress={() => {
                                     Alert.alert(
                                         'Do you want to delete this transaction?',
                                         'This action can not be undone!',
@@ -155,10 +155,10 @@ export default function MyBudget({navigation}) {
                                         <View style={styles.buffer}><Text style={styles.itemAmount}>-${item.amount}</Text></View>
                                     </View>
 
-                                </TouchableOpacity>
+                                </TouchableScale>
                                 // DEPOSIT ITEM
                             ) :
-                            <TouchableOpacity onLongPress={() => {
+                            <TouchableScale activeScale={0.9} onLongPress={() => {
                                 Alert.alert(
                                     'Do you want to delete this transaction?',
                                     'This action can not be undone!',
@@ -195,7 +195,7 @@ export default function MyBudget({navigation}) {
                                     <Text style={styles.itemName}>{item.name} </Text>
                                     <View style={styles.buffer}><Text style={styles.itemAmount}>${item.amount}</Text></View>
                                 </View>
-                            </TouchableOpacity>
+                            </TouchableScale>
                     }
                 />
 

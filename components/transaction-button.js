@@ -7,6 +7,8 @@ import {
 } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
+import TouchableScale from 'react-native-touchable-scale'; // https://github.com/kohver/react-native-touchable-scale
+
 global.colors = {
   main: "#0E6251",
   text: "#E8F8F5",
@@ -16,11 +18,14 @@ global.colors = {
 export default function TransactionButton({ title, onPress, style }) {
   return (
     <View style={style}>
-      <TouchableOpacity onPress={onPress}>
+      <TouchableScale
+            onPress={onPress}
+            activeScale={0.9}
+        >
         <View style={styles.button}>
           <Text style={styles.buttonText}>{title}</Text>
         </View>
-      </TouchableOpacity>
+      </TouchableScale>
     </View>
   );
 }
