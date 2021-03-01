@@ -8,7 +8,7 @@ export default function LoadingScreen({navigation}) {
     displayBudgetsArray();
       setTimeout(() => {
         // Replaces LoadingScreen with MyBudget screen on the stack
-        if (myBudget == 0) {
+        if (myBudget == 0 || myBudget == null) {
           navigation.dispatch(
             StackActions.replace('SetBudget'))
           // navigation.navigate('MyBudget')
@@ -19,8 +19,8 @@ export default function LoadingScreen({navigation}) {
         }
       }, 200)
       return (
-        <View>
-          <Text style={{position: 'relative', justifyContent: 'center', textAlign: 'center'}}>loading</Text>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.main}}>
+          <Text style={{position: 'relative', justifyContent: 'center', textAlign: 'center'}}></Text>
         </View>
       )
 }

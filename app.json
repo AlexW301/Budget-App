@@ -3,7 +3,7 @@
   "expo": {
     "name": "Budget App Test",
     "slug": "budgetapptest",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -20,14 +20,15 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.alex301.budgetapp",
-      "buildNumber": "0.0.0"
+      "buildNumber": "0.1.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0E6251"
       },
-      "softwareKeyboardLayoutMode": "pan"
+      "softwareKeyboardLayoutMode": "pan",
+      "package": "com.alex301.budgetapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
