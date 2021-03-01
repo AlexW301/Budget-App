@@ -4,6 +4,8 @@ import { StyleSheet, Text, View, Button, TextInput, Alert, TouchableOpacity, Fla
 import { useIsFocused } from '@react-navigation/native';
 import AddTransaction from './add-transaction-screen';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { ListItem, Avatar } from 'react-native-elements';
+import TouchableScale from 'react-native-touchable-scale'; // https://github.com/kohver/react-native-touchable-scale
 
 
 global.colors = {

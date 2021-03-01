@@ -32,7 +32,8 @@
     "react-native-screens": "~2.15.2",
     "react-native-swipeout": "^2.3.6",
     "react-native-web": "~0.13.12",
-    "shortid": "^2.2.16"
+    "shortid": "^2.2.16",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"
