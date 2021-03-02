@@ -25,6 +25,7 @@ export default function MyBudget({navigation}) {
 
     const [daysLeft, setDaysLeft] = useState();
 
+    // Dont need current month anymore using currentMonthOnLoad from loading screen
     const [currentMonth, setCurrentMonth] = useState();
 
     useEffect(() => {
@@ -36,15 +37,16 @@ export default function MyBudget({navigation}) {
       var sec = new Date().getSeconds(); //Current Seconds
       var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
       setCurrentDate(date);
+    // Dont need current month anymore using currentMonthOnLoad from loading screen
       setCurrentMonth(`${month}/${year}`);
       setDaysLeft(daysInMonth[month - 1] - date);
       displayBudgetsArray();
       if(monthsBudgeted.length === 1) {
-        monthsBudgeted.unshift(currentMonth)
+        monthsBudgeted.unshift(currentMonthOnLoad)
       }
-      if(monthsBudgeted.indexOf(currentMonth) === -1) {
+      if(monthsBudgeted.indexOf(currentMonthOnLoad) === -1) {
           //Add Current Month to monthsBudgeted array, so that this does not run again this month until next month
-          monthsBudgeted.unshift(currentMonth)
+          monthsBudgeted.unshift(currentMonthOnLoad)
           //alert(`Months Budgeted ${monthsBudgeted}`)
           // Get Last Months info/year
           let lastMonth = `${month - 1}/${month = 0 ? year - 1 : year}`
