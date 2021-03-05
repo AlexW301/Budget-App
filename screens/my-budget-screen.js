@@ -225,10 +225,10 @@ export default function MyBudget({ navigation }) {
                       ? `${item.name}`
                       : `${item.name.substring(0, 12)}...`}</Text>
                   <View style={styles.buffer}>
-                    <Text style={styles.itemAmountExpense}>{
+                    <Text style={ item.amount.length < 6 ? styles.itemAmountExpense : styles.itemAmountExpenseLarge} >{
                         item.amount.length < 7
                         ? `-$${item.amount}`
-                        : `-$${item.amount.substring(0, item.amount.length - 3)}`
+                        : `-$${item.amount.substring(0, item.amount.length - 3).substring(0, item.amount.length - 6)},${item.amount.substring(item.amount.length - 6, item.amount.length - 3)}`
                     }
                         </Text>
                   </View>
@@ -288,7 +288,11 @@ export default function MyBudget({ navigation }) {
                       : `${item.name.substring(0, 12)}...`}
                   </Text>
                   <View style={styles.buffer}>
-                    <Text style={styles.itemAmountDeposit}>${item.amount}</Text>
+                    <Text style={item.amount.length < 6 ? styles.itemAmountDeposit : styles.itemAmountDepositLarge}>{
+                        item.amount.length < 7
+                        ? `$${item.amount}`
+                        : `$${item.amount.substring(0, item.amount.length - 3).substring(0, item.amount.length - 6)},${item.amount.substring(item.amount.length - 6, item.amount.length - 3)}`
+                    }</Text>
                   </View>
                 </View>
               </TouchableScale>
@@ -344,21 +348,46 @@ const styles = StyleSheet.create({
 
   itemAmountDeposit: {
     alignContent: "center",
+    textAlign: 'justify',
     marginTop: 10,
-    fontSize: 25,
+    fontSize: 30,
     color: colors.text,
     fontFamily: "Rubik_500Medium",
     bottom: 25,
     marginLeft: 13
   },
 
-  itemAmountExpense: {
+  itemAmountDepositLarge: {
     alignContent: "center",
+    textAlign: 'justify',
     marginTop: 10,
     fontSize: 25,
     color: colors.text,
     fontFamily: "Rubik_500Medium",
     bottom: 25,
+    marginLeft: 0
+  },
+
+  itemAmountExpense: {
+    alignContent: "center",
+    textAlign: 'justify',
+    marginTop: 10,
+    fontSize: 30,
+    color: colors.text,
+    fontFamily: "Rubik_500Medium",
+    bottom: 25,
+    marginLeft: -10
+  },
+
+  itemAmountExpenseLarge: {
+    alignContent: "center",
+    textAlign: 'justify',
+    marginTop: 10,
+    fontSize: 25,
+    color: colors.text,
+    fontFamily: "Rubik_500Medium",
+    bottom: 25,
+    marginLeft: -12
   },
 
   buffer: {
@@ -367,7 +396,7 @@ const styles = StyleSheet.create({
   },
 
   transactionItem: {
-    borderWidth: 5,
+    borderWidth: 4,
     borderRadius: 20,
     borderTopWidth: 25,
     height: 100,
