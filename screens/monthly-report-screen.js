@@ -17,7 +17,7 @@ export default function MonthlyReportScreen({ route, navigation }) {
     amountSavedText = `You went $${amountSaved} over budget last month. Better luck this month!`
   }
   return (
-    <View>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.main}}>
       <Text style={{ position: 'relative', justifyContent: 'center', textAlign: 'center', marginBottom: 30, marginTop: 20 }}>This screen is currently a work in progress!</Text>
       <Text style={{ position: 'relative', justifyContent: 'center', textAlign: 'center', paddingHorizontal: 10, marginBottom: 20 }}>When it is done, at the begining of a new month it will show and save information about your last month of spending. Eventually you will also be able to go back and view a history of all previous months spending at anytime.</Text>
       <Text style={{ position: 'relative', justifyContent: 'center', textAlign: 'center' }}>Last Month | {budgetReport.month}</Text>

@@ -114,8 +114,9 @@ export default function MyBudget({ navigation }) {
     <View
       style={{
         flex: 1,
+        flexDirection: 'column',
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         backgroundColor: colors.main,
       }}
     >
@@ -126,7 +127,7 @@ export default function MyBudget({ navigation }) {
           justifyContent: "center",
           position: "relative",
           width: "100%",
-          top: "13%",
+          paddingTop: 0
         }}
         onLongPress={() => {
           navigation.navigate("SetBudget");
@@ -148,7 +149,6 @@ export default function MyBudget({ navigation }) {
           alignContent: "center",
           justifyContent: "center",
           position: "relative",
-          marginTop: "23%",
           color: colors.text,
           fontSize: 20,
           fontFamily: "Rubik_400Regular_Italic",
@@ -319,11 +319,9 @@ const styles = StyleSheet.create({
   flatList: {
     alignContent: "center",
     position: "relative",
-    bottom: "-5%",
-    height: "86%",
-    maxHeight: "86%",
-    maxWidth: "90%",
+    maxWidth: "100%",
     width: 375,
+    flex: 1,
   },
 
   itemName: {
@@ -376,7 +374,7 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontFamily: "Rubik_500Medium",
     bottom: 25,
-    marginLeft: -10
+    marginLeft: -3
   },
 
   itemAmountExpenseLarge: {
@@ -387,7 +385,7 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontFamily: "Rubik_500Medium",
     bottom: 25,
-    marginLeft: -12
+    marginLeft: -14
   },
 
   buffer: {
