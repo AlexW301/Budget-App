@@ -52,7 +52,7 @@ export default function MyBudget({ navigation }) {
     if (monthsBudgeted.length === 1) {
       monthsBudgeted.unshift(currentMonthOnLoad);
     }
-    if (monthsBudgeted.indexOf(currentMonthOnLoad) === -1) {
+    if (monthsBudgeted.indexOf('currentMonthOnLoad') === -1) {
       //Add Current Month to monthsBudgeted array, so that this does not run again this month until next month
       monthsBudgeted.unshift(currentMonthOnLoad);
       //alert(`Months Budgeted ${monthsBudgeted}`)
@@ -123,8 +123,6 @@ export default function MyBudget({ navigation }) {
       <TouchableScale
         activeScale={0.9}
         style={{
-          alignContent: "center",
-          justifyContent: "center",
           position: "relative",
           width: "100%",
           paddingTop: 0
@@ -306,7 +304,6 @@ export default function MyBudget({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
@@ -317,11 +314,10 @@ const styles = StyleSheet.create({
   },
 
   flatList: {
-    alignContent: "center",
-    position: "relative",
-    maxWidth: "100%",
+    maxWidth: "95%",
     width: 375,
     flex: 1,
+    maxHeight: '90.2%'
   },
 
   itemName: {
