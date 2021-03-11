@@ -74,6 +74,13 @@ function HomeScreen({ navigation, route }) {
             headerTitleAlign: "center",
             headerStyle: styles.header,
             headerTitleStyle: styles.headerTitle,
+            headerRight: () => (
+              <Button
+                onPress={() => alert('This is a button!')}
+                title="Info"
+                color="#fff"
+              />
+            )
           }}
         />
         <Stack.Screen

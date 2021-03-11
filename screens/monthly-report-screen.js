@@ -15,10 +15,16 @@ export default function MonthlyReportScreen({ route, navigation }) {
   } else if (amountSaved === 0) {
     amountSavedText = `You were exactly on your budget last month!`
   } else if (amountSaved < 0) {
-    amountSavedText = `You went $${amountSaved} over budget last month. You'll do better this month!`
+    amountSavedText = `You went $${JSON.stringify(amountSaved).substring(1,amountSaved.length)} over budget last month. You'll do better this month!`
+  }
+  let goToSetBudget = () => {
+    navigation.replace('SetBudget')
+  }
+  let keepSameBudget = () => {
+    navigation.replace('MyBudget')
   }
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-around', backgroundColor: colors.main}}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: colors.main}}>
       <Text style={styles.reportMonth}>Report for {monthNames[budgetReport.month.substring(0,1)]}</Text>
       <Text style={styles.congratsText}>{budgetReport.spent < budgetReport.budget ? `Congratulations! You stayed within your budget last month!` : `` || ( budgetReport.spent > budgetReport.budget && budgetReport.spent - budgetReport.budget) <= (budgetReport.budget * .10) ? `Almost! You went just a little bit over last month.` : `You went over your budget last month...` }</Text>
       <View style={styles.results}>
@@ -27,8 +33,8 @@ export default function MonthlyReportScreen({ route, navigation }) {
       <Text style={styles.spentText}>You spent ${budgetReport.spent}</Text>
       <Text style={styles.resultsText2}>{amountSavedText}</Text>
       </View>
-      <TransactionButton style={styles.adjustBudget} title="Adjust Budget" onPress={{}}></TransactionButton>
-      <TransactionButton style={styles.keepBudget} title="Keep Same Budget" onPress={{}}></TransactionButton>
+      <TransactionButton style={styles.adjustBudget} title="Adjust Budget" onPress={goToSetBudget}></TransactionButton>
+      <TransactionButton style={styles.keepBudget} title="Keep Same Budget" onPress={keepSameBudget}></TransactionButton>
     </View>
     
   )
@@ -36,16 +42,16 @@ export default function MonthlyReportScreen({ route, navigation }) {
 
 const styles = StyleSheet.create({
   reportMonth: {
-    flex: .05,
+    flex: .12,
     fontSize: 30,
     fontFamily: "Rubik_700Bold",
     color: colors.text,
-    //marginTop: '5%',
+    marginTop: '2%',
     //marginBottom: '-21%',
     //backgroundColor: 'yellow'
   },
   congratsText: {
-    flex: .1,
+    flex: .15,
     fontSize: 22,
     fontFamily: "Rubik_400Regular",
     color: colors.text,
@@ -84,10 +90,12 @@ const styles = StyleSheet.create({
   results: {
     flex: .35,
     alignItems: 'center',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
+    //backgroundColor: 'red'
   },
   adjustBudget: {
-    flex: .1
+    flex: .1,
+    //backgroundColor: 'blue'
   },
   keepBudget: {
     flex: .1
