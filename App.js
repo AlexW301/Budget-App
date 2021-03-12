@@ -10,6 +10,7 @@ import SetBudget from "./screens/set-budget-screen";
 import MyBudget from "./screens/my-budget-screen";
 import AddTransaction from "./screens/add-transaction-screen";
 import LoadingScreen from "./screens/loading-screen";
+import StashScreen from "./screens/stash-screen";
 import { useEffect } from "react";
 import {
   useFonts,
@@ -26,6 +27,7 @@ import {
 } from "@expo-google-fonts/rubik";
 import AppLoading from "expo";
 import MonthlyReportScreen from "./screens/monthly-report-screen";
+import StashButton from "./components/stash-button";
 
 // GLOBAL VARIABLES ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -54,12 +56,17 @@ global.colors = {
 };
 
 global.firstDayOfMonth = true;
+
+global.stashTotal = 0
 // NAVIGATION STACK ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const Stack = createStackNavigator();
 
 function HomeScreen({ navigation, route }) {
   {
+    const navigateToStashScreen = () => {
+      navigation.navigate('StashScreen')
+    }
     return (
       <Stack.Navigator
         initialRouteName="LoadingScreen"
@@ -75,11 +82,7 @@ function HomeScreen({ navigation, route }) {
             headerStyle: styles.header,
             headerTitleStyle: styles.headerTitle,
             headerRight: () => (
-              <Button
-                onPress={() => alert('This is a button!')}
-                title="Info"
-                color="#fff"
-              />
+              <StashButton title="$" style={{marginRight: 20}} onPress={navigateToStashScreen}></StashButton>
             )
           }}
         />
@@ -103,6 +106,17 @@ function HomeScreen({ navigation, route }) {
           component={MonthlyReportScreen}
           options={{
             title: "Monthly Report",
+            headerShown: true,
+            headerTitleAlign: "center",
+            headerStyle: styles.header,
+            headerTitleStyle: styles.headerTitle,
+          }}
+        />
+        <Stack.Screen
+          name="StashScreen"
+          component={StashScreen}
+          options={{
+            title: "Stash",
             headerShown: true,
             headerTitleAlign: "center",
             headerStyle: styles.header,

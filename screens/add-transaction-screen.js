@@ -162,6 +162,7 @@ export default function AddTransaction({ navigation }) {
             if (transaction.name && transaction.amount) {
               navigation.navigate("MyBudget", transaction);
             }
+            stashTotal = stashTotal + parseFloat(transaction.amount)
             updateDescription("");
             updateAmount();
           }}
