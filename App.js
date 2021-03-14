@@ -41,6 +41,20 @@ global.transaction = {
   key: "",
   date: "",
 };
+global.stashTransaction = {
+  name: "",
+  amount: 0,
+  type: "stash",
+  key: "",
+  date: "",
+};
+global.stashArray = [{
+  name: "dsfsdf",
+  amount: 0,
+  type: "stash",
+  key: "t54tdfgd",
+  date: "dfg",
+}];
 global.createTransaction = false;
 global.transactionsArray = [];
 

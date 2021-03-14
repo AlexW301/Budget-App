@@ -151,18 +151,21 @@ export default function AddTransaction({ navigation }) {
           }}
         />
         <TransactionButton
-          title="Deposit"
+          title="STASH"
           style={{ flex: 1, position: "relative", bottom: "30%" }}
           onPress={() => {
             Keyboard.dismiss();
             createTransaction = true;
-            transaction.type = "deposit";
-            transaction.date = currentDate;
-            transaction.amount = Number(transaction.amount).toFixed(2);
-            if (transaction.name && transaction.amount) {
-              navigation.navigate("MyBudget", transaction);
-            }
+            stashTransaction.type = "stash";
+            stashTransaction.date = currentDate;
+            stashTransaction.amount = Number(transaction.amount).toFixed(2);
+            stashTransaction.name = transaction.name;
+            stashTransaction.key = shortid.generate();
+            stashArray.unshift(stashTransaction);
             stashTotal = stashTotal + parseFloat(transaction.amount)
+            if (transaction.name && transaction.amount) {
+              navigation.navigate("StashScreen", stashTransaction);
+            }
             updateDescription("");
             updateAmount();
           }}
@@ -206,3 +209,23 @@ const styles = StyleSheet.create({
     top: 30,
   },
 });
+
+/* OLD DEPOSIT BUTTON incase I need it again
+<TransactionButton
+          title="Deposit"
+          style={{ flex: 1, position: "relative", bottom: "30%" }}
+          onPress={() => {
+            Keyboard.dismiss();
+            createTransaction = true;
+            transaction.type = "deposit";
+            transaction.date = currentDate;
+            transaction.amount = Number(transaction.amount).toFixed(2);
+            if (transaction.name && transaction.amount) {
+              navigation.navigate("MyBudget", transaction);
+            }
+            stashTotal = stashTotal + parseFloat(transaction.amount)
+            updateDescription("");
+            updateAmount();
+          }}
+        />
+*/
