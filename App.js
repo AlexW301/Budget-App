@@ -44,17 +44,13 @@ global.transaction = {
 global.stashTransaction = {
   name: "",
   amount: 0,
-  type: "stash",
+  type: "",
   key: "",
   date: "",
 };
-global.stashArray = [{
-  name: "dsfsdf",
-  amount: 0,
-  type: "stash",
-  key: "t54tdfgd",
-  date: "dfg",
-}];
+global.stashArray = [];
+global.stashTotal = 0
+
 global.createTransaction = false;
 global.transactionsArray = [];
 
@@ -71,7 +67,7 @@ global.colors = {
 
 global.firstDayOfMonth = true;
 
-global.stashTotal = 0
+
 // NAVIGATION STACK ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const Stack = createStackNavigator();
@@ -231,10 +227,16 @@ global.saveData = () => {
   let myBudgetSave = myBudget;
   let currentBudgetSave = JSON.stringify(currentBudget);
 
+  let stashTotalSave = JSON.stringify(stashTotal);
+  let stashArraySave = JSON.stringify(stashArray);
+
   AsyncStorage.setItem("myBudget", myBudgetSave);
   AsyncStorage.setItem("currentBudget", currentBudgetSave);
   AsyncStorage.setItem("transactionsArray", JSON.stringify(transactionsArray));
   //AsyncStorage.setItem("budgetsByMonth", JSON.stringify(budgetsByMonth));
+
+  AsyncStorage.setItem("stashTotal", stashTotalSave);
+  AsyncStorage.setItem("stashArray", stashArraySave);
 };
 
 global.saveBudgetsArray = () => {
@@ -257,8 +259,15 @@ global.displayData = async () => {
     //let budgetsByMonthSave = await AsyncStorage.getItem("budgetsByMonth");
     //budgetsByMonth = budgetsByMonthSave;
     //alert(budgetsByMonth)
+    let stashTotalSave = await AsyncStorage.getItem("stashTotal");
+    let stashArraySave = await AsyncStorage.getItem("stashArray");
+
     myBudget = myBudgetSave;
     currentBudget = JSON.parse(currentBudgetSave);
+
+    stashTotal = JSON.parse(stashTotalSave);
+    stashArray = JSON.parse(stashArraySave);
+
     let transactionsArrayParsed = JSON.parse(transactionsArraySave);
 
     if (transactionsArray !== null) {

@@ -160,8 +160,6 @@ export default function AddTransaction({ navigation }) {
             stashTransaction.date = currentDate;
             stashTransaction.amount = Number(transaction.amount).toFixed(2);
             stashTransaction.name = transaction.name;
-            stashTransaction.key = shortid.generate();
-            stashArray.unshift(stashTransaction);
             stashTotal = stashTotal + parseFloat(transaction.amount)
             if (transaction.name && transaction.amount) {
               navigation.navigate("StashScreen", stashTransaction);

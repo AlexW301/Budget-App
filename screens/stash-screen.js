@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
 import { StackActions } from '@react-navigation/native';
 import TransactionButton from '../components/transaction-button'
 import { useIsFocused } from "@react-navigation/native";
@@ -9,8 +9,21 @@ import TouchableScale from "react-native-touchable-scale";
 export default function StashScreen({ route, navigation }) {
     const isFocused = useIsFocused();
 
-  if (isFocused === false) {
-      
+  if (isFocused && createTransaction && stashTransaction.type === "stash") {
+      // Give stash transaction a unique key
+      stashTransaction.key = shortid.generate();
+      // Push stash transaction to array
+      stashArray.unshift(stashTransaction);
+      // SAVE current data
+      saveData();
+      // Clear stash transaction variable
+      stashTransaction = {
+        name: "",
+        amount: 0,
+        type: "expense",
+        key: "",
+      };
+      createTransaction = false;
   }
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: colors.main}}>
