@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
 import { StackActions } from '@react-navigation/native';
 import TransactionButton from '../components/transaction-button'
@@ -7,7 +7,10 @@ import TouchableScale from "react-native-touchable-scale";
 
 
 export default function StashScreen({ route, navigation }) {
+
     const isFocused = useIsFocused();
+
+    const [refresh, initRefresh] = useState(1);
 
   if (isFocused && createTransaction && stashTransaction.type === "stash") {
       // Give stash transaction a unique key
@@ -53,11 +56,15 @@ export default function StashScreen({ route, navigation }) {
                         })
                         .indexOf(item.key)
                     );
-                    stashTotal = stashTotal - item.amount
+                    if (item.type === "stash") {
+                      stashTotal =
+                        parseFloat(stashTotal) -
+                        parseFloat(item.amount);
+                      }
 
-                    transactionsArray.splice(pos, 1);
-                    saveData();
+                    stashArray.splice(pos, 1);
                     initRefresh(refresh + 1);
+                    saveData();
                   },
                 },
                 {
@@ -78,7 +85,7 @@ export default function StashScreen({ route, navigation }) {
                 ? `${item.name}`
                 : `${item.name.substring(0, 12)}...`}</Text>
             <View style={styles.buffer}>
-              <Text style={styles.itemAmountStash}>{item.amount}
+              <Text style={item.amount.length < 7 ? styles.itemAmountStash : styles.itemAmountStashLarge}>${item.amount}
                   </Text>
             </View>
           </View>
@@ -103,11 +110,12 @@ const styles = StyleSheet.create({
   },
   itemName: {
     alignContent: "center",
+    textAlign: "left",
+    paddingLeft: 5,
     marginTop: 10,
     fontSize: 22,
     fontFamily: "Rubik_400Regular",
     color: colors.text,
-    left: 15,
     bottom: 20,
   },
 
@@ -131,12 +139,21 @@ const styles = StyleSheet.create({
   },
   itemAmountStash: {
     alignContent: "center",
-    textAlign: 'justify',
-    marginTop: 10,
+    textAlign: "right",
     fontSize: 30,
     color: colors.text,
     fontFamily: "Rubik_500Medium",
-    bottom: 70,
-    marginLeft: 203
+    bottom: 55,
+    paddingRight: 5
+  },
+
+  itemAmountStashLarge: {
+    alignContent: "center",
+    textAlign: 'right',
+    fontSize: 25,
+    color: colors.text,
+    fontFamily: "Rubik_500Medium",
+    bottom: 55,
+    paddingRight: 5
   },
 })
