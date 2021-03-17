@@ -223,11 +223,8 @@ export default function MyBudget({ navigation }) {
                       ? `${item.name}`
                       : `${item.name.substring(0, 12)}...`}</Text>
                   <View style={styles.buffer}>
-                    <Text style={ item.amount.length < 6 ? styles.itemAmountExpense : styles.itemAmountExpenseLarge} >{
-                        item.amount.length < 7
-                        ? `-$${item.amount}`
-                        : `-$${item.amount.substring(0, item.amount.length - 3).substring(0, item.amount.length - 6)},${item.amount.substring(item.amount.length - 6, item.amount.length - 3)}`
-                    }
+                    <Text style={ item.amount.length < 7 ? styles.itemAmountExpense : styles.itemAmountExpenseLarge} >
+                      -${item.amount}
                         </Text>
                   </View>
                 </View>
@@ -322,11 +319,12 @@ const styles = StyleSheet.create({
 
   itemName: {
     alignContent: "center",
+    textAlign: 'left',
+    paddingLeft: 5,
     marginTop: 10,
     fontSize: 22,
     fontFamily: "Rubik_400Regular",
     color: colors.text,
-    left: 15,
     bottom: 20,
   },
 
@@ -364,24 +362,26 @@ const styles = StyleSheet.create({
 
   itemAmountExpense: {
     alignContent: "center",
-    textAlign: 'justify',
+    textAlign: 'right',
     marginTop: 10,
     fontSize: 30,
     color: colors.text,
     fontFamily: "Rubik_500Medium",
     bottom: 25,
-    marginLeft: -3
+    //backgroundColor: 'blue',
+    left: -235,
   },
 
   itemAmountExpenseLarge: {
     alignContent: "center",
-    textAlign: 'justify',
+    textAlign: 'right',
     marginTop: 10,
     fontSize: 25,
     color: colors.text,
     fontFamily: "Rubik_500Medium",
     bottom: 25,
-    marginLeft: -14
+    //backgroundColor: 'blue',
+    left: -235,
   },
 
   buffer: {
@@ -399,3 +399,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#464646",
   },
 });
+
+
+
+
+// OLD Logic for transaction amount displayed on transaction item
+/*
+{
+                        item.amount.length < 7
+                        ? `-$${item.amount}`
+                        : `-$${item.amount.substring(0, item.amount.length - 3).substring(0, item.amount.length - 6)},${item.amount.substring(item.amount.length - 6, item.amount.length - 3)}`
+                    }
+*/

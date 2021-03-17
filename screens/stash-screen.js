@@ -31,7 +31,7 @@ export default function StashScreen({ route, navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: colors.main}}>
       <Text>Stash Screen</Text>
-      <Text>{stashTotal}</Text>
+      <Text>${Number(stashTotal).toFixed(2)}</Text>
       <View>
       <FlatList
       style={styles.flatList}
