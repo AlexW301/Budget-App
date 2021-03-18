@@ -33,6 +33,8 @@ export default function MyBudget({ navigation }) {
 
   const [daysLeft, setDaysLeft] = useState();
 
+  let monthNames = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
   // Dont need current month anymore using currentMonthOnLoad from loading screen
   const [currentMonth, setCurrentMonth] = useState();
 
@@ -67,7 +69,30 @@ export default function MyBudget({ navigation }) {
       };
       // Push last months data object to the global month budget array
       budgetsArray.push(budgetData);
-      //alert('Budgets Array' + JSON.stringify(budgetsArray))
+      // Add extra saved money to stash transaction
+            createTransaction = true;
+            stashTransaction.type = "stash";
+            stashTransaction.date = lastMonth;
+            stashTransaction.amount = Number(budgetData.budget - budgetData.spent).toFixed(2);
+            stashTransaction.name = monthNames[lastMonth.substring(0,1)];
+            stashTotal = stashTotal + parseFloat(stashTransaction.amount);
+      //push stash transaction to stash array and update stash total
+      if (createTransaction && stashTransaction.type === "stash") {
+        // Give stash transaction a unique key
+        stashTransaction.key = shortid.generate();
+        // Push stash transaction to array
+        stashArray.unshift(stashTransaction);
+        // SAVE current data
+        saveData();
+        // Clear stash transaction variable
+        stashTransaction = {
+          name: "",
+          amount: 0,
+          type: "expense",
+          key: "",
+        };
+        createTransaction = false;
+    }
       // Save Budget Data to local storage
       saveBudgetsArray();
       // Clear Current Budget and Array
@@ -166,7 +191,7 @@ export default function MyBudget({ navigation }) {
       >
         ${Number(currentBudget).toFixed(2)}
       </Text>
-      <View style={styles.buttonView}>
+      <View style={{ flex: 1, justifyContent: 'flex-start', backgroundColor: colors.main}}>
         <FlatList
           style={styles.flatList}
           data={transactionsArray}
@@ -314,7 +339,7 @@ const styles = StyleSheet.create({
     maxWidth: "95%",
     width: 375,
     flex: 1,
-    maxHeight: '90.2%'
+    maxHeight: '100%',
   },
 
   itemName: {
@@ -330,11 +355,12 @@ const styles = StyleSheet.create({
 
   itemDate: {
     alignContent: "center",
+    textAlign: 'right',
+    paddingRight: 10,
     marginTop: 10,
     fontSize: 15,
     fontFamily: "Rubik_400Regular",
     color: "#464646",
-    left: 265,
     bottom: 32,
   },
 

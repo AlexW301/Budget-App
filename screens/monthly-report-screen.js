@@ -11,11 +11,11 @@ export default function MonthlyReportScreen({ route, navigation }) {
   let amountSavedText
   let monthNames = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   if (amountSaved > 0) {
-    amountSavedText = `You saved an extra $${amountSaved} last month!`
+    amountSavedText = `You saved an extra $${amountSaved} last month! This has been added to your stash!`
   } else if (amountSaved === 0) {
     amountSavedText = `You were exactly on your budget last month!`
   } else if (amountSaved < 0) {
-    amountSavedText = `You went $${JSON.stringify(amountSaved).substring(1,amountSaved.length)} over budget last month. You'll do better this month!`
+    amountSavedText = `You went $${JSON.stringify(amountSaved).substring(1,amountSaved.length)} over budget last month. This amount has been deducted from your stash`
   }
   let goToSetBudget = () => {
     navigation.replace('SetBudget')

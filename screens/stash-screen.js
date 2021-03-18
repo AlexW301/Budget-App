@@ -30,9 +30,33 @@ export default function StashScreen({ route, navigation }) {
   }
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: colors.main}}>
-      <Text>Stash Screen</Text>
-      <Text>${Number(stashTotal).toFixed(2)}</Text>
-      <View>
+      <Text style={{
+            fontSize: 30,
+            textAlign: "center",
+            color: colors.text,
+            fontFamily: "Rubik_400Regular",
+          }}>Welcome To The Stash</Text>
+      <Text
+        style={{
+          alignContent: "center",
+          justifyContent: "center",
+          position: "relative",
+          color: colors.text,
+          fontSize: 20,
+          fontFamily: "Rubik_400Regular_Italic",
+        }}
+      >
+        your current stash is...
+      </Text>
+      <Text style={{
+          alignContent: "center",
+          justifyContent: "center",
+          position: "relative",
+          fontSize: 50,
+          fontFamily: "Rubik_700Bold",
+          color: colors.text,
+        }}>${Number(stashTotal).toFixed(2)}</Text>
+      <View style={{ flex: 1, justifyContent: 'flex-start', backgroundColor: colors.main}}> 
       <FlatList
       style={styles.flatList}
       data={stashArray}
@@ -105,8 +129,7 @@ const styles = StyleSheet.create({
     maxWidth: "95%",
     width: 375,
     flex: 1,
-    maxHeight: '90.2%',
-    backgroundColor: 'blue'
+    maxHeight: '100%',
   },
   itemName: {
     alignContent: "center",
@@ -121,11 +144,12 @@ const styles = StyleSheet.create({
 
   itemDate: {
     alignContent: "center",
+    textAlign: 'right',
+    paddingRight: 10,
     marginTop: 10,
     fontSize: 15,
     fontFamily: "Rubik_400Regular",
     color: "#464646",
-    left: 265,
     bottom: 32,
   },
   transactionItem: {

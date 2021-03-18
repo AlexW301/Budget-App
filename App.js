@@ -126,7 +126,7 @@ function HomeScreen({ navigation, route }) {
           name="StashScreen"
           component={StashScreen}
           options={{
-            title: "Stash",
+            title: "The Stash",
             headerShown: true,
             headerTitleAlign: "center",
             headerStyle: styles.header,
