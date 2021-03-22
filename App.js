@@ -5,12 +5,14 @@ import { BackHandler, View, StyleSheet, Button } from "react-native";
 import { NavigationContainer, useLinkProps } from "@react-navigation/native";
 import { createStackNavigator, HeaderTitle } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SetBudget from "./screens/set-budget-screen";
 import MyBudget from "./screens/my-budget-screen";
 import AddTransaction from "./screens/add-transaction-screen";
 import LoadingScreen from "./screens/loading-screen";
 import StashScreen from "./screens/stash-screen";
+import Icon from 'react-native-vector-icons/Ionicons'; 
 import { useEffect } from "react";
 import {
   useFonts,
@@ -159,26 +161,79 @@ function AddTransactionScreen() {
   );
 }
 
-function SetBudgetScreen() {
+function SetBudgetScreen({ navigation, route }) {
+    return (
+      <Stack.Navigator
+        initialRouteName="SetBudget"
+        HeaderTitle="Set My Budget"
+      >
+        <Stack.Screen
+          name="SetBudget"
+          component={SetBudget}
+          options={{
+            title: "Set My Budget",
+            headerStyle: styles.header,
+            headerTitleStyle: styles.headerTitle,
+            headerTitleAlign: "center",
+          }}
+        />
+      </Stack.Navigator>
+    );
+  }
+
+  function StashScreen2({ navigation, route }) {
+    return (
+      <Stack.Navigator
+        initialRouteName="StashScreen"
+        HeaderTitle="Stash"
+      >
+        <Stack.Screen
+          name="SetBudget"
+          component={StashScreen}
+          options={{
+            title: "Stash",
+            headerStyle: styles.header,
+            headerTitleStyle: styles.headerTitle,
+            headerTitleAlign: "center",
+          }}
+        />
+      </Stack.Navigator>
+    );
+  }
+
+function TabScreens() {
   return (
-    <Stack.Navigator
-      initialRouteName="Set My Budget"
-      HeaderTitle="Set My Budget"
-    >
-      <Stack.Screen
-        name="SetBudget"
-        component={SetBudget}
-        options={{
-          title: "Set My Budget",
-          headerLeft: null,
-          headerTitleAlign: "center",
+    <Tab.Navigator
+        initialRouteName="MyBudget"
+        tabBarOptions={{
+          activeTintColor: colors.text,
+          inactiveTintColor: colors.text,
+          activeBackgroundColor: "#117864",
+          inactiveBackgroundColor: "#148F77",
         }}
-      />
-    </Stack.Navigator>
+      >
+        <Tab.Screen
+          name="MyBudget"
+          component={HomeScreen}
+          options={{ title: "My Budget", tabBarVisible: true,  tabBarIcon:()=>(  
+            <Icon name="wallet-outline" color='#E8F8F5' size={30}/>  
+        )  
+      }  }
+        />
+        <Tab.Screen
+          name="AddTransaction"
+          component={AddTransactionScreen}
+          options={{ title: "Add Transaction", tabBarIcon:()=>(  
+            <Icon name="card-outline" color='#E8F8F5' size={30}/>  
+        )  
+       }}
+        />
+      </Tab.Navigator>
   );
 }
 
 const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   let [fontsLoaded, error] = useFonts({
@@ -196,26 +251,26 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName="MyBudget"
-        tabBarOptions={{
-          activeTintColor: colors.text,
-          inactiveTintColor: colors.text,
-          activeBackgroundColor: "#117864",
-          inactiveBackgroundColor: "#148F77",
-        }}
-      >
-        <Tab.Screen
-          name="MyBudget"
-          component={HomeScreen}
-          options={{ title: "My Budget", tabBarVisible: true }}
-        />
-        <Tab.Screen
-          name="AddTransaction"
-          component={AddTransactionScreen}
-          options={{ title: "Add Transaction" }}
-        />
-      </Tab.Navigator>
+      <Drawer.Navigator HeaderTitle="My Budget Screen" drawerType="slide" drawerStyle={{
+    backgroundColor: "#117864",
+    width: 200,
+  }} drawerContentOptions={{
+    activeTintColor: '#E8F8F5',
+    activeBackgroundColor: '#0B5345',
+    inactiveTintColor: '#E8F8F5',
+    inactiveBackgroundColor: '#148F77',
+    labelStyle:{
+      marginLeft:5
+    }
+  }}>
+      <Drawer.Screen name="Home" component={TabScreens} />
+      <Drawer.Screen name="SetBudget" component={SetBudgetScreen} options={{
+            title: "Set My Budget"
+          }} />
+      <Drawer.Screen name="StashScreen" component={StashScreen2} options={{
+            title: "Stash"
+          }} />
+    </Drawer.Navigator>
     </NavigationContainer>
   );
 }
