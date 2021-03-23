@@ -30,6 +30,8 @@ import {
 import AppLoading from "expo";
 import MonthlyReportScreen from "./screens/monthly-report-screen";
 import StashButton from "./components/stash-button";
+import Header from './components/header';
+import { ActivityIndicator } from "react-native";
 
 // GLOBAL VARIABLES ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -88,7 +90,8 @@ function HomeScreen({ navigation, route }) {
           name="MyBudget"
           component={MyBudget}
           options={{
-            title: "My Budget",
+            headerTitle: () => 
+                <Header title="Home" navigation={navigation}/>,
             headerLeft: null,
             headerTitleAlign: "center",
             headerStyle: styles.header,
@@ -140,7 +143,7 @@ function HomeScreen({ navigation, route }) {
   }
 }
 
-function AddTransactionScreen() {
+function AddTransactionScreen({navigation}) {
   return (
     <Stack.Navigator
       initialRouteName="AddTransaction"
@@ -150,7 +153,8 @@ function AddTransactionScreen() {
         name="AddTransaction"
         component={AddTransaction}
         options={{
-          title: "Add Transaction",
+          headerTitle: () => 
+                <Header title="Add Transaction" navigation={navigation}/>,
           headerLeft: null,
           headerTitleAlign: "center",
           headerStyle: styles.header,
@@ -171,7 +175,8 @@ function SetBudgetScreen({ navigation, route }) {
           name="SetBudget"
           component={SetBudget}
           options={{
-            title: "Set My Budget",
+            headerTitle: () => 
+                <Header title="Set My Budget" navigation={navigation}/>,
             headerStyle: styles.header,
             headerTitleStyle: styles.headerTitle,
             headerTitleAlign: "center",
@@ -191,7 +196,8 @@ function SetBudgetScreen({ navigation, route }) {
           name="SetBudget"
           component={StashScreen}
           options={{
-            title: "Stash",
+            headerTitle: () => 
+                <Header title="STASH" navigation={navigation}/>,
             headerStyle: styles.header,
             headerTitleStyle: styles.headerTitle,
             headerTitleAlign: "center",
@@ -210,13 +216,14 @@ function TabScreens() {
           inactiveTintColor: colors.text,
           activeBackgroundColor: "#117864",
           inactiveBackgroundColor: "#148F77",
+          showLabel: false
         }}
       >
         <Tab.Screen
           name="MyBudget"
           component={HomeScreen}
           options={{ title: "My Budget", tabBarVisible: true,  tabBarIcon:()=>(  
-            <Icon name="wallet-outline" color='#E8F8F5' size={30}/>  
+            <Icon name="wallet-outline" color='#E8F8F5' size={40}/>  
         )  
       }  }
         />
@@ -224,7 +231,7 @@ function TabScreens() {
           name="AddTransaction"
           component={AddTransactionScreen}
           options={{ title: "Add Transaction", tabBarIcon:()=>(  
-            <Icon name="card-outline" color='#E8F8F5' size={30}/>  
+            <Icon name="card-outline" color='#E8F8F5' size={40}/>  
         )  
        }}
         />

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
+import Icon from 'react-native-vector-icons/Ionicons'; 
 
 import TouchableScale from 'react-native-touchable-scale'; // https://github.com/kohver/react-native-touchable-scale
 
@@ -23,7 +24,7 @@ export default function StashButton({ title, onPress, style }) {
             activeScale={0.9}
         >
         <View style={styles.button}>
-          <Text style={styles.buttonText}>{title}</Text>
+        <Icon name="key" color='#E8F8F5' size={25} style={styles.icon}/>
         </View>
       </TouchableScale>
     </View>
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: "#0B5345",
     alignContent: "center",
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
     paddingVertical: 4,
   },
 
