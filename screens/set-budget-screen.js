@@ -14,6 +14,7 @@ import {
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import { color } from "react-native-reanimated";
 import SetBudgetButton from "../components/set-budget-button";
+import { Keyboard } from "react-native";
 
 global.colors = {
   main: "#0E6251",
@@ -23,6 +24,7 @@ global.colors = {
 
 export default function SetBudget({ navigation }) {
   let newBudget;
+  const [amount, updateAmount] = useState();
   return (
     <View
       style={{
@@ -46,7 +48,11 @@ export default function SetBudget({ navigation }) {
       <TextInput
         style={styles.budgetInput}
         keyboardType="numeric"
-        onChangeText={(value) => (newBudget = value)}
+        onChangeText={(value) => {
+          updateAmount(value);
+          newBudget = value
+        }}
+        value={amount}
       />
       <View
         style={{
@@ -59,9 +65,9 @@ export default function SetBudget({ navigation }) {
         <SetBudgetButton
           title="Set Budget"
           onPress={() => {
-            if (newBudget < 9999999) {
-            myBudget = newBudget;
-            currentBudget = newBudget;
+            if (amount < 9999999) {
+            myBudget = amount;
+            currentBudget = amount;
             for (var i = 0; i < transactionsArray.length; i++) {
               if (transactionsArray[i].type === "expense") {
                 currentBudget =
@@ -75,6 +81,7 @@ export default function SetBudget({ navigation }) {
             }
             saveData();
             navigation.navigate("MyBudget", currentBudget);
+            updateAmount();
             } else {
               Alert.alert('You need to set a smaller budget buddy...')
             }

@@ -19,17 +19,19 @@ export default function LoadingScreen({navigation}) {
       //alert(currentMonthOnLoad)
     }, []);
       setTimeout(() => {
+        //alert(`#2${myBudget}`)
         // Replaces LoadingScreen with MyBudget screen on the stack
         if (myBudget == 0 || myBudget == null) {
+          // Navigates to set budget screen
+          navigation.navigate('SetBudget')
+          // Replaces loading screen from the stack with My Budget Screen
           navigation.dispatch(
-            StackActions.replace('SetBudget'))
-          // navigation.navigate('MyBudget')
+            StackActions.replace('MyBudget'))
         } else {
           navigation.dispatch(
             StackActions.replace('MyBudget'))
-          // navigation.navigate('MyBudget')
         }
-      }, 200)
+      }, 300)
       return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.main}}>
           <Text style={{position: 'relative', justifyContent: 'center', textAlign: 'center'}}></Text>

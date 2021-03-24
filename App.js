@@ -37,7 +37,7 @@ import { ActivityIndicator } from "react-native";
 
 global.shortid = require("shortid");
 global.currentBudget = 0;
-global.myBudget = "0";
+global.myBudget = 0;
 global.transaction = {
   name: "",
   amount: 0,
@@ -99,16 +99,6 @@ function HomeScreen({ navigation, route }) {
             headerRight: () => (
               <StashButton title="$" style={{marginRight: 20}} onPress={navigateToStashScreen}></StashButton>
             )
-          }}
-        />
-        <Stack.Screen
-          name="SetBudget"
-          component={SetBudget}
-          options={{
-            title: "Set My Budget",
-            headerStyle: styles.header,
-            headerTitleStyle: styles.headerTitle,
-            headerTitleAlign: "center",
           }}
         />
         <Stack.Screen
@@ -222,16 +212,16 @@ function TabScreens() {
         <Tab.Screen
           name="MyBudget"
           component={HomeScreen}
-          options={{ title: "My Budget", tabBarVisible: true,  tabBarIcon:()=>(  
-            <Icon name="wallet-outline" color='#E8F8F5' size={40}/>  
+          options={{ title: "My Budget", tabBarVisible: true,  tabBarIcon:({focused})=>(  
+            <Icon name="wallet-outline" color='#E8F8F5' size={focused ? 40 : 30}/>  
         )  
       }  }
         />
         <Tab.Screen
           name="AddTransaction"
           component={AddTransactionScreen}
-          options={{ title: "Add Transaction", tabBarIcon:()=>(  
-            <Icon name="card-outline" color='#E8F8F5' size={40}/>  
+          options={{ title: "Add Transaction", tabBarIcon:({focused})=>(  
+            <Icon name="card-outline" color='#E8F8F5' size={focused ? 40 : 30}/>  
         )  
        }}
         />
@@ -259,8 +249,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator HeaderTitle="My Budget Screen" drawerType="slide" drawerStyle={{
-    backgroundColor: "#117864",
-    width: 200,
+    backgroundColor: "#0E6251",
+    width: 225,
   }} drawerContentOptions={{
     activeTintColor: '#E8F8F5',
     activeBackgroundColor: '#0B5345',
@@ -325,6 +315,7 @@ global.displayData = async () => {
     let stashArraySave = await AsyncStorage.getItem("stashArray");
 
     myBudget = myBudgetSave;
+    //alert(myBudget)
     currentBudget = JSON.parse(currentBudgetSave);
 
     stashTotal = JSON.parse(stashTotalSave);
