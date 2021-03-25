@@ -12,15 +12,22 @@ export default function HistoryScreen({ route, navigation }) {
 
     const [refresh, initRefresh] = useState(1);
 
-    const [count, updateCount] = useState(0);
-
-    let historyArray = [];
+    let historyArray = [{
+      name: "asd",
+      amount: 0,
+      type: "",
+      key: "dsfsd",
+      date: "",
+    }];
 
   if (isFocused && addHistory) {
-        // Push last months budget array to history array
-        historyArray.push(budgetsArray.transactions);
-        // Update count for array for next time
-        updateCount(count + 1);
+    for (let i = 0; i < budgetsArray.length; i++) {
+      for (let i = 0; i < budgetsArray[i].transactions.length; i++) {
+        historyArray.unshift(budgetsArray[i].transactions[i])
+       }
+    }
+    //budgetsArray.map(x => historyArray.unshift(x.transactions))
+    alert(JSON.stringify(historyArray))
         // Set add history to false
         addHistory = false;
   }
