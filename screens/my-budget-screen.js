@@ -69,6 +69,8 @@ export default function MyBudget({ navigation }) {
       };
       // Push last months data object to the global month budget array
       budgetsArray.push(budgetData);
+      // Set add history to true
+      addHistory = true;
       // Add extra saved money to stash transaction
             createTransaction = true;
             stashTransaction.type = "stash";

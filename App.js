@@ -32,6 +32,7 @@ import MonthlyReportScreen from "./screens/monthly-report-screen";
 import StashButton from "./components/stash-button";
 import Header from './components/header';
 import { ActivityIndicator } from "react-native";
+import HistoryScreen from './screens/history-screen';
 
 // GLOBAL VARIABLES ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -70,7 +71,7 @@ global.colors = {
 };
 
 global.firstDayOfMonth = true;
-
+global.addHistory = false;
 
 // NAVIGATION STACK ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -183,7 +184,7 @@ function SetBudgetScreen({ navigation, route }) {
         HeaderTitle="Stash"
       >
         <Stack.Screen
-          name="SetBudget"
+          name="StashScreen"
           component={StashScreen}
           options={{
             headerTitle: () => 
@@ -261,11 +262,14 @@ export default function App() {
     }
   }}>
       <Drawer.Screen name="Home" component={TabScreens} />
+      <Drawer.Screen name="StashScreen" component={StashScreen2} options={{
+            title: "Stash"
+          }} />
       <Drawer.Screen name="SetBudget" component={SetBudgetScreen} options={{
             title: "Set My Budget"
           }} />
-      <Drawer.Screen name="StashScreen" component={StashScreen2} options={{
-            title: "Stash"
+      <Drawer.Screen name="HistoryScreen" component={HistoryScreen} options={{
+            title: "History"
           }} />
     </Drawer.Navigator>
     </NavigationContainer>
