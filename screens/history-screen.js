@@ -5,6 +5,7 @@ import TransactionButton from '../components/transaction-button'
 import { useIsFocused } from "@react-navigation/native";
 import TouchableScale from "react-native-touchable-scale";
 
+global.historyArray = [];
 
 export default function HistoryScreen({ route, navigation }) {
 
@@ -12,24 +13,9 @@ export default function HistoryScreen({ route, navigation }) {
 
     const [refresh, initRefresh] = useState(1);
 
-    let historyArray = [{
-      name: "asd",
-      amount: 0,
-      type: "",
-      key: "dsfsd",
-      date: "",
-    }];
 
-  if (isFocused && addHistory) {
-    for (let i = 0; i < budgetsArray.length; i++) {
-      for (let i = 0; i < budgetsArray[i].transactions.length; i++) {
-        historyArray.unshift(budgetsArray[i].transactions[i])
-       }
-    }
-    //budgetsArray.map(x => historyArray.unshift(x.transactions))
-    alert(JSON.stringify(historyArray))
-        // Set add history to false
-        addHistory = false;
+  if (isFocused) {
+      
   }
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: colors.main}}>
