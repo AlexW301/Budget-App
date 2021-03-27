@@ -138,193 +138,277 @@ export default function MyBudget({ navigation }) {
       createTransaction = false;
     }
   }
-  return (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: 'column',
-        alignItems: "center",
-        justifyContent: "flex-start",
-        backgroundColor: colors.main,
-      }}
-    >
-      <TouchableScale
-        activeScale={0.9}
+  if (transactionsArray.length === 0) {
+    return (
+      <View
         style={{
-          position: "relative",
-          width: "100%",
-          paddingTop: 0
-        }}
-        onLongPress={() => {
-          navigation.navigate("SetBudget");
+          flex: 1,
+          flexDirection: 'column',
+          alignItems: "center",
+          justifyContent: "flex-start",
+          backgroundColor: colors.main,
         }}
       >
-        <Text
+        <TouchableScale
+          activeScale={0.9}
           style={{
-            fontSize: 30,
-            textAlign: "center",
-            color: colors.text,
-            fontFamily: "Rubik_400Regular",
+            position: "relative",
+            width: "100%",
+            paddingTop: 0
+          }}
+          onLongPress={() => {
+            navigation.navigate("SetBudget");
           }}
         >
-          Your Budget is ${myBudget}
+          <Text
+            style={{
+              fontSize: 30,
+              textAlign: "center",
+              color: colors.text,
+              fontFamily: "Rubik_400Regular",
+            }}
+          >
+            Your Budget is ${myBudget}
+          </Text>
+        </TouchableScale>
+        <Text
+          style={{
+            alignContent: "center",
+            justifyContent: "center",
+            position: "relative",
+            color: colors.text,
+            fontSize: 20,
+            fontFamily: "Rubik_400Regular_Italic",
+          }}
+        >
+          you have {daysLeft} days left...
         </Text>
-      </TouchableScale>
-      <Text
-        style={{
-          alignContent: "center",
-          justifyContent: "center",
-          position: "relative",
-          color: colors.text,
-          fontSize: 20,
-          fontFamily: "Rubik_400Regular_Italic",
-        }}
-      >
-        you have {daysLeft} days left...
-      </Text>
-      <Text
-        style={{
-          alignContent: "center",
-          justifyContent: "center",
-          position: "relative",
-          fontSize: 50,
-          fontFamily: "Rubik_700Bold",
-          color: colors.text,
-        }}
-      >
-        ${Number(currentBudget).toFixed(2)}
-      </Text>
-      <View style={{ flex: 1, justifyContent: 'flex-start', backgroundColor: colors.main}}>
-        <FlatList
-          style={styles.flatList}
-          data={transactionsArray}
-          renderItem={({ item }) =>
-            item.type === "expense" ? (
-              // EXPENSE ITEM
-              <TouchableScale
-                activeScale={0.9}
-                onLongPress={() => {
-                  Alert.alert(
-                    "Do you want to delete this transaction?",
-                    "This action can not be undone!",
-                    [
-                      {
-                        text: "Yes, Delete!",
-                        onPress: () => {
-                          let pos = JSON.stringify(
-                            transactionsArray
-                              .map(function (e) {
-                                return e.key;
-                              })
-                              .indexOf(item.key)
-                          );
-                          if (item.type === "expense") {
-                            currentBudget =
-                              parseFloat(currentBudget) +
-                              parseFloat(item.amount);
-                          } else if (item.type === "deposit") {
-                            currentBudget =
-                              parseFloat(currentBudget) -
-                              parseFloat(item.amount);
-                          }
-
-                          transactionsArray.splice(pos, 1);
-                          saveData();
-                          initRefresh(refresh + 1);
-                        },
-                      },
-                      {
-                        text: "Cancel, Dont Delete",
-                        onPress: () => {},
-                        style: "cancel",
-                      },
-                    ],
-                    { cancelable: false }
-                  );
-
-                  //Alert.alert(pos)
-                }}
-              >
-                <View style={styles.transactionItem}>
-                  <Text style={styles.itemDate}>{item.date}</Text>
-                  <Text style={styles.itemName}>{item.name.length < 15
-                      ? `${item.name}`
-                      : `${item.name.substring(0, 12)}...`}</Text>
-                  <View style={styles.buffer}>
-                    <Text style={ item.amount.length < 7 ? styles.itemAmountExpense : styles.itemAmountExpenseLarge} >
-                      -${item.amount}
-                        </Text>
-                  </View>
-                </View>
-              </TouchableScale>
-            ) : (
-              // DEPOSIT ITEM
-              <TouchableScale
-                activeScale={0.9}
-                onLongPress={() => {
-                  Alert.alert(
-                    "Do you want to delete this transaction?",
-                    "This action can not be undone!",
-                    [
-                      {
-                        text: "Yes, Delete!",
-                        onPress: () => {
-                          let pos = JSON.stringify(
-                            transactionsArray
-                              .map(function (e) {
-                                return e.key;
-                              })
-                              .indexOf(item.key)
-                          );
-                          if (item.type === "expense") {
-                            currentBudget =
-                              parseFloat(currentBudget) +
-                              parseFloat(item.amount);
-                          } else if (item.type === "deposit") {
-                            currentBudget =
-                              parseFloat(currentBudget) -
-                              parseFloat(item.amount);
-                          }
-
-                          transactionsArray.splice(pos, 1);
-                          saveData();
-                          initRefresh(refresh + 1);
-                        },
-                      },
-                      {
-                        text: "Cancel, Dont Delete",
-                        onPress: () => {},
-                        style: "cancel",
-                      },
-                    ],
-                    { cancelable: false }
-                  );
-
-                  //Alert.alert(pos)
-                }}
-              >
-                <View style={styles.transactionItem}>
-                  <Text style={styles.itemDate}>{item.date}</Text>
-                  <Text style={styles.itemName}>
-                    {item.name.length < 15
-                      ? `${item.name}`
-                      : `${item.name.substring(0, 12)}...`}
-                  </Text>
-                  <View style={styles.buffer}>
-                    <Text style={item.amount.length < 6 ? styles.itemAmountDeposit : styles.itemAmountDepositLarge}>{
-                        item.amount.length < 7
-                        ? `$${item.amount}`
-                        : `$${item.amount.substring(0, item.amount.length - 3).substring(0, item.amount.length - 6)},${item.amount.substring(item.amount.length - 6, item.amount.length - 3)}`
-                    }</Text>
-                  </View>
-                </View>
-              </TouchableScale>
-            )
-          }
-        />
+        <Text
+          style={{
+            alignContent: "center",
+            justifyContent: "center",
+            position: "relative",
+            fontSize: 50,
+            fontFamily: "Rubik_700Bold",
+            color: colors.text,
+          }}
+        >
+          ${Number(currentBudget).toFixed(2)}
+        </Text>
+        <View style={{
+              border: true,
+              borderWidth: 2,
+              flex: .98,
+              width: '95%',
+              borderColor: '#E8F8F5',
+              opacity: .5,
+              justifyContent: 'center',
+              alignContent: 'center',
+              borderRadius: 15
+          }}>
+            <Text style={{
+              alignContent: "center",
+              justifyContent: "center",
+              position: "relative",
+              color: colors.text,
+              fontSize: 20,
+              fontFamily: "Rubik_400Regular_Italic",
+              paddingHorizontal: 10,
+              textAlign: 'center'
+            }} >it's empty here...</Text>
+          </View>
       </View>
-    </View>
-  );
+    );
+  } else {
+    return (
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'column',
+          alignItems: "center",
+          justifyContent: "flex-start",
+          backgroundColor: colors.main,
+        }}
+      >
+        <TouchableScale
+          activeScale={0.9}
+          style={{
+            position: "relative",
+            width: "100%",
+            paddingTop: 0
+          }}
+          onLongPress={() => {
+            navigation.navigate("SetBudget");
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 30,
+              textAlign: "center",
+              color: colors.text,
+              fontFamily: "Rubik_400Regular",
+            }}
+          >
+            Your Budget is ${myBudget}
+          </Text>
+        </TouchableScale>
+        <Text
+          style={{
+            alignContent: "center",
+            justifyContent: "center",
+            position: "relative",
+            color: colors.text,
+            fontSize: 20,
+            fontFamily: "Rubik_400Regular_Italic",
+          }}
+        >
+          you have {daysLeft} days left...
+        </Text>
+        <Text
+          style={{
+            alignContent: "center",
+            justifyContent: "center",
+            position: "relative",
+            fontSize: 50,
+            fontFamily: "Rubik_700Bold",
+            color: colors.text,
+          }}
+        >
+          ${Number(currentBudget).toFixed(2)}
+        </Text>
+        <View style={{ flex: 1, justifyContent: 'flex-start', backgroundColor: colors.main}}>
+          <FlatList
+            style={styles.flatList}
+            data={transactionsArray}
+            renderItem={({ item }) =>
+              item.type === "expense" ? (
+                // EXPENSE ITEM
+                <TouchableScale
+                  activeScale={0.9}
+                  onLongPress={() => {
+                    Alert.alert(
+                      "Do you want to delete this transaction?",
+                      "This action can not be undone!",
+                      [
+                        {
+                          text: "Yes, Delete!",
+                          onPress: () => {
+                            let pos = JSON.stringify(
+                              transactionsArray
+                                .map(function (e) {
+                                  return e.key;
+                                })
+                                .indexOf(item.key)
+                            );
+                            if (item.type === "expense") {
+                              currentBudget =
+                                parseFloat(currentBudget) +
+                                parseFloat(item.amount);
+                            } else if (item.type === "deposit") {
+                              currentBudget =
+                                parseFloat(currentBudget) -
+                                parseFloat(item.amount);
+                            }
+  
+                            transactionsArray.splice(pos, 1);
+                            saveData();
+                            initRefresh(refresh + 1);
+                          },
+                        },
+                        {
+                          text: "Cancel, Dont Delete",
+                          onPress: () => {},
+                          style: "cancel",
+                        },
+                      ],
+                      { cancelable: false }
+                    );
+  
+                    //Alert.alert(pos)
+                  }}
+                >
+                  <View style={styles.transactionItem}>
+                    <Text style={styles.itemDate}>{item.date}</Text>
+                    <Text style={styles.itemName}>{item.name.length < 15
+                        ? `${item.name}`
+                        : `${item.name.substring(0, 12)}...`}</Text>
+                    <View style={styles.buffer}>
+                      <Text style={ item.amount.length < 7 ? styles.itemAmountExpense : styles.itemAmountExpenseLarge} >
+                        -${item.amount}
+                          </Text>
+                    </View>
+                  </View>
+                </TouchableScale>
+              ) : (
+                // DEPOSIT ITEM
+                <TouchableScale
+                  activeScale={0.9}
+                  onLongPress={() => {
+                    Alert.alert(
+                      "Do you want to delete this transaction?",
+                      "This action can not be undone!",
+                      [
+                        {
+                          text: "Yes, Delete!",
+                          onPress: () => {
+                            let pos = JSON.stringify(
+                              transactionsArray
+                                .map(function (e) {
+                                  return e.key;
+                                })
+                                .indexOf(item.key)
+                            );
+                            if (item.type === "expense") {
+                              currentBudget =
+                                parseFloat(currentBudget) +
+                                parseFloat(item.amount);
+                            } else if (item.type === "deposit") {
+                              currentBudget =
+                                parseFloat(currentBudget) -
+                                parseFloat(item.amount);
+                            }
+  
+                            transactionsArray.splice(pos, 1);
+                            saveData();
+                            initRefresh(refresh + 1);
+                          },
+                        },
+                        {
+                          text: "Cancel, Dont Delete",
+                          onPress: () => {},
+                          style: "cancel",
+                        },
+                      ],
+                      { cancelable: false }
+                    );
+  
+                    //Alert.alert(pos)
+                  }}
+                >
+                  <View style={styles.transactionItem}>
+                    <Text style={styles.itemDate}>{item.date}</Text>
+                    <Text style={styles.itemName}>
+                      {item.name.length < 15
+                        ? `${item.name}`
+                        : `${item.name.substring(0, 12)}...`}
+                    </Text>
+                    <View style={styles.buffer}>
+                      <Text style={item.amount.length < 6 ? styles.itemAmountDeposit : styles.itemAmountDepositLarge}>{
+                          item.amount.length < 7
+                          ? `$${item.amount}`
+                          : `$${item.amount.substring(0, item.amount.length - 3).substring(0, item.amount.length - 6)},${item.amount.substring(item.amount.length - 6, item.amount.length - 3)}`
+                      }</Text>
+                    </View>
+                  </View>
+                </TouchableScale>
+              )
+            }
+          />
+        </View>
+      </View>
+    );
+  }
+  
 }
 
 const styles = StyleSheet.create({
