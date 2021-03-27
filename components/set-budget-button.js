@@ -14,7 +14,7 @@ global.colors = {
   shade1: "#117864",
 };
 
-export default function SetBudgetButton({ title, onPress }) {
+export default function SetBudgetButton({ title, onPress}) {
   return (
     <View style={{ flex: 1, position: "relative", justifyContent: "center" }}>
       <TouchableScale

@@ -15,12 +15,13 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 import { color } from "react-native-reanimated";
 import SetBudgetButton from "../components/set-budget-button";
 import { Keyboard } from "react-native";
-
+/*
 global.colors = {
   main: "#0E6251",
   text: "#E8F8F5",
   shade1: "#117864",
 };
+*/
 
 export default function SetBudget({ navigation }) {
   let newBudget;
@@ -31,7 +32,7 @@ export default function SetBudget({ navigation }) {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#0E6251",
+        backgroundColor: setBudgetColors.main,
       }}
     >
       <Text

@@ -17,11 +17,13 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 import { ListItem, Avatar } from "react-native-elements";
 import TouchableScale from "react-native-touchable-scale"; // https://github.com/kohver/react-native-touchable-scale
 
+/*
 global.colors = {
   main: "#0E6251",
   text: "#E8F8F5",
   shade1: "#117864",
 };
+*/
 global.monthsBudgeted = ["init"];
 
 

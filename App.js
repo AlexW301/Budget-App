@@ -33,6 +33,7 @@ import StashButton from "./components/stash-button";
 import Header from './components/header';
 import { ActivityIndicator } from "react-native";
 import HistoryScreen from './screens/history-screen';
+import { Alert } from "react-native";
 
 // GLOBAL VARIABLES ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -69,7 +70,13 @@ global.colors = {
   text: "#E8F8F5",
   shade1: "#117864",
 };
-
+global.tabColors = {
+  active: "#117864",
+  inactive: "#148F77"
+}
+global.setBudgetColors = {
+  main: "#0E6251"
+}
 global.firstDayOfMonth = true;
 global.historyArray = [];
 
@@ -97,9 +104,6 @@ function HomeScreen({ navigation, route }) {
             headerTitleAlign: "center",
             headerStyle: styles.header,
             headerTitleStyle: styles.headerTitle,
-            headerRight: () => (
-              <StashButton title="$" style={{marginRight: 20}} onPress={navigateToStashScreen}></StashButton>
-            )
           }}
         />
         <Stack.Screen
@@ -226,8 +230,8 @@ function TabScreens() {
         tabBarOptions={{
           activeTintColor: colors.text,
           inactiveTintColor: colors.text,
-          activeBackgroundColor: "#117864",
-          inactiveBackgroundColor: "#148F77",
+          activeBackgroundColor: tabColors.active,
+          inactiveBackgroundColor: tabColors.inactive,
           showLabel: false
         }}
       >
@@ -395,3 +399,16 @@ saveBudgetsArray();
 displayBudgetsArray();
 
 //clearAsyncStorage();
+
+
+/*
+global.colors = {
+  main: "#0E6251",
+  text: "#E8F8F5",
+  shade1: "#117864",
+};
+global.tabColors = {
+  active: "#117864",
+  inactive: "#148F77"
+}
+*/
