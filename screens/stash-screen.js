@@ -6,6 +6,7 @@ import { useIsFocused } from "@react-navigation/native";
 import TouchableScale from "react-native-touchable-scale";
 
 
+
 export default function StashScreen({ route, navigation }) {
 
     const isFocused = useIsFocused();

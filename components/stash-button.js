@@ -10,6 +10,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import TouchableScale from 'react-native-touchable-scale'; // https://github.com/kohver/react-native-touchable-scale
 
+
+
 global.colors = {
   main: "#0E6251",
   text: "#E8F8F5",

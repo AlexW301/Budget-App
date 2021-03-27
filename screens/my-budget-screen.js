@@ -24,6 +24,7 @@ global.colors = {
 };
 global.monthsBudgeted = ["init"];
 
+
 export default function MyBudget({ navigation }) {
   const [visible, setVisible] = useState(false);
 
@@ -70,7 +71,7 @@ export default function MyBudget({ navigation }) {
       // Push last months data object to the global month budget array
       budgetsArray.push(budgetData);
       // Add this months transaction array to the history array
-      historyArray = historyArray.concat(transactionsArray)
+      historyArray = transactionsArray.concat(historyArray)
       // Add extra saved money to stash transaction
             createTransaction = true;
             stashTransaction.type = "stash";

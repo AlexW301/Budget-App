@@ -5,7 +5,7 @@ import TransactionButton from '../components/transaction-button'
 import { useIsFocused } from "@react-navigation/native";
 import TouchableScale from "react-native-touchable-scale";
 
-global.historyArray = [];
+
 
 export default function HistoryScreen({ route, navigation }) {
 

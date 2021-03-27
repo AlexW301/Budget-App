@@ -31,7 +31,7 @@ export default function LoadingScreen({navigation}) {
           navigation.dispatch(
             StackActions.replace('MyBudget'))
         }
-      }, 300)
+      }, 500)
       return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.main}}>
           <Text style={{position: 'relative', justifyContent: 'center', textAlign: 'center'}}></Text>

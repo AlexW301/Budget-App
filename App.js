@@ -71,7 +71,7 @@ global.colors = {
 };
 
 global.firstDayOfMonth = true;
-global.addHistory = false;
+global.historyArray = [];
 
 // NAVIGATION STACK ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -286,6 +286,8 @@ global.saveData = () => {
   let stashTotalSave = JSON.stringify(stashTotal);
   let stashArraySave = JSON.stringify(stashArray);
 
+  let historyArraySave = JSON.stringify(historyArray);
+
   AsyncStorage.setItem("myBudget", myBudgetSave);
   AsyncStorage.setItem("currentBudget", currentBudgetSave);
   AsyncStorage.setItem("transactionsArray", JSON.stringify(transactionsArray));
@@ -293,6 +295,8 @@ global.saveData = () => {
 
   AsyncStorage.setItem("stashTotal", stashTotalSave);
   AsyncStorage.setItem("stashArray", stashArraySave);
+
+  AsyncStorage.setItem("historyArray", historyArraySave);
 };
 
 global.saveBudgetsArray = () => {
@@ -317,13 +321,20 @@ global.displayData = async () => {
     //alert(budgetsByMonth)
     let stashTotalSave = await AsyncStorage.getItem("stashTotal");
     let stashArraySave = await AsyncStorage.getItem("stashArray");
+    // In an if statement because if there is no stash array info yet the stashArraySave will return null and make the stash Array null, which causes errors
+    if (stashArraySave) {
+      stashArray = JSON.parse(stashArraySave);
+    }
+    let historyArraySave = await AsyncStorage.getItem("historyArray");
+    if (historyArraySave) {
+      historyArray = JSON.parse(historyArraySave);
+    }
 
     myBudget = myBudgetSave;
     //alert(myBudget)
     currentBudget = JSON.parse(currentBudgetSave);
 
     stashTotal = JSON.parse(stashTotalSave);
-    stashArray = JSON.parse(stashArraySave);
 
     let transactionsArrayParsed = JSON.parse(transactionsArraySave);
 
