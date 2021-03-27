@@ -177,6 +177,27 @@ function SetBudgetScreen({ navigation, route }) {
     );
   }
 
+  function HistoryScreenStack({ navigation, route }) {
+    return (
+      <Stack.Navigator
+        initialRouteName="HistoryScreen"
+        HeaderTitle="History"
+      >
+        <Stack.Screen
+          name="History"
+          component={HistoryScreen}
+          options={{
+            headerTitle: () => 
+                <Header title="History" navigation={navigation}/>,
+            headerStyle: styles.header,
+            headerTitleStyle: styles.headerTitle,
+            headerTitleAlign: "center",
+          }}
+        />
+      </Stack.Navigator>
+    );
+  }
+
   function StashScreen2({ navigation, route }) {
     return (
       <Stack.Navigator
@@ -265,11 +286,11 @@ export default function App() {
       <Drawer.Screen name="StashScreen" component={StashScreen2} options={{
             title: "Stash"
           }} />
+      <Drawer.Screen name="HistoryScreen" component={HistoryScreenStack} options={{
+            title: "History"
+          }} />
       <Drawer.Screen name="SetBudget" component={SetBudgetScreen} options={{
             title: "Set My Budget"
-          }} />
-      <Drawer.Screen name="HistoryScreen" component={HistoryScreen} options={{
-            title: "History"
           }} />
     </Drawer.Navigator>
     </NavigationContainer>

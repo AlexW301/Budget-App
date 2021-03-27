@@ -85,6 +85,7 @@ export default function SetBudget({ navigation }) {
             } else {
               Alert.alert('You need to set a smaller budget buddy...')
             }
+            Keyboard.dismiss();
           }}
         />
       </View>

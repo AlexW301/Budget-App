@@ -17,93 +17,142 @@ export default function HistoryScreen({ route, navigation }) {
   if (isFocused) {
       
   }
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: colors.main}}>
-      <Text style={{
-            fontSize: 30,
-            textAlign: "center",
-            color: colors.text,
-            fontFamily: "Rubik_400Regular",
-          }}>HISTORY</Text>
-      <Text
-        style={{
-          alignContent: "center",
-          justifyContent: "center",
-          position: "relative",
-          color: colors.text,
-          fontSize: 20,
-          fontFamily: "Rubik_400Regular_Italic",
-        }}
-      >
-        work in progress...
-      </Text>
-      
-      <View style={{ flex: 1, justifyContent: 'flex-start', backgroundColor: colors.main}}> 
-      <FlatList
-      style={styles.flatList}
-      data={historyArray}
-      renderItem={({ item }) =>
-      (
-        // TRANSACTION ITEM
-        <TouchableScale
-          activeScale={0.9}
-          onLongPress={() => {
-            Alert.alert(
-              "Do you want to delete this transaction?",
-              "This action can not be undone!",
-              [
-                {
-                  text: "Yes, Delete!",
-                  onPress: () => {
-                    let pos = JSON.stringify(
-                      stashArray
-                        .map(function (e) {
-                          return e.key;
-                        })
-                        .indexOf(item.key)
-                    );
-                    if (item.type === "stash") {
-                      stashTotal =
-                        parseFloat(stashTotal) -
-                        parseFloat(item.amount);
-                      }
-
-                    stashArray.splice(pos, 1);
-                    initRefresh(refresh + 1);
-                    saveData();
-                  },
-                },
-                {
-                  text: "Cancel, Dont Delete",
-                  onPress: () => {},
-                  style: "cancel",
-                },
-              ],
-              { cancelable: false }
-            );
-
-            //Alert.alert(pos)
-          }}
-        >
-          <View style={styles.transactionItem}>
-            <Text style={styles.itemDate}>{item.date}</Text>
-            <Text style={styles.itemName}>{item.name.length < 15
-                ? `${item.name}`
-                : `${item.name.substring(0, 12)}...`}</Text>
-            <View style={styles.buffer}>
-              <Text style={item.amount.length < 7 ? styles.itemAmountStash : styles.itemAmountStashLarge}>${item.amount}
-                  </Text>
-            </View>
+  if (historyArray.length === 0) {
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: colors.main}}>
+          <Text style={{
+                fontSize: 30,
+                textAlign: "center",
+                color: colors.text,
+                fontFamily: "Rubik_400Regular",
+                paddingTop: 10
+              }}>HISTORY</Text>
+          <Text
+            style={{
+              alignContent: "center",
+              justifyContent: "center",
+              position: "relative",
+              color: colors.text,
+              fontSize: 15,
+              fontFamily: "Rubik_400Regular_Italic",
+              paddingHorizontal: 10,
+              textAlign: 'center'
+            }}
+          >
+            You don't have any past transactions yet... but this is where they will show up
+          </Text>
+          <View style={{
+              border: true,
+              marginTop: 10,
+              borderWidth: 2,
+              flex: .98,
+              width: '95%',
+              borderColor: '#E8F8F5',
+              opacity: .5,
+              justifyContent: 'center',
+              alignContent: 'center',
+              borderRadius: 15
+          }}>
+            <Text style={{
+              alignContent: "center",
+              justifyContent: "center",
+              position: "relative",
+              color: colors.text,
+              fontSize: 20,
+              fontFamily: "Rubik_400Regular_Italic",
+              paddingHorizontal: 10,
+              textAlign: 'center'
+            }} >it's empty here...</Text>
           </View>
-        </TouchableScale>
-      )}
-      keyExtractor={item => item.key}
-      />
-      </View>
-     
-    </View>
-    
-  )
+         
+        </View>
+        
+      )
+  } else {
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: colors.main}}>
+          <Text style={{
+                fontSize: 30,
+                textAlign: "center",
+                color: colors.text,
+                fontFamily: "Rubik_400Regular",
+                flex: .06,
+                paddingTop: 10
+              }}>HISTORY</Text>
+          <Text
+            style={{
+              alignContent: "center",
+              justifyContent: "center",
+              position: "relative",
+              color: colors.text,
+              fontSize: 20,
+              fontFamily: "Rubik_400Regular_Italic",
+              flex: .05
+            }}
+          >
+            your past transactions...
+          </Text>
+          
+          <View style={{ flex: 1, justifyContent: 'flex-start', backgroundColor: colors.main}}> 
+          <FlatList
+          style={styles.flatList}
+          data={historyArray}
+          renderItem={({ item }) =>
+          (
+            // TRANSACTION ITEM
+            <TouchableScale
+              activeScale={0.9}
+              onLongPress={() => {
+                Alert.alert(
+                  "Do you want to delete this transaction?",
+                  "This action can not be undone!",
+                  [
+                    {
+                      text: "Yes, Delete!",
+                      onPress: () => {
+                        let pos = JSON.stringify(
+                          historyArray
+                            .map(function (e) {
+                              return e.key;
+                            })
+                            .indexOf(item.key)
+                        );
+                        historyArray.splice(pos, 1);
+                        initRefresh(refresh + 1);
+                        saveData();
+                      },
+                    },
+                    {
+                      text: "Cancel, Dont Delete",
+                      onPress: () => {},
+                      style: "cancel",
+                    },
+                  ],
+                  { cancelable: false }
+                );
+              }}
+            >
+              <View style={styles.transactionItem}>
+                <Text style={styles.itemDate}>{item.date}</Text>
+                <Text style={styles.itemName}>{item.name.length < 15
+                    ? `${item.name}`
+                    : `${item.name.substring(0, 12)}...`}</Text>
+                <View style={styles.buffer}>
+                  <Text style={item.amount.length < 7 ? styles.itemAmountHistory : styles.itemAmountHistoryLarge}>${item.amount}
+                      </Text>
+                </View>
+              </View>
+            </TouchableScale>
+          )}
+          keyExtractor={item => item.key}
+          />
+          </View>
+         
+        </View>
+        
+      )
+  }
+  
 }
 
 const styles = StyleSheet.create({
@@ -143,7 +192,7 @@ const styles = StyleSheet.create({
     borderColor: colors.text,
     backgroundColor: "#464646",
   },
-  itemAmountStash: {
+  itemAmountHistory: {
     alignContent: "center",
     textAlign: "right",
     fontSize: 30,
@@ -153,7 +202,7 @@ const styles = StyleSheet.create({
     paddingRight: 5
   },
 
-  itemAmountStashLarge: {
+  itemAmountHistoryLarge: {
     alignContent: "center",
     textAlign: 'right',
     fontSize: 25,
