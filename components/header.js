@@ -12,9 +12,9 @@ export default function Header({title, navigation}) {
         <View style={styles.iconView}>
             <Icon name="menu" color='#E8F8F5' size={30} onPress={openMenu} style={styles.icon}/>        
         <View style={styles.header}>
-            <View>
+            
                 <Text style={styles.headerText}>{title}</Text>
-            </View>
+            
         </View>
         </View>
     )
@@ -25,22 +25,43 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignContent: 'center',
         alignItems: 'center',
-        justifyContent: 'center',
+        //backgroundColor: 'red'
     },
+
     headerText: {
         color: colors.text,
-        fontSize: 25,
-        fontFamily: "Rubik_400Regular",
+        fontSize: 20,
+        fontFamily: "Rubik_500Medium_Italic",
+        justifyContent: 'center',
+        alignContent: 'center',
+        paddingLeft: 10
+        //backgroundColor: 'blue',
+
     },
     iconView: {
         width: '100%',
         height: '100%',
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        //backgroundColor: 'green'
     },
     icon: {
-        position: 'absolute',
+        position: 'relative',
         flexDirection: 'row',
+        justifyContent: 'center'
     }
 })
+
+/*
+<View style={styles.iconView}>
+            <Icon name="menu" color='#E8F8F5' size={30} onPress={openMenu} style={styles.icon}/>        
+        <View style={styles.header}>
+            <View>
+                <Text style={styles.headerText}>{title}</Text>
+            </View>
+        </View>
+        </View>
+*/

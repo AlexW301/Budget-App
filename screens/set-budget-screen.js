@@ -31,21 +31,25 @@ export default function SetBudget({ navigation }) {
       style={{
         flex: 1,
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: 'flex-start',
         backgroundColor: setBudgetColors.main,
       }}
     >
+      <View style={{flex: 1, alignContent: 'center', justifyContent: 'flex-start'}}>
       <Text
         style={{
           position: "relative",
           color: colors.text,
           fontSize: 35,
           fontFamily: "Rubik_300Light",
-          top: "35%",
+          paddingTop: 10
         }}
       >
         What is your budget?
       </Text>
+      </View>
+
+      <View style={{ alignContent: 'center', justifyContent: 'flex-end'}}>
       <TextInput
         style={styles.budgetInput}
         keyboardType="numeric"
@@ -55,12 +59,15 @@ export default function SetBudget({ navigation }) {
         }}
         value={amount}
       />
+      </View>
+      
       <View
         style={{
           position: "relative",
-          justifyContent: "center",
+          justifyContent: 'flex-start',
           alignContent: "center",
-          bottom: "25%",
+          flex: 1,
+          paddingBottom: '70%'
         }}
       >
         <SetBudgetButton
@@ -83,8 +90,10 @@ export default function SetBudget({ navigation }) {
             saveData();
             navigation.navigate("MyBudget", currentBudget);
             updateAmount();
-            } else {
-              Alert.alert('You need to set a smaller budget buddy...')
+            } else if (amount > 9999999){
+              Alert.alert('You gotta set a smaller budget buddy...')
+            } else if (amount === undefined) {
+              Alert.alert('Come on dude you gotta set a budget first...')
             }
             Keyboard.dismiss();
           }}
@@ -97,18 +106,15 @@ export default function SetBudget({ navigation }) {
 const styles = StyleSheet.create({
   budgetInput: {
     position: "relative",
-    width: "50%",
+    width: 200,
     fontSize: 35,
     borderColor: colors.text,
     borderWidth: 2,
-    top: "-15%",
     color: colors.text,
     borderRadius: 50,
     paddingStart: 0,
-    height: "9%",
-    textAlign: "center",
-    marginTop: "100%",
-    marginBottom: "-40%",
+    height: 65,
+    textAlign: "center"
   },
 });
 
