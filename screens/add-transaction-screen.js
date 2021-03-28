@@ -49,12 +49,11 @@ export default function AddTransaction({ navigation }) {
     <View
       style={{ flex: 1, alignItems: "center", backgroundColor: colors.main }}
     >
-      <View style={{ position: "relative", bottom: "0%" }}>
+      <View style={{ position: "relative", bottom: "0%", flex: .6, paddingTop: 10}}>
         <Text
           style={{
             textAlign: "center",
             fontSize: 40,
-            top: 18,
             fontFamily: "Rubik_400Regular",
             color: colors.text,
           }}
@@ -65,7 +64,6 @@ export default function AddTransaction({ navigation }) {
           style={{
             justifyContent: "center",
             position: "relative",
-            top: "30%",
             textAlign: "center",
             fontFamily: "Rubik_400Regular_Italic",
             color: colors.text,
@@ -75,15 +73,15 @@ export default function AddTransaction({ navigation }) {
           Your Current Balance is ${Number(currentBudget).toFixed(2)}
         </Text>
       </View>
-      <View style={{ position: "relative", top: "15%" }}>
+      <View style={{ position: "relative", flex: 3 }}>
         <Text
           style={{
             position: "relative",
             textAlign: "center",
             fontSize: 20,
-            bottom: "6%",
             fontFamily: "Rubik_400Regular",
             color: colors.text,
+            flex: .4
           }}
         >
           New Transaction
@@ -101,6 +99,7 @@ export default function AddTransaction({ navigation }) {
             borderRadius: 50,
             paddingStart: 10,
             height: 45,
+            flex: .25
           }}
           placeholder=" Description"
           placeholderTextColor={colors.text}
@@ -117,12 +116,12 @@ export default function AddTransaction({ navigation }) {
             fontSize: 15,
             borderColor: "gray",
             borderWidth: 2,
-            top: "0%",
             color: colors.text,
             borderRadius: 50,
             paddingStart: 10,
             height: 45,
-            top: "-1%",
+            flex: .25,
+            marginBottom: 15
           }}
           keyboardType="numeric"
           placeholder=" Amount"
@@ -135,7 +134,7 @@ export default function AddTransaction({ navigation }) {
         />
         <TransactionButton
           title="Expense"
-          style={{ flex: 1, position: "relative", bottom: "-1%" }}
+          style={{ flex: 1, position: "relative", flex: .4 }}
           onPress={() => {
             Keyboard.dismiss();
             createTransaction = true;
@@ -152,7 +151,7 @@ export default function AddTransaction({ navigation }) {
         />
         <TransactionButton
           title="STASH"
-          style={{ flex: 1, position: "relative", bottom: "30%" }}
+          style={{ flex: 1, position: "relative", flex: 2 }}
           onPress={() => {
             Keyboard.dismiss();
             createTransaction = true;
@@ -162,6 +161,7 @@ export default function AddTransaction({ navigation }) {
             stashTransaction.name = transaction.name;
             stashTotal = stashTotal + parseFloat(transaction.amount)
             if (transaction.name && transaction.amount) {
+              navigation.goBack();
               navigation.navigate("StashScreen", stashTransaction);
             }
             updateDescription("");

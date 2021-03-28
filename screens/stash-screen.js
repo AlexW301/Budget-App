@@ -37,6 +37,7 @@ export default function StashScreen({ route, navigation }) {
               textAlign: "center",
               color: colors.text,
               fontFamily: "Rubik_400Regular",
+              paddingTop: 5
             }}>Welcome To The Stash</Text>
         <Text
           style={{
@@ -93,6 +94,7 @@ export default function StashScreen({ route, navigation }) {
               textAlign: "center",
               color: colors.text,
               fontFamily: "Rubik_400Regular",
+              paddingTop: 5
             }}>Welcome To The Stash</Text>
         <Text
           style={{

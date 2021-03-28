@@ -156,7 +156,7 @@ export default function MyBudget({ navigation }) {
           style={{
             position: "relative",
             width: "100%",
-            paddingTop: 0
+            paddingTop: 5
           }}
           onLongPress={() => {
             navigation.navigate("SetBudget");
@@ -237,7 +237,7 @@ export default function MyBudget({ navigation }) {
           style={{
             position: "relative",
             width: "100%",
-            paddingTop: 0
+            paddingTop: 5
           }}
           onLongPress={() => {
             navigation.navigate("SetBudget");

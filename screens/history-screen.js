@@ -25,7 +25,7 @@ export default function HistoryScreen({ route, navigation }) {
                 textAlign: "center",
                 color: colors.text,
                 fontFamily: "Rubik_400Regular",
-                paddingTop: 10
+                paddingTop: 5
               }}>HISTORY</Text>
           <Text
             style={{
@@ -77,7 +77,7 @@ export default function HistoryScreen({ route, navigation }) {
                 color: colors.text,
                 fontFamily: "Rubik_400Regular",
                 flex: .06,
-                paddingTop: 10
+                paddingTop: 5
               }}>HISTORY</Text>
           <Text
             style={{

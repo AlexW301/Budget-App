@@ -149,7 +149,7 @@ function AddTransactionScreen({navigation}) {
         component={AddTransaction}
         options={{
           headerTitle: () => 
-                <Header title="Add Transaction" navigation={navigation}/>,
+                <Header title="Home" navigation={navigation}/>,
           headerLeft: null,
           headerTitleAlign: "center",
           headerStyle: styles.header,
