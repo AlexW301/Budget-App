@@ -33,6 +33,7 @@ import StashButton from "./components/stash-button";
 import Header from './components/header';
 import { ActivityIndicator } from "react-native";
 import HistoryScreen from './screens/history-screen';
+import SettingsScreen from './screens/settings-screen';
 import { Alert } from "react-native";
 
 // GLOBAL VARIABLES ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -202,6 +203,27 @@ function SetBudgetScreen({ navigation, route }) {
     );
   }
 
+  function SettingsScreenStack({ navigation, route }) {
+    return (
+      <Stack.Navigator
+        initialRouteName="SettingsScreen"
+        HeaderTitle="Settings"
+      >
+        <Stack.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{
+            headerTitle: () => 
+                <Header title="Settings" navigation={navigation}/>,
+            headerStyle: styles.header,
+            headerTitleStyle: styles.headerTitle,
+            headerTitleAlign: "center",
+          }}
+        />
+      </Stack.Navigator>
+    );
+  }
+
   function StashScreen2({ navigation, route }) {
     return (
       <Stack.Navigator
@@ -295,6 +317,9 @@ export default function App() {
           }} />
       <Drawer.Screen name="SetBudget" component={SetBudgetScreen} options={{
             title: "Set My Budget"
+          }} />
+      <Drawer.Screen name="Settings" component={SettingsScreenStack} options={{
+            title: "Settings"
           }} />
     </Drawer.Navigator>
     </NavigationContainer>
