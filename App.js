@@ -316,7 +316,7 @@ export default function App() {
             title: "History"
           }} />
       <Drawer.Screen name="SetBudget" component={SetBudgetScreen} options={{
-            title: "Set My Budget"
+            title: "Set Budget"
           }} />
       <Drawer.Screen name="Settings" component={SettingsScreenStack} options={{
             title: "Settings"

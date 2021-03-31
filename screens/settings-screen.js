@@ -22,8 +22,10 @@ export default function SettingsScreen({ route, navigation }) {
               {
                 text: "Yes, Delete!",
                 onPress: () => {
+                // Delete all saved data
                   clearAsyncStorage();
-                  // Need way to reload app for changes to show
+                // Reload app to show changes
+                  Updates.reloadAsync();
                 },
               },
               {
@@ -42,7 +44,7 @@ export default function SettingsScreen({ route, navigation }) {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: colors.main}}>
           <Text style={styles.header}>Settings</Text>
-          <TouchableScale style={styles.item} onPress={() => {alert('button pressed')}}><Text style={styles.itemText}>Settings</Text></TouchableScale>
+          <TouchableScale style={styles.item} onPress={() => {navigation.navigate('SetBudget')}}><Text style={styles.itemText}>Set Budget</Text></TouchableScale>
           <TouchableScale style={styles.item} onPress={() => {alert('button pressed')}}><Text style={styles.itemText}>Settings</Text></TouchableScale>
           <TouchableScale style={styles.item} onPress={() => {alert('button pressed')}}><Text style={styles.itemText}>Settings</Text></TouchableScale>
           <TouchableScale style={styles.item} onPress={() => {resetApp();}}><Text style={styles.itemText}>Reset</Text></TouchableScale>
