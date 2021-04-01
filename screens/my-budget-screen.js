@@ -56,10 +56,13 @@ export default function MyBudget({ navigation }) {
     displayBudgetsArray();
     if (monthsBudgeted.length === 1) {
       monthsBudgeted.unshift(currentMonthOnLoad);
+      saveBudgetsArray();
     }
+    displayBudgetsArray();
     if (monthsBudgeted.indexOf(currentMonthOnLoad) === -1) {
       //Add Current Month to monthsBudgeted array, so that this does not run again this month until next month
       monthsBudgeted.unshift(currentMonthOnLoad);
+      saveBudgetsArray();
       //alert(`Months Budgeted ${monthsBudgeted}`)
       // Get Last Months info/year
       let lastMonth = `${month - 1}/${(month = 0 ? year - 1 : year)}`;

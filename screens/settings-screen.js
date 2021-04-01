@@ -38,6 +38,8 @@ export default function SettingsScreen({ route, navigation }) {
           );
     }
 
+    
+
   if (isFocused) {
       
   }
