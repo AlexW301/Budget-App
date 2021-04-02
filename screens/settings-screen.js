@@ -5,6 +5,7 @@ import { useIsFocused } from "@react-navigation/native";
 import TouchableScale from "react-native-touchable-scale";
 import { Button } from 'react-native';
 import * as Updates from 'expo-updates';
+import MyBudget from './my-budget-screen';
 
 
 
@@ -38,6 +39,18 @@ export default function SettingsScreen({ route, navigation }) {
           );
     }
 
+    const save = () => {
+      // Add this months transaction array to the history array
+      historyArray = transactionsArray.concat(historyArray)
+      // Empty Transaction Array
+      transactionsArray = [];
+      // Set current budget to budget
+      currentBudget = myBudget
+      // Save changes
+      saveData();
+      // alert
+      alert('Budget Saved')
+    }
     
 
   if (isFocused) {
@@ -46,9 +59,7 @@ export default function SettingsScreen({ route, navigation }) {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: colors.main}}>
           <Text style={styles.header}>Settings</Text>
-          <TouchableScale style={styles.item} onPress={() => {navigation.navigate('SetBudget')}}><Text style={styles.itemText}>Set Budget</Text></TouchableScale>
-          <TouchableScale style={styles.item} onPress={() => {alert('button pressed')}}><Text style={styles.itemText}>Settings</Text></TouchableScale>
-          <TouchableScale style={styles.item} onPress={() => {alert('button pressed')}}><Text style={styles.itemText}>Settings</Text></TouchableScale>
+          <TouchableScale style={styles.item} onPress={() => {save()}}><Text style={styles.itemText}>Save</Text></TouchableScale>
           <TouchableScale style={styles.item} onPress={() => {resetApp();}}><Text style={styles.itemText}>Reset</Text></TouchableScale>
         </View>
       );

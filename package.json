@@ -20,6 +20,7 @@
     "expo": "^40.0.0",
     "expo-font": "~8.4.0",
     "expo-status-bar": "~1.0.3",
+    "expo-updates": "^0.4.2",
     "link": "^0.1.5",
     "node-modules": "^1.0.1",
     "react": "16.13.1",
@@ -38,8 +39,7 @@
     "react-native-vector-icons": "^8.1.0",
     "react-native-web": "~0.13.12",
     "shortid": "^2.2.16",
-    "yarn": "^1.22.10",
-    "expo-updates": "~0.4.1"
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"
