@@ -24,7 +24,7 @@ global.colors = {
   shade1: "#117864",
 };
 */
-global.monthsBudgeted = ["init"];
+
 
 
 export default function MyBudget({ navigation }) {
@@ -58,7 +58,8 @@ export default function MyBudget({ navigation }) {
       monthsBudgeted.unshift(currentMonthOnLoad);
       saveBudgetsArray();
     }
-    displayBudgetsArray();
+    //alert(`months budgeted | ${monthsBudgeted}`)
+    //alert(`current month | ${currentMonthOnLoad}`)
     if (monthsBudgeted.indexOf(currentMonthOnLoad) === -1) {
       //Add Current Month to monthsBudgeted array, so that this does not run again this month until next month
       monthsBudgeted.unshift(currentMonthOnLoad);
