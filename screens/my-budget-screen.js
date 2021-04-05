@@ -36,6 +36,12 @@ export default function MyBudget({ navigation }) {
 
   const [daysLeft, setDaysLeft] = useState();
 
+  const [month, setMonth] = useState();
+
+  const [year, setYear] = useState();
+
+  const [lastMonth, setLastMonth] = useState();
+
   let monthNames = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
   // Dont need current month anymore using currentMonthOnLoad from loading screen
@@ -53,20 +59,28 @@ export default function MyBudget({ navigation }) {
     // Dont need current month anymore using currentMonthOnLoad from loading screen
     setCurrentMonth(`${month}/${year}`);
     setDaysLeft(daysInMonth[month - 1] - date);
-    displayBudgetsArray();
-    if (monthsBudgeted.length === 1) {
-      monthsBudgeted.unshift(currentMonthOnLoad);
-      saveBudgetsArray();
+    setMonth(month)
+    setYear(year);
+    setLastMonth(`${month - 1}/${(month = 0 ? year - 1 : year)}`);
+
+    
+  }, []);
+
+  /////////// ADD TRANSACTION VARIABLE TO THE ARRAY //////////////////////////////////////////
+
+  const isFocused = useIsFocused();
+  // If myBudget (from this screen) doesnt equal the budget from the other screen, update them
+  if (isFocused) {
+    
+
+    if (daysLeft === 0) {
+      // Alert
+      alert('Days left is = to 0, setting monthly report to true')
+      // Set monthly report to true if there are 0 days left in month
+      monthlyReport = true;
+      // Save to local storage
     }
-    //alert(`months budgeted | ${monthsBudgeted}`)
-    //alert(`current month | ${currentMonthOnLoad}`)
-    if (monthsBudgeted.indexOf(currentMonthOnLoad) === -1) {
-      //Add Current Month to monthsBudgeted array, so that this does not run again this month until next month
-      monthsBudgeted.unshift(currentMonthOnLoad);
-      saveBudgetsArray();
-      //alert(`Months Budgeted ${monthsBudgeted}`)
-      // Get Last Months info/year
-      let lastMonth = `${month - 1}/${(month = 0 ? year - 1 : year)}`;
+    if (daysLeft > 0 && monthlyReport) {
       // Create Object containing all budget data from last month
       var budgetData = {
         month: lastMonth,
@@ -111,14 +125,10 @@ export default function MyBudget({ navigation }) {
       // Navigate to new screen showing last months spending
       navigation.navigate("MonthlyReportScreen", budgetsArray);
       // Reset
+      monthlyReport = false
+      // save to local storage
     }
-  }, []);
 
-  /////////// ADD TRANSACTION VARIABLE TO THE ARRAY //////////////////////////////////////////
-
-  const isFocused = useIsFocused();
-  // If myBudget (from this screen) doesnt equal the budget from the other screen, update them
-  if (isFocused) {
     if (createTransaction) {
       // Give transaction unique id
       transaction.key = shortid.generate();
@@ -529,4 +539,67 @@ const styles = StyleSheet.create({
                         ? `-$${item.amount}`
                         : `-$${item.amount.substring(0, item.amount.length - 3).substring(0, item.amount.length - 6)},${item.amount.substring(item.amount.length - 6, item.amount.length - 3)}`
                     }
+
+                    ////// OLD Logic for detecting new month
+                    displayBudgetsArray();
+    if (monthsBudgeted.length === 1) {
+      monthsBudgeted.unshift(currentMonthOnLoad);
+      saveBudgetsArray();
+    }
+    //alert(`months budgeted | ${monthsBudgeted}`)
+    //alert(`current month | ${currentMonthOnLoad}`)
+    if (monthsBudgeted.indexOf(currentMonthOnLoad) === -1) {
+      //Add Current Month to monthsBudgeted array, so that this does not run again this month until next month
+      monthsBudgeted.unshift(currentMonthOnLoad);
+      saveBudgetsArray();
+      //alert(`Months Budgeted ${monthsBudgeted}`)
+      // Get Last Months info/year
+      let lastMonth = `${month - 1}/${(month = 0 ? year - 1 : year)}`;
+      // Create Object containing all budget data from last month
+      var budgetData = {
+        month: lastMonth,
+        budget: myBudget,
+        spent: myBudget - currentBudget,
+        transactions: transactionsArray,
+      };
+      // Push last months data object to the global month budget array
+      budgetsArray.push(budgetData);
+      // Add this months transaction array to the history array
+      historyArray = transactionsArray.concat(historyArray)
+      // Add extra saved money to stash transaction
+            createTransaction = true;
+            stashTransaction.type = "stash";
+            stashTransaction.date = lastMonth;
+            stashTransaction.amount = Number(budgetData.budget - budgetData.spent).toFixed(2);
+            stashTransaction.name = monthNames[lastMonth.substring(0,1)];
+            stashTotal = stashTotal + parseFloat(stashTransaction.amount);
+      //push stash transaction to stash array and update stash total
+      if (createTransaction && stashTransaction.type === "stash") {
+        // Give stash transaction a unique key
+        stashTransaction.key = shortid.generate();
+        // Push stash transaction to array
+        stashArray.unshift(stashTransaction);
+        // SAVE current data
+        saveData();
+        // Clear stash transaction variable
+        stashTransaction = {
+          name: "",
+          amount: 0,
+          type: "expense",
+          key: "",
+        };
+        createTransaction = false;
+    }
+      // Save Budget Data to local storage
+      saveBudgetsArray();
+      // Clear Current Budget and Array
+      transactionsArray = [];
+      currentBudget = myBudget;
+      saveData();
+      // Navigate to new screen showing last months spending
+      navigation.navigate("MonthlyReportScreen", budgetsArray);
+      // Reset
+    }
+  }, []);
+
 */
