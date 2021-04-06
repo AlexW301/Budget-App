@@ -5,8 +5,8 @@ import TransactionButton from '../components/transaction-button'
 
 
 export default function MonthlyReportScreen({ route, navigation }) {
-  const budgetArray = route.params
-  budgetReport = budgetArray[budgetArray.length - 1]
+  //const budgetArray = route.params
+  budgetReport = budgetsArray[budgetsArray.length - 1]
   amountSaved = budgetReport.budget - budgetReport.spent
   let amountSavedText
   let monthNames = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']

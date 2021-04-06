@@ -26,8 +26,8 @@ global.colors = {
 */
 
 
-
 export default function MyBudget({ navigation }) {
+
   const [visible, setVisible] = useState(false);
 
   const [refresh, initRefresh] = useState(1);
@@ -62,7 +62,6 @@ export default function MyBudget({ navigation }) {
     setMonth(month)
     setYear(year);
     setLastMonth(`${month - 1}/${(month = 0 ? year - 1 : year)}`);
-
     
   }, []);
 
@@ -73,7 +72,7 @@ export default function MyBudget({ navigation }) {
   if (isFocused) {
     
 
-    if (daysLeft === 0) {
+    if (daysLeft === 24) {
       // Alert
       alert('Days left is = to 0, setting monthly report to true')
       // Set monthly report to true if there are 0 days left in month
@@ -123,7 +122,7 @@ export default function MyBudget({ navigation }) {
       currentBudget = myBudget;
       saveData();
       // Navigate to new screen showing last months spending
-      navigation.navigate("MonthlyReportScreen", budgetsArray);
+      navigation.navigate("MonthlyReportScreen");
       // Reset
       monthlyReport = false
       // save to local storage
