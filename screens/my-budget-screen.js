@@ -74,7 +74,7 @@ export default function MyBudget({ navigation }) {
   // If myBudget (from this screen) doesnt equal the budget from the other screen, update them
   if (isFocused) {
 
-    if (daysLeft === 23) {
+    if (daysLeft === 22) {
       // Alert
       alert('Days left is = to 0, setting monthly report to true')
       // Set monthly report to true if there are 0 days left in month
@@ -119,7 +119,6 @@ export default function MyBudget({ navigation }) {
           backgroundColor: colors.main,
         }}
       >
-
           <Text style={{
             alignContent: "center",
             justifyContent: "center",
@@ -129,9 +128,64 @@ export default function MyBudget({ navigation }) {
             fontFamily: "Rubik_400Regular_Italic",
             paddingHorizontal: 10,
             textAlign: 'center',
-            flex: .5
+            flex: .25,
           }}>Your monthly report for {lastMonth} is in, click below to see how you did</Text>
-          <Image source={Mail} style={{resizeMode: 'center', height: '50%', width: '50%', flex: .1}}/>
+          <TouchableScale onPress={() => {
+                // Create Object containing all budget data from last month
+                var budgetData = {
+                  month: lastMonth,
+                  budget: myBudget,
+                  spent: myBudget - currentBudget,
+                  transactions: transactionsArray,
+                };
+                // Push last months data object to the global month budget array
+                budgetsArray.push(budgetData);
+                // Add this months transaction array to the history array
+                historyArray = transactionsArray.concat(historyArray)
+                // Add extra saved money to stash transaction
+                createTransaction = true;
+                stashTransaction.type = "stash";
+                stashTransaction.date = lastMonth;
+                stashTransaction.amount = Number(budgetData.budget - budgetData.spent).toFixed(2);
+                stashTransaction.name = monthNames[lastMonth.substring(0, 1)];
+                stashTotal = stashTotal + parseFloat(stashTransaction.amount);
+                //push stash transaction to stash array and update stash total
+                if (createTransaction && stashTransaction.type === "stash") {
+                  // Give stash transaction a unique key
+                  stashTransaction.key = shortid.generate();
+                  // Push stash transaction to array
+                  stashArray.unshift(stashTransaction);
+                  // SAVE current data
+                  saveData();
+                  // Clear stash transaction variable
+                  stashTransaction = {
+                    name: "",
+                    amount: 0,
+                    type: "expense",
+                    key: "",
+                  };
+                  createTransaction = false;
+                }
+                // Save Budget Data to local storage
+                saveBudgetsArray();
+                // Clear Current Budget and Array
+                transactionsArray = [];
+                currentBudget = myBudget;
+                saveData();
+                // Navigate to new screen showing last months spending
+                navigation.navigate("MonthlyReportScreen");
+                // Reset
+                monthlyReport = false
+                // save to local storage
+              }} style={{
+              position: "relative",
+              justifyContent: 'center',
+              alignContent: "center",
+              flex: .25,
+            }}>
+          <Image source={Mail} style={{resizeMode: 'center', height: '100%', width: '100%', flex: 1, alignSelf: 'center', justifyContent: 'center', paddingHorizontal: '20%',}}/>
+          </TouchableScale>
+          
           
           <View
             style={{
