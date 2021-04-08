@@ -74,7 +74,6 @@ export default function MyBudget({ navigation }) {
   // If myBudget (from this screen) doesnt equal the budget from the other screen, update them
   if (isFocused) {
 
-
     if (daysLeft === 23) {
       // Alert
       alert('Days left is = to 0, setting monthly report to true')
@@ -132,7 +131,8 @@ export default function MyBudget({ navigation }) {
             textAlign: 'center',
             flex: .5
           }}>Your monthly report for {lastMonth} is in, click below to see how you did</Text>
-          <Image source={Mail} style={{resizeMode: 'center', height: '50%', width: '50%'}}/>
+          <Image source={Mail} style={{resizeMode: 'center', height: '50%', width: '50%', flex: .1}}/>
+          
           <View
             style={{
               position: "relative",
