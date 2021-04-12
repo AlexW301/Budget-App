@@ -73,15 +73,14 @@ export default function MyBudget({ navigation }) {
   const isFocused = useIsFocused();
   // If myBudget (from this screen) doesnt equal the budget from the other screen, update them
   if (isFocused) {
-
-    if (daysLeft === 22) {
-      // Alert
-      alert('Days left is = to 0, setting monthly report to true')
+    alert(monthlyReport)
+    if (daysLeft === 0) {
       // Set monthly report to true if there are 0 days left in month
       monthlyReport = true;
       // Save to local storage
+      alert(monthlyReport)
+      saveMonthlyReport();
     }
-
 
     if (createTransaction) {
       // Give transaction unique id
@@ -108,7 +107,8 @@ export default function MyBudget({ navigation }) {
       createTransaction = false;
     }
   }
-  if (daysLeft > 0 && monthlyReport) {
+
+  if (daysLeft > 0 && monthlyReport === 'true') {
     return (
       <View
         style={{
@@ -177,6 +177,7 @@ export default function MyBudget({ navigation }) {
                 // Reset
                 monthlyReport = false
                 // save to local storage
+                saveMonthlyReport();
               }} style={{
               position: "relative",
               justifyContent: 'center',
@@ -245,6 +246,7 @@ export default function MyBudget({ navigation }) {
                 // Reset
                 monthlyReport = false
                 // save to local storage
+                saveMonthlyReport();
               }} />
           </View>
       </View>

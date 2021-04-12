@@ -6,6 +6,7 @@ import {StackActions} from '@react-navigation/native';
 export default function LoadingScreen({navigation}) {
     displayData();
     displayBudgetsArray();
+    displayMonthlyReport();
     useEffect(() => {
       var date = new Date().getDate(); //Current Date
       var month = new Date().getMonth() + 1; //Current Month
@@ -31,7 +32,7 @@ export default function LoadingScreen({navigation}) {
           navigation.dispatch(
             StackActions.replace('MyBudget'))
         }
-      }, 600)
+      }, 1000)
       return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.main}}>
           <Text style={{position: 'relative', justifyContent: 'center', textAlign: 'center'}}></Text>

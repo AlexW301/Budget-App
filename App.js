@@ -332,6 +332,7 @@ export default function App() {
 // LOCAL STORAGE AND SAVING ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // DELETE budgetsByMonth ////////////// old variable, not using it
+//Save
 global.saveData = () => {
   let myBudgetSave = myBudget;
   let currentBudgetSave = JSON.stringify(currentBudget);
@@ -356,6 +357,22 @@ global.saveBudgetsArray = () => {
   AsyncStorage.setItem("budgetsArray", JSON.stringify(budgetsArray));
   AsyncStorage.setItem("monthsBudgeted", JSON.stringify(monthsBudgeted));
 };
+
+global.saveMonthlyReport = () => {
+  AsyncStorage.setItem("monthlyReport", JSON.stringify(monthlyReport))
+}
+
+// Display
+
+global.displayMonthlyReport = async () => {
+  monthlyReport = await AsyncStorage.getItem("monthlyReport", (err, value) => {
+    if (err) {
+        console.log(err)
+    } else {
+        JSON.parse(value) // boolean
+    }
+})
+}
 
 global.displayBudgetsArray = async () => {
   let budgetsArraySave = await AsyncStorage.getItem("budgetsArray");
