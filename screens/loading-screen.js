@@ -32,10 +32,10 @@ export default function LoadingScreen({navigation}) {
           navigation.dispatch(
             StackActions.replace('MyBudget'))
         }
-      }, 1000)
+      }, 2000)
       return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.main}}>
-          <Text style={{position: 'relative', justifyContent: 'center', textAlign: 'center'}}></Text>
+          <Text style={{position: 'relative', justifyContent: 'center', textAlign: 'center', color: 'white'}}>Loading...</Text>
         </View>
       )
 }

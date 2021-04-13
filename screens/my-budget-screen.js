@@ -29,6 +29,7 @@ global.colors = {
 */
 
 
+
 export default function MyBudget({ navigation }) {
 
   const [visible, setVisible] = useState(false);
@@ -73,12 +74,12 @@ export default function MyBudget({ navigation }) {
   const isFocused = useIsFocused();
   // If myBudget (from this screen) doesnt equal the budget from the other screen, update them
   if (isFocused) {
-    alert(monthlyReport)
-    if (daysLeft === 0) {
+    //alert(monthlyReport)
+    if (daysLeft <= 10) {
       // Set monthly report to true if there are 0 days left in month
       monthlyReport = true;
       // Save to local storage
-      alert(monthlyReport)
+      //alert(monthlyReport)
       saveMonthlyReport();
     }
 
@@ -108,7 +109,7 @@ export default function MyBudget({ navigation }) {
     }
   }
 
-  if (daysLeft > 0 && monthlyReport === 'true') {
+  if (daysLeft > 10 && monthlyReport === 'true') {
     return (
       <View
         style={{
@@ -129,7 +130,7 @@ export default function MyBudget({ navigation }) {
             paddingHorizontal: 10,
             textAlign: 'center',
             flex: .25,
-          }}>Your monthly report for {lastMonth} is in, click below to see how you did</Text>
+          }}>Your monthly report for {lastMonth} is here, click below to see how you did</Text>
           <TouchableScale onPress={() => {
                 // Create Object containing all budget data from last month
                 var budgetData = {

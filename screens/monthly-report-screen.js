@@ -3,7 +3,6 @@ import { View, Text, StyleSheet } from 'react-native';
 import { StackActions } from '@react-navigation/native';
 import TransactionButton from '../components/transaction-button'
 
-
 export default function MonthlyReportScreen({ route, navigation }) {
   //const budgetArray = route.params
   budgetReport = budgetsArray[budgetsArray.length - 1]
