@@ -178,7 +178,13 @@ export default function StashScreen({ route, navigation }) {
         keyExtractor={item => item.key}
         />
         </View>
-       
+        <TransactionButton
+          title="      Withdraw      "
+          style={{ flex: .15, position: "relative", marginTop: 15}}
+          onPress={() => {
+            alert('Withdraw')
+          }}
+        />
       </View>
       
     )
