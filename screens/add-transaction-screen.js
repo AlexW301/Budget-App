@@ -149,9 +149,11 @@ export default function AddTransaction({ navigation }) {
             updateAmount();
           }}
         />
+        <View style={{ flex: 1, position: "relative", flex: 2, flexDirection: 'row' }}>
+        <View style={{ flex: 1, position: "relative", marginHorizontal: 5 }}>  
         <TransactionButton
           title="STASH"
-          style={{ flex: 1, position: "relative", flex: 2 }}
+          style={{ position: "relative", flex: 1 }}
           onPress={() => {
             Keyboard.dismiss();
             createTransaction = true;
@@ -168,6 +170,30 @@ export default function AddTransaction({ navigation }) {
             updateAmount();
           }}
         />
+        </View>
+        <View style={{ flex: 1, position: "relative", marginHorizontal: 5 }}>  
+        <TransactionButton
+          title="Withdraw"
+          style={{ flex: 1, position: "relative"}}
+          onPress={() => {
+            Keyboard.dismiss();
+            createTransaction = true;
+            stashTransaction.type = "withdraw";
+            stashTransaction.date = currentDate;
+            stashTransaction.amount = Number(transaction.amount).toFixed(2);
+            stashTransaction.name = transaction.name;
+            stashTotal = stashTotal - parseFloat(transaction.amount)
+            if (transaction.name && transaction.amount) {
+              navigation.goBack();
+              navigation.navigate("StashScreen", stashTransaction);
+            }
+            updateDescription("");
+            updateAmount();
+          }}
+        />
+        </View>
+        </View>
+        
       </View>
     </View>
   );

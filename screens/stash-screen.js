@@ -13,7 +13,7 @@ export default function StashScreen({ route, navigation }) {
 
     const [refresh, initRefresh] = useState(1);
 
-  if (isFocused && createTransaction && stashTransaction.type === "stash") {
+  if (isFocused && createTransaction && stashTransaction.type === "stash" || stashTransaction.type === "withdraw") {
       // Give stash transaction a unique key
       stashTransaction.key = shortid.generate();
       // Push stash transaction to array
@@ -144,7 +144,11 @@ export default function StashScreen({ route, navigation }) {
                         stashTotal =
                           parseFloat(stashTotal) -
                           parseFloat(item.amount);
-                        }
+                        } else if (item.type === "withdraw") {
+                          stashTotal =
+                            parseFloat(stashTotal) +
+                            parseFloat(item.amount);
+                          }
   
                       stashArray.splice(pos, 1);
                       initRefresh(refresh + 1);
@@ -169,7 +173,7 @@ export default function StashScreen({ route, navigation }) {
                   ? `${item.name}`
                   : `${item.name.substring(0, 12)}...`}</Text>
               <View style={styles.buffer}>
-                <Text style={item.amount.length < 7 ? styles.itemAmountStash : styles.itemAmountStashLarge}>${item.amount}
+                <Text style={item.amount.length < 7 ? styles.itemAmountStash : styles.itemAmountStashLarge}>{item.type === "stash" ? `$${item.amount}` : `-$${item.amount}`}
                     </Text>
               </View>
             </View>
@@ -182,7 +186,7 @@ export default function StashScreen({ route, navigation }) {
           title="      Withdraw      "
           style={{ flex: .15, position: "relative", marginTop: 15}}
           onPress={() => {
-            alert('Withdraw')
+            navigation.navigate('AddTransaction')
           }}
         />
       </View>
