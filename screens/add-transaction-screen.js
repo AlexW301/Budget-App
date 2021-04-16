@@ -49,6 +49,7 @@ export default function AddTransaction({ navigation }) {
     <View
       style={{ flex: 1, alignItems: "center", backgroundColor: colors.main }}
     >
+      <TouchableOpacity onPress={() => {Keyboard.dismiss()}} activeOpacity={1} style={{ alignItems: "center" }}>
       <View style={{ position: "relative", bottom: "0%", flex: .6, paddingTop: 10}}>
         <Text
           style={{
@@ -99,7 +100,8 @@ export default function AddTransaction({ navigation }) {
             borderRadius: 50,
             paddingStart: 10,
             height: 45,
-            flex: .25
+            flex: .25,
+            alignSelf: 'center'
           }}
           placeholder=" Description"
           placeholderTextColor={colors.text}
@@ -121,7 +123,8 @@ export default function AddTransaction({ navigation }) {
             paddingStart: 10,
             height: 45,
             flex: .25,
-            marginBottom: 15
+            marginBottom: 15,
+            alignSelf: 'center'
           }}
           keyboardType="numeric"
           placeholder=" Amount"
@@ -195,6 +198,7 @@ export default function AddTransaction({ navigation }) {
         </View>
         
       </View>
+      </TouchableOpacity>
     </View>
   );
 }

@@ -35,21 +35,35 @@ export default function SetBudget({ navigation }) {
         backgroundColor: setBudgetColors.main,
       }}
     >
-      <View style={{flex: 1, alignContent: 'center', justifyContent: 'flex-start'}}>
+      <TouchableOpacity onPress={() => {Keyboard.dismiss()}} activeOpacity={1}>
+      <View style={{flex: 1.2, alignContent: 'center', justifyContent: 'flex-start'}}>
       <Text
         style={{
           position: "relative",
           color: colors.text,
           fontSize: 35,
-          fontFamily: "Rubik_300Light",
-          paddingTop: 10
+          fontFamily: "Rubik_400Regular",
+          paddingTop: 10,
+          textAlign: 'center'
         }}
       >
         What is your budget?
       </Text>
+      <Text
+        style={{
+          position: "relative",
+          color: colors.text,
+          fontSize: 20,
+          fontFamily: "Rubik_300Light",
+          paddingTop: 15,
+          textAlign: 'center'
+        }}
+      >
+        Your budget should be based on how much money you would like to spend in a month.
+      </Text>
       </View>
 
-      <View style={{ alignContent: 'center', justifyContent: 'flex-end'}}>
+      <View style={{ alignContent: 'center', justifyContent: 'flex-end', alignSelf: 'center'}}>
       <TextInput
         style={styles.budgetInput}
         keyboardType="numeric"
@@ -66,6 +80,7 @@ export default function SetBudget({ navigation }) {
           position: "relative",
           justifyContent: 'flex-start',
           alignContent: "center",
+          alignSelf: 'center',
           flex: 1,
           paddingBottom: '70%'
         }}
@@ -99,6 +114,7 @@ export default function SetBudget({ navigation }) {
           }}
         />
       </View>
+      </TouchableOpacity>
     </View>
   );
 }
