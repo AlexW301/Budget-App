@@ -36,6 +36,16 @@ import HistoryScreen from './screens/history-screen';
 import SettingsScreen from './screens/settings-screen';
 import { Alert } from "react-native";
 
+import * as firebase from 'firebase';
+import ApiKeys from './constants/ApiKeys';
+
+
+  // Initialize Firebase
+  if (!firebase.apps.length) {
+    firebase.initializeApp(ApiKeys.FirebaseConfig);
+  }
+
+
 // GLOBAL VARIABLES ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 global.shortid = require("shortid");
