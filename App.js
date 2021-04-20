@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { BackHandler, View, StyleSheet, Button } from "react-native";
 import { NavigationContainer, useLinkProps } from "@react-navigation/native";
 import { createStackNavigator, HeaderTitle } from "@react-navigation/stack";
@@ -38,6 +38,7 @@ import { Alert } from "react-native";
 
 import * as firebase from 'firebase';
 import ApiKeys from './constants/ApiKeys';
+import * as Analytics from 'expo-firebase-analytics';
 
 
   // Initialize Firebase
@@ -309,8 +310,33 @@ export default function App() {
     Rubik_900Black_Italic,
   });
 
+  const navigationRef = useRef();
+  const routeNameRef = useRef();
+
   return (
-    <NavigationContainer>
+    <NavigationContainer
+    ref={navigationRef}
+      onReady={() =>
+        (routeNameRef.current = navigationRef.current.getCurrentRoute().name)
+      }
+      onStateChange={async () => {
+        const previousRouteName = routeNameRef.current;
+        const currentRouteName = navigationRef.current.getCurrentRoute().name;
+
+        if (previousRouteName !== currentRouteName) {
+          // The line below uses the expo-firebase-analytics tracker
+          // https://docs.expo.io/versions/latest/sdk/firebase-analytics/
+          // Change this line to use another Mobile analytics SDK
+          await analytics().logScreenView({
+            screen_name: currentRouteName,
+            screen_class: currentRouteName
+          });
+        }
+
+        // Save the current route name for later comparison
+        routeNameRef.current = currentRouteName;
+      }}
+    >
       <Drawer.Navigator HeaderTitle="My Budget Screen" drawerType="slide" drawerStyle={{
     backgroundColor: "#0E6251",
     width: 225,
