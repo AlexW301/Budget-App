@@ -3,7 +3,7 @@
   "expo": {
     "name": "Budget App Test",
     "slug": "budgetapptest",
-    "version": "1.3.4",
+    "version": "1.3.5",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -21,7 +21,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.alex301.budgetapp",
       "googleServicesFile": "./GoogleService-Info.plist",
-      "buildNumber": "1.3.4"
+      "buildNumber": "1.3.5"
     },
     "android": {
       "adaptiveIcon": {

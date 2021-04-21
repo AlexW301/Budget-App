@@ -89,7 +89,7 @@ export default function SetBudget({ navigation }) {
           title="Set Budget"
           onPress={() => {
             if (amount < 9999999) {
-            myBudget = amount;
+            myBudget = amount; 
             currentBudget = amount;
             for (var i = 0; i < transactionsArray.length; i++) {
               if (transactionsArray[i].type === "expense") {
