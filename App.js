@@ -40,7 +40,6 @@ import * as firebase from 'firebase';
 import ApiKeys from './constants/ApiKeys';
 import * as Analytics from 'expo-firebase-analytics';
 
-
   // Initialize Firebase
   if (!firebase.apps.length) {
     firebase.initializeApp(ApiKeys.FirebaseConfig);
@@ -327,10 +326,7 @@ export default function App() {
           // The line below uses the expo-firebase-analytics tracker
           // https://docs.expo.io/versions/latest/sdk/firebase-analytics/
           // Change this line to use another Mobile analytics SDK
-          await Analytics.logEvent('Screen Change',{
-            screen_name: currentRouteName,
-            previous_screen: previousRouteName
-          })
+          await Analytics.setCurrentScreen(currentRouteName);
         }
 
         // Save the current route name for later comparison
