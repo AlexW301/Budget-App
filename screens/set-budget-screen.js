@@ -88,6 +88,9 @@ export default function SetBudget({ navigation }) {
         <SetBudgetButton
           title="Set Budget"
           onPress={() => {
+            // trying to remove commas
+            //updateAmount(amount.replace('-', ''))
+           /// alert(amount)
             if (amount < 9999999) {
             myBudget = amount; 
             currentBudget = amount;
