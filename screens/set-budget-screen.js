@@ -89,11 +89,12 @@ export default function SetBudget({ navigation }) {
           title="Set Budget"
           onPress={() => {
             // trying to remove commas
+            let newAmount = amount.replace(',', '')
             //updateAmount(amount.replace('-', ''))
-           /// alert(amount)
-            if (amount < 9999999) {
-            myBudget = amount; 
-            currentBudget = amount;
+            alert(newAmount)
+            if (newAmount < 9999999) {
+            myBudget = newAmount; 
+            currentBudget = newAmount;
             for (var i = 0; i < transactionsArray.length; i++) {
               if (transactionsArray[i].type === "expense") {
                 currentBudget =
@@ -108,9 +109,9 @@ export default function SetBudget({ navigation }) {
             saveData();
             navigation.navigate("MyBudget", currentBudget);
             updateAmount();
-            } else if (amount > 9999999){
+            } else if (newAmount > 9999999){
               Alert.alert('You gotta set a smaller budget buddy...')
-            } else if (amount === undefined) {
+            } else if (newAmount === undefined) {
               Alert.alert('Come on dude you gotta set a budget first...')
             }
             Keyboard.dismiss();
