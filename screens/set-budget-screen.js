@@ -91,7 +91,7 @@ export default function SetBudget({ navigation }) {
             // trying to remove commas
             let newAmount = amount.replace(',', '')
             //updateAmount(amount.replace('-', ''))
-            alert(newAmount)
+            //alert(newAmount)
             if (newAmount < 9999999) {
             myBudget = newAmount; 
             currentBudget = newAmount;

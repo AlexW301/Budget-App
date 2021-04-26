@@ -156,6 +156,8 @@ export default function MyBudget({ navigation }) {
                   stashTransaction.key = shortid.generate();
                   // Push stash transaction to array
                   stashArray.unshift(stashTransaction);
+                  // Adds month results to history array as a transaction
+                  historyArray.unshift(stashTransaction);
                   // SAVE current data
                   saveData();
                   // Clear stash transaction variable

@@ -132,9 +132,9 @@ export default function HistoryScreen({ route, navigation }) {
                 );
               }}
             >
-              <View style={styles.transactionItem}>
-                <Text style={styles.itemDate}>{item.date}</Text>
-                <Text style={styles.itemName}>{item.name.length < 15
+              <View style={item.date.length < 7 ? styles.transactionItemMonth : styles.transactionItem}>
+                <Text style={item.date.length < 7 ? styles.itemDateMonth : styles.itemDate}>{item.date}</Text>
+                <Text style={ item.date.length < 7 ? styles.itemNameMonth : styles.itemName}>{item.name.length < 15
                     ? `${item.name}`
                     : `${item.name.substring(0, 12)}...`}</Text>
                 <View style={styles.buffer}>
@@ -172,7 +172,16 @@ const styles = StyleSheet.create({
     color: colors.text,
     bottom: 20,
   },
-
+  itemNameMonth: {
+    alignContent: "center",
+    textAlign: "left",
+    paddingLeft: 5,
+    marginTop: -10,
+    fontSize: 25,
+    fontFamily: "Rubik_400Regular",
+    color: colors.text,
+    bottom: 20,
+  },
   itemDate: {
     alignContent: "center",
     textAlign: 'right',
@@ -181,6 +190,16 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: "Rubik_400Regular",
     color: "#464646",
+    bottom: 32,
+  },
+  itemDateMonth: {
+    alignContent: "center",
+    textAlign: 'right',
+    paddingRight: 10,
+    marginTop: 10,
+    fontSize: 20,
+    fontFamily: "Rubik_400Regular",
+    color: "#E8F8F5",
     bottom: 32,
   },
   transactionItem: {
@@ -192,6 +211,16 @@ const styles = StyleSheet.create({
     borderColor: colors.text,
     backgroundColor: "#464646",
   },
+  transactionItemMonth: {
+    borderWidth: 6,
+    borderRadius: 20,
+    borderTopWidth: 25,
+    height: 80,
+    marginTop: 10,
+    borderColor: colors.text,
+    backgroundColor: "#464646",
+    borderColor: '#464646'
+  },
   itemAmountHistory: {
     alignContent: "center",
     textAlign: "right",
@@ -199,7 +228,7 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontFamily: "Rubik_500Medium",
     bottom: 55,
-    paddingRight: 5
+    paddingRight: 5,
   },
 
   itemAmountHistoryLarge: {
