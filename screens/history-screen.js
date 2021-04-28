@@ -39,7 +39,7 @@ export default function HistoryScreen({ route, navigation }) {
               textAlign: 'center'
             }}
           >
-            You don't have any past transactions yet... but this is where they will show up
+            You don't have any past transactions yet... they will start showing up at the end of the month
           </Text>
           <View style={{
               border: true,
