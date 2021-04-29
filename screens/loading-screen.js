@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import {StackActions} from '@react-navigation/native'; 
-
+import icon from '../assets/adaptive-icon.png'
 
 export default function LoadingScreen({navigation}) {
     displayData();
@@ -35,7 +35,8 @@ export default function LoadingScreen({navigation}) {
       }, 2000)
       return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.main}}>
-          <Text style={{position: 'relative', justifyContent: 'center', textAlign: 'center', color: 'white'}}>Loading...</Text>
+          <Image source={icon} style={{width: 150, height: 150}}/>
+          <Text style={{position: 'relative', justifyContent: 'center', textAlign: 'center', color: 'white', fontWeight: 'bold'}}>Loading...</Text>
         </View>
       )
 }

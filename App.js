@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useRef } from "react";
-import { BackHandler, View, StyleSheet, Button } from "react-native";
+import { BackHandler, View, StyleSheet, Button, Image } from "react-native";
 import { NavigationContainer, useLinkProps } from "@react-navigation/native";
 import { createStackNavigator, HeaderTitle } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -35,7 +35,7 @@ import { ActivityIndicator } from "react-native";
 import HistoryScreen from './screens/history-screen';
 import SettingsScreen from './screens/settings-screen';
 import { Alert } from "react-native";
-
+import icon from './assets/adaptive-icon.png'
 import * as firebase from 'firebase';
 import ApiKeys from './constants/ApiKeys';
 import * as Analytics from 'expo-firebase-analytics';
@@ -277,7 +277,7 @@ function TabScreens() {
           name="MyBudget"
           component={HomeScreen}
           options={{ title: "My Budget", tabBarVisible: true,  tabBarIcon:({focused})=>(  
-            <Icon name="wallet-outline" color='#E8F8F5' size={focused ? 40 : 30}/>  
+            <Image source={icon} style={{width: focused ? 50 : 40, height: focused ? 50 : 40}}/>  
         )  
       }  }
         />
@@ -327,7 +327,7 @@ export default function App() {
           // The line below uses the expo-firebase-analytics tracker
           // https://docs.expo.io/versions/latest/sdk/firebase-analytics/
           // Change this line to use another Mobile analytics SDK
-          await Analytics.setCurrentScreen(currentRouteName);
+          //await Analytics.setCurrentScreen(currentRouteName);
         }
 
         // Save the current route name for later comparison

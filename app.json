@@ -1,7 +1,7 @@
 {
   "backgroundColor": "#0E6251",
   "expo": {
-    "name": "Budget App Test",
+    "name": "Simple Saver",
     "slug": "budgetapptest",
     "version": "1.4.0",
     "orientation": "portrait",
