@@ -79,8 +79,19 @@ export default function StashScreen({ route, navigation }) {
               fontSize: 20,
               fontFamily: "Rubik_400Regular_Italic",
               paddingHorizontal: 10,
+              textAlign: 'center',
+              paddingBottom: 40
+            }} >Your Stash is the excess money you save or recieve that does not count towards your monthly budget.</Text>
+            <Text style={{
+              alignContent: "center",
+              justifyContent: "center",
+              position: "relative",
+              color: colors.text,
+              fontSize: 20,
+              fontFamily: "Rubik_400Regular_Italic",
+              paddingHorizontal: 10,
               textAlign: 'center'
-            }} >it's empty here...</Text>
+            }} >Your stash will automatically fill up or decrease at the end of each month based on your budget performance. You can also make manual entries via the add transaction screen.</Text>
           </View>
 
         </View>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
 import { StackActions } from '@react-navigation/native';
 import { useIsFocused } from "@react-navigation/native";
@@ -14,6 +14,26 @@ export default function SettingsScreen({ route, navigation }) {
     const isFocused = useIsFocused();
 
     const [refresh, initRefresh] = useState(1);
+
+    const [month, setMonth] = useState();
+
+    const [historyMonth, setHistoryMonth] = useState();
+
+    let monthNames = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+    useEffect(() => {
+      var date = new Date().getDate(); //Current Date
+      var month = new Date().getMonth() + 1; //Current Month
+      var year = new Date().getFullYear(); //Current Year
+      var hours = new Date().getHours(); //Current Hours
+      var min = new Date().getMinutes(); //Current Minutes
+      var sec = new Date().getSeconds(); //Current Seconds
+      var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+      setMonth(month)
+      setHistoryMonth(`${month}/${year}`)
+  
+    }, []);
 
     const resetApp = () => {
         Alert.alert(
@@ -49,6 +69,12 @@ export default function SettingsScreen({ route, navigation }) {
             onPress: () => {
             // Add this months transaction array to the history array
       historyArray = transactionsArray.concat(historyArray)
+      //
+      stashTransaction.type = "stash";
+      stashTransaction.date = historyMonth
+      stashTransaction.amount = Number(currentBudget).toFixed(2);
+      stashTransaction.name = monthNames[JSON.stringify(month).substring(0, 1)];
+      historyArray.unshift(stashTransaction);
       // Empty Transaction Array
       transactionsArray = [];
       // Set current budget to budget

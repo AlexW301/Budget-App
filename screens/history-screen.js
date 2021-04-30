@@ -33,13 +33,13 @@ export default function HistoryScreen({ route, navigation }) {
               justifyContent: "center",
               position: "relative",
               color: colors.text,
-              fontSize: 15,
+              fontSize: 20,
               fontFamily: "Rubik_400Regular_Italic",
               paddingHorizontal: 10,
               textAlign: 'center'
             }}
           >
-            You don't have any past transactions yet... they will start showing up at the end of the month
+            your past transactions...
           </Text>
           <View style={{
               border: true,
@@ -61,8 +61,19 @@ export default function HistoryScreen({ route, navigation }) {
               fontSize: 20,
               fontFamily: "Rubik_400Regular_Italic",
               paddingHorizontal: 10,
+              textAlign: 'center',
+              paddingBottom: 40
+            }} >You don't have any past transactions yet... they will start showing up here at the end of the month when you recieve your monthly report.</Text>
+            <Text style={{
+              alignContent: "center",
+              justifyContent: "center",
+              position: "relative",
+              color: colors.text,
+              fontSize: 20,
+              fontFamily: "Rubik_400Regular_Italic",
+              paddingHorizontal: 10,
               textAlign: 'center'
-            }} >it's empty here...</Text>
+            }} >If you need to you can also manually save all your transactions to the history from the settings page using the "Save" button.</Text>
           </View>
          
         </View>
