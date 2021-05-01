@@ -3,7 +3,7 @@
   "expo": {
     "name": "Simple Saver",
     "slug": "budgetapptest",
-    "version": "1.4.1",
+    "version": "1.4.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -21,7 +21,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.alex301.budgetapp",
       "googleServicesFile": "./GoogleService-Info.plist",
-      "buildNumber": "1.4.1"
+      "buildNumber": "1.4.2"
     },
     "android": {
       "adaptiveIcon": {
