@@ -14,7 +14,7 @@ export default function MonthlyReportScreen({ route, navigation }) {
   } else if (amountSaved === 0) {
     amountSavedText = `You were exactly on your budget last month!`
   } else if (amountSaved < 0) {
-    amountSavedText = `You went $${JSON.stringify(amountSaved).substring(1,amountSaved.length)} over budget last month. This amount has been deducted from your stash`
+    amountSavedText = `You went $${Number(JSON.stringify(amountSaved).substring(1,amountSaved.length)).toFixed(2)} over budget last month. This amount has been deducted from your stash`
   }
   let goToSetBudget = () => {
     navigation.navigate('SetBudget')
