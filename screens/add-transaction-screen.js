@@ -9,9 +9,15 @@ import {
   TextInput,
   TouchableOpacity,
   Keyboard,
+  Modal,
+  Image
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import TransactionButton from "../components/transaction-button";
+import {
+  Overlay
+} from "react-native-elements";
+import icon from '../assets/adaptive-icon.png'
 
 global.colors = {
   main: "#0E6251",
@@ -24,6 +30,7 @@ export default function AddTransaction({ navigation }) {
   const [description, updateDescription] = useState("");
   const [amount, updateAmount] = useState();
   const [currentDate, setCurrentDate] = useState("");
+  const [isVisible, setIsVisible] = React.useState(false);
 
   useEffect(() => {
     var date = new Date().getDate(); //Current Date
@@ -49,6 +56,20 @@ export default function AddTransaction({ navigation }) {
     <View
       style={{ flex: 1, alignItems: "center", backgroundColor: colors.main }}
     >
+      <Overlay
+      backdropStyle={{}}
+      isVisible={isVisible}
+      ModalComponent={Modal}
+      onBackdropPress={() => setIsVisible(!isVisible)}
+      overlayStyle={{}}
+    >
+      <Text>Some content</Text>
+      <TouchableOpacity
+        onPress={() => setIsVisible(!isVisible)}
+      >
+        <Text>Click to close</Text>
+      </TouchableOpacity>
+    </Overlay>
       <TouchableOpacity onPress={() => {Keyboard.dismiss()}} activeOpacity={1} style={{ alignItems: "center" }}>
       <View style={{ position: "relative", bottom: "0%", flex: .6, paddingTop: 10}}>
         <Text
@@ -186,7 +207,10 @@ export default function AddTransaction({ navigation }) {
             stashTransaction.amount = Number(transaction.amount).toFixed(2);
             stashTransaction.name = transaction.name;
             stashTotal = stashTotal - parseFloat(transaction.amount)
-            if (transaction.name && transaction.amount) {
+            if (transaction.name === 'Your Face') {
+              setIsVisible(true)
+            }
+            else if (transaction.name && transaction.amount) {
               navigation.goBack();
               navigation.navigate("StashScreen", stashTransaction);
             }

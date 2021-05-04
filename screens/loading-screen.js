@@ -35,8 +35,8 @@ export default function LoadingScreen({navigation}) {
       }, 2000)
       return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.main}}>
-          <Image source={icon} style={{width: 150, height: 150}}/>
-          <Text style={{position: 'relative', justifyContent: 'center', textAlign: 'center', color: 'white', fontWeight: 'bold'}}>Loading...</Text>
+          <Image source={icon} style={{width: 250, height: 250}}/>
+          <Text style={{position: 'relative', justifyContent: 'center', textAlign: 'center', color: 'white', fontWeight: 'bold', marginTop: -50}}>Loading...</Text>
         </View>
       )
 }

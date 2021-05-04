@@ -277,7 +277,7 @@ function TabScreens() {
           name="MyBudget"
           component={HomeScreen}
           options={{ title: "My Budget", tabBarVisible: true,  tabBarIcon:({focused})=>(  
-            <Image source={icon} style={{width: focused ? 85 : 65, height: focused ? 50 : 40}}/>  
+            <Image source={icon} style={{width: focused ? 125 : 100, height: focused ? 125 : 100}}/>  
         )  
       }  }
         />
