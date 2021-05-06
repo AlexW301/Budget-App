@@ -10,7 +10,8 @@ import {
   TouchableOpacity,
   Keyboard,
   Modal,
-  Image
+  Image,
+  ScrollView
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import TransactionButton from "../components/transaction-button";
@@ -18,6 +19,7 @@ import {
   Overlay
 } from "react-native-elements";
 import icon from '../assets/adaptive-icon.png'
+import alex from '../assets/alex-profile.jpg'
 
 global.colors = {
   main: "#0E6251",
@@ -61,14 +63,17 @@ export default function AddTransaction({ navigation }) {
       isVisible={isVisible}
       ModalComponent={Modal}
       onBackdropPress={() => setIsVisible(!isVisible)}
-      overlayStyle={{}}
+      overlayStyle={{width: '85%', height: 600}}
     >
-      <Text>Some content</Text>
+      <ScrollView>
+      <Text style={{alignSelf: 'center'}}>About Me</Text>
+      <Image source={alex} style={{width: 250, height: 250, alignSelf: 'center'}}/>
       <TouchableOpacity
         onPress={() => setIsVisible(!isVisible)}
       >
         <Text>Click to close</Text>
       </TouchableOpacity>
+      </ScrollView>
     </Overlay>
       <TouchableOpacity onPress={() => {Keyboard.dismiss()}} activeOpacity={1} style={{ alignItems: "center" }}>
       <View style={{ position: "relative", bottom: "0%", flex: .6, paddingTop: 10}}>
