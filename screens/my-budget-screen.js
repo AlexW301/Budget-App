@@ -10,7 +10,9 @@ import {
   TouchableOpacity,
   FlatList,
   ScrollView,
-  Image
+  Image,
+  Modal,
+  Linking
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import AddTransaction from "./add-transaction-screen";
@@ -19,6 +21,7 @@ import { ListItem, Avatar } from "react-native-elements";
 import TouchableScale from "react-native-touchable-scale"; // https://github.com/kohver/react-native-touchable-scale
 import SetBudgetButton from "../components/set-budget-button";
 import Mail from '../assets/mail.png';
+import { Overlay } from "react-native-elements";
 
 /*
 global.colors = {
@@ -45,6 +48,8 @@ export default function MyBudget({ navigation }) {
   const [year, setYear] = useState();
 
   const [lastMonth, setLastMonth] = useState();
+
+  const [isVisible, setIsVisible] = React.useState(false);
 
   let monthNames = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
@@ -402,6 +407,8 @@ export default function MyBudget({ navigation }) {
                 // EXPENSE ITEM
                 <TouchableScale
                   activeScale={0.9}
+                  onPress={() => {
+                    setIsVisible(true)}}
                   onLongPress={() => {
                     Alert.alert(
                       "Do you want to delete this transaction?",

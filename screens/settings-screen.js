@@ -9,6 +9,7 @@ import {
   Modal,
   Image,
   TouchableOpacity,
+  Linking
 } from "react-native";
 import { StackActions } from "@react-navigation/native";
 import { useIsFocused } from "@react-navigation/native";
@@ -153,27 +154,37 @@ export default function SettingsScreen({ route, navigation }) {
           />
           <Text style={styles.subTitle}>Alex Waller</Text>
           <Text style={styles.subSubTitle}>Developer</Text>
-          <Text style={styles.body}>Hi, My name is Alex</Text>
+          <Text style={styles.body}>Hi, My name is Alex Waller</Text>
           <Text style={styles.body}>
-            I started teaching myself to code back in September of 2020 by taking a complete guide to Javascript course online. I finished the course in December that year 
+            I am 22 years old. I started teaching myself to code back in September of 2020 by taking a complete guide to Javascript course online. I finished the course in December of that year 
             and was eager to put what I have learned to use and continue to learn.
           </Text>
           <Text style={styles.body}>
-            I learned of a popular Javascript library called React Native that would allow me code native IOS and Android apps using Javascript. I thought this was really cool way to put what I have learned to use and learn something new at the same time.
+            I learned of a popular Javascript library called React Native that would allow me code native IOS and Android apps using Javascript. I thought this would be really cool way to put what I have learned to use and learn something new at the same time.
           </Text>
           <Text style={styles.body}>
-            In 2021 I have 3 goals. Learn to code, save money for a house, and run a 4 hour marathon. This app was a fun way to work on two of those goals. While working on the app every morning I was learning to code. My girlfriend and I were also beta testing the app 
+            In 2021 I have 3 goals. Learn to code, save money for a house, and run a 4 hour marathon. This app was a fun way to work on two of those goals at the same time. While working on the app every morning I was learning to code. My girlfriend and I were also beta testing the app 
             as I built it and using it to keep us on budget.
           </Text>
           <Text style={styles.body}>
             I am not done working on this app and will continue to work on it and bring new features as requested. However it is now at a place I am satisfied with and excited to share with everyone. 
           </Text>
           <Text style={styles.body}>
-            I hope you enjoy the app and it helps keep you on your own budget, what ever that may be! If you have any feedback on the app at all or would like to request a feature feel free to reach out to my email and let me know.
+            I hope you enjoy the app and it helps keep you on your own budget, what ever that may be! If you have any feedback on the app at all or would like to request a feature feel free to reach out to my email below and let me know.
           </Text>
           <Text style={styles.body}>
-            alexwaller301@gmail.com add email button here
+            Thank you for downloading my app!
           </Text>
+          <TouchableOpacity onPress={() => {Linking.openURL('mailto:alexwaller301@gmail.com')}}>
+          <Text style={styles.link}>
+            alexwaller301@gmail.com
+          </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {Linking.openURL('https://venmo.com/code?user_id=2192143212871680281')}}>
+          <Text style={styles.link}>
+            Support the Developer
+          </Text>
+          </TouchableOpacity>
         </ScrollView>
         <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
             <Text style={{color: 'white'}}>Click to close</Text>
@@ -263,5 +274,13 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontFamily: "Rubik_400Regular_Italic",
     opacity: 1,
+  },
+  link: {
+    fontSize: 17,
+    textAlign: "center",
+    color: colors.text,
+    fontFamily: "Rubik_700Bold",
+    opacity: 1,
+    marginTop: 15,
   },
 });
