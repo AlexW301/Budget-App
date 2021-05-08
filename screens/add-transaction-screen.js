@@ -20,6 +20,8 @@ import {
 } from "react-native-elements";
 import icon from '../assets/adaptive-icon.png'
 import alex from '../assets/alex-profile.jpg'
+import { Camera, Permissions } from 'expo-camera';
+import FaceCamera from '../components/Camera';
 
 global.colors = {
   main: "#0E6251",
@@ -34,6 +36,9 @@ export default function AddTransaction({ navigation }) {
   const [currentDate, setCurrentDate] = useState("");
   const [isVisible, setIsVisible] = React.useState(false);
 
+  const [hasPermission, setHasPermission] = useState(null);
+    const [type, setType] = useState(Camera.Constants.Type.back);
+
   useEffect(() => {
     var date = new Date().getDate(); //Current Date
     var month = new Date().getMonth() + 1; //Current Month
@@ -42,6 +47,12 @@ export default function AddTransaction({ navigation }) {
     var min = new Date().getMinutes(); //Current Minutes
     var sec = new Date().getSeconds(); //Current Seconds
     setCurrentDate(month + "/" + date + "/" + year);
+
+    (async () => {
+      const { status } = await Camera.requestPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+
   }, []);
 
   var date = new Date().getDate(); //Current Date
@@ -65,15 +76,19 @@ export default function AddTransaction({ navigation }) {
       onBackdropPress={() => setIsVisible(!isVisible)}
       overlayStyle={{width: '85%', height: 600}}
     >
-      <ScrollView>
+      
       <Text style={{alignSelf: 'center'}}>About Me</Text>
-      <Image source={alex} style={{width: 250, height: 250, alignSelf: 'center'}}/>
+      <FaceCamera />
+      <TouchableOpacity
+        onPress={() => {}}
+      >
+        <Text>fdsfsdfsdfsdfsdf</Text>
+      </TouchableOpacity>
       <TouchableOpacity
         onPress={() => setIsVisible(!isVisible)}
       >
         <Text>Click to close</Text>
       </TouchableOpacity>
-      </ScrollView>
     </Overlay>
       <TouchableOpacity onPress={() => {Keyboard.dismiss()}} activeOpacity={1} style={{ alignItems: "center" }}>
       <View style={{ position: "relative", bottom: "0%", flex: .6, paddingTop: 10}}>
