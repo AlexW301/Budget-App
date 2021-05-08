@@ -206,7 +206,7 @@ export default function StashScreen({ route, navigation }) {
                     <ScrollView>
                       <Text style={styles.itemNameExpanded }>{stashArray[currentPosition].name}</Text>
                     </ScrollView>
-                    <Text style={styles.itemAmountExpanded }>{stashArray[currentPosition].type === "stash" ? "$" : "-$"}{stashArray[currentPosition].amount}</Text>
+                    <Text style={styles.itemAmountExpanded }>{stashArray[currentPosition].type === "stash" && stashArray[currentPosition].amount > 0 ? "$" : "-$"}{stashArray[currentPosition].amount < 0 ? JSON.stringify(stashArray[currentPosition].amount).substring(2, stashArray[currentPosition].amount.length + 1) : stashArray[currentPosition].amount}</Text>
                     <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
                       <Text style={{ color: "white" }}>Click to close</Text>
                     </TouchableOpacity>
@@ -217,7 +217,7 @@ export default function StashScreen({ route, navigation }) {
                   ? `${item.name}`
                   : `${item.name.substring(0, 12)}...`}</Text>
               <View style={styles.buffer}>
-                <Text style={item.amount.length < 7 ? styles.itemAmountStash : styles.itemAmountStashLarge}>{item.type === "stash" ? `$${item.amount}` : `-$${item.amount}`}
+                <Text style={item.amount.length < 7 ? styles.itemAmountStash : styles.itemAmountStashLarge}>{item.type === "stash" && item.amount > 0 ? `$` : `-$`}{item.amount < 0 ? JSON.stringify(item.amount).substring(2, item.amount.length + 1) : item.amount}
                     </Text>
               </View>
             </View>
