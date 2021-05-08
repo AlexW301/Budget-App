@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Alert, Modal, ScrollView, TouchableOpacity } from 'react-native';
 import { StackActions } from '@react-navigation/native';
 import TransactionButton from '../components/transaction-button'
 import { useIsFocused } from "@react-navigation/native";
 import TouchableScale from "react-native-touchable-scale";
+import { Overlay } from "react-native-elements";
 
 
 
@@ -12,6 +13,10 @@ export default function StashScreen({ route, navigation }) {
     const isFocused = useIsFocused();
 
     const [refresh, initRefresh] = useState(1);
+
+    const [isVisible, setIsVisible] = React.useState(false);
+
+    const [currentPosition, setCurrentPosition] = useState(0);
 
   if (isFocused && createTransaction && stashTransaction.type === "stash" || stashTransaction.type === "withdraw") {
       // Give stash transaction a unique key
@@ -136,6 +141,18 @@ export default function StashScreen({ route, navigation }) {
           // STASH ITEM
           <TouchableScale
             activeScale={0.9}
+            onPress={() => {
+              setCurrentPosition(
+                JSON.stringify(
+                  stashArray
+                    .map(function (e) {
+                      return e.key;
+                    })
+                    .indexOf(item.key)
+                )
+              );
+              setIsVisible(true);
+            }}
             onLongPress={() => {
               Alert.alert(
                 "Do you want to delete this transaction?",
@@ -178,6 +195,22 @@ export default function StashScreen({ route, navigation }) {
               //Alert.alert(pos)
             }}
           >
+            <Overlay
+                    backdropStyle={{opacity: .7}}
+                    isVisible={isVisible}
+                    ModalComponent={Modal}
+                    onBackdropPress={() => setIsVisible(!isVisible)}
+                    overlayStyle={styles.transactionItemExpanded}
+                  >
+                    <Text style={styles.itemDateExpanded }>{stashArray[currentPosition].date}</Text>
+                    <ScrollView>
+                      <Text style={styles.itemNameExpanded }>{stashArray[currentPosition].name}</Text>
+                    </ScrollView>
+                    <Text style={styles.itemAmountExpanded }>{stashArray[currentPosition].type === "stash" ? "$" : "-$"}{stashArray[currentPosition].amount}</Text>
+                    <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
+                      <Text style={{ color: "white" }}>Click to close</Text>
+                    </TouchableOpacity>
+                  </Overlay>
             <View style={styles.transactionItem}>
               <Text style={styles.itemDate}>{item.date}</Text>
               <Text style={styles.itemName}>{item.name.length < 15
@@ -261,5 +294,43 @@ const styles = StyleSheet.create({
     fontFamily: "Rubik_500Medium",
     bottom: 55,
     paddingRight: 5
+  },
+  transactionItemExpanded: {
+    borderWidth: 4,
+    borderRadius: 20,
+    borderTopWidth: 25,
+    height: 300,
+    marginTop: 10,
+    borderColor: colors.text,
+    backgroundColor: "#464646",
+    width: '90%'
+  },
+
+  itemNameExpanded: {
+    alignContent: "center",
+    textAlign: "left",
+    marginTop: 10,
+    fontSize: 22,
+    fontFamily: "Rubik_400Regular",
+    color: colors.text,
+  },
+
+  itemAmountExpanded: {
+    alignContent: "center",
+    justifyContent: 'center',
+    textAlign: "right",
+    marginTop: 10,
+    fontSize: 40,
+    color: colors.text,
+    fontFamily: "Rubik_500Medium",
+  },
+
+  itemDateExpanded: {
+    alignContent: "center",
+    textAlign: "center",
+    marginTop: 5,
+    fontSize: 25,
+    fontFamily: "Rubik_700Bold",
+    color: colors.text,
   },
 })

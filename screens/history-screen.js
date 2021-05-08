@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Alert, Modal, TouchableOpacity, ScrollView } from 'react-native';
 import { StackActions } from '@react-navigation/native';
 import TransactionButton from '../components/transaction-button'
 import { useIsFocused } from "@react-navigation/native";
 import TouchableScale from "react-native-touchable-scale";
+import { Overlay } from "react-native-elements";
 
 
 
@@ -12,6 +13,10 @@ export default function HistoryScreen({ route, navigation }) {
     const isFocused = useIsFocused();
 
     const [refresh, initRefresh] = useState(1);
+
+    const [isVisible, setIsVisible] = React.useState(false);
+
+    const [currentPosition, setCurrentPosition] = useState(0);
 
 
   if (isFocused) {
@@ -113,6 +118,18 @@ export default function HistoryScreen({ route, navigation }) {
             // TRANSACTION ITEM
             <TouchableScale
               activeScale={0.9}
+              onPress={() => {
+                setCurrentPosition(
+                  JSON.stringify(
+                    historyArray
+                      .map(function (e) {
+                        return e.key;
+                      })
+                      .indexOf(item.key)
+                  )
+                );
+                setIsVisible(true);
+              }}
               onLongPress={() => {
                 Alert.alert(
                   "Do you want to delete this transaction?",
@@ -143,13 +160,29 @@ export default function HistoryScreen({ route, navigation }) {
                 );
               }}
             >
+              <Overlay
+                    backdropStyle={{opacity: .7}}
+                    isVisible={isVisible}
+                    ModalComponent={Modal}
+                    onBackdropPress={() => setIsVisible(!isVisible)}
+                    overlayStyle={styles.transactionItemExpanded}
+                  >
+                    <Text style={styles.itemDateExpanded }>{historyArray[currentPosition].date}</Text>
+                    <ScrollView>
+                      <Text style={styles.itemNameExpanded }>{historyArray[currentPosition].name}</Text>
+                    </ScrollView>
+                    <Text style={styles.itemAmountExpanded }>{historyArray[currentPosition].type = "expense" ? "-$" : "$"}{historyArray[currentPosition].amount < 0 ? JSON.stringify(historyArray[currentPosition].amount).substring(2, historyArray[currentPosition].amount.length + 1) : historyArray[currentPosition].amount}</Text>
+                    <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
+                      <Text style={{ color: "white" }}>Click to close</Text>
+                    </TouchableOpacity>
+                  </Overlay>
               <View style={item.date.length < 7 ? styles.transactionItemMonth : styles.transactionItem}>
                 <Text style={item.date.length < 7 ? styles.itemDateMonth : styles.itemDate}>{item.date}</Text>
                 <Text style={ item.date.length < 7 ? styles.itemNameMonth : styles.itemName}>{item.name.length < 15
                     ? `${item.name}`
                     : `${item.name.substring(0, 12)}...`}</Text>
                 <View style={styles.buffer}>
-                  <Text style={item.amount.length < 7 ? styles.itemAmountHistory : styles.itemAmountHistoryLarge}>${item.amount}
+                  <Text style={item.amount.length < 7 ? styles.itemAmountHistory : styles.itemAmountHistoryLarge}>{historyArray[currentPosition].type = "expense" ? "-$" : "$"}{item.amount < 0 ? JSON.stringify(item.amount).substring(2, item.amount.length + 1) : item.amount}
                       </Text>
                 </View>
               </View>
@@ -250,5 +283,43 @@ const styles = StyleSheet.create({
     fontFamily: "Rubik_500Medium",
     bottom: 55,
     paddingRight: 5
+  },
+  transactionItemExpanded: {
+    borderWidth: 4,
+    borderRadius: 20,
+    borderTopWidth: 25,
+    height: 300,
+    marginTop: 10,
+    borderColor: colors.text,
+    backgroundColor: "#464646",
+    width: '90%'
+  },
+
+  itemNameExpanded: {
+    alignContent: "center",
+    textAlign: "left",
+    marginTop: 10,
+    fontSize: 22,
+    fontFamily: "Rubik_400Regular",
+    color: colors.text,
+  },
+
+  itemAmountExpanded: {
+    alignContent: "center",
+    justifyContent: 'center',
+    textAlign: "right",
+    marginTop: 10,
+    fontSize: 40,
+    color: colors.text,
+    fontFamily: "Rubik_500Medium",
+  },
+
+  itemDateExpanded: {
+    alignContent: "center",
+    textAlign: "center",
+    marginTop: 5,
+    fontSize: 25,
+    fontFamily: "Rubik_700Bold",
+    color: colors.text,
   },
 })

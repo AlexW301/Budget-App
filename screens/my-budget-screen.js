@@ -12,7 +12,7 @@ import {
   ScrollView,
   Image,
   Modal,
-  Linking
+  Linking,
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import AddTransaction from "./add-transaction-screen";
@@ -20,7 +20,7 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 import { ListItem, Avatar } from "react-native-elements";
 import TouchableScale from "react-native-touchable-scale"; // https://github.com/kohver/react-native-touchable-scale
 import SetBudgetButton from "../components/set-budget-button";
-import Mail from '../assets/mail.png';
+import Mail from "../assets/mail.png";
 import { Overlay } from "react-native-elements";
 
 /*
@@ -31,10 +31,7 @@ global.colors = {
 };
 */
 
-
-
 export default function MyBudget({ navigation }) {
-
   const [visible, setVisible] = useState(false);
 
   const [refresh, initRefresh] = useState(1);
@@ -51,7 +48,23 @@ export default function MyBudget({ navigation }) {
 
   const [isVisible, setIsVisible] = React.useState(false);
 
-  let monthNames = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  const [currentPosition, setCurrentPosition] = useState(0);
+
+  let monthNames = [
+    "",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   // Dont need current month anymore using currentMonthOnLoad from loading screen
   const [currentMonth, setCurrentMonth] = useState();
@@ -68,10 +81,9 @@ export default function MyBudget({ navigation }) {
     // Dont need current month anymore using currentMonthOnLoad from loading screen
     setCurrentMonth(`${month}/${year}`);
     setDaysLeft(daysInMonth[month - 1] - date);
-    setMonth(month)
+    setMonth(month);
     setYear(year);
     setLastMonth(`${month - 1}/${(month = 0 ? year - 1 : year)}`);
-
   }, []);
 
   /////////// ADD TRANSACTION VARIABLE TO THE ARRAY //////////////////////////////////////////
@@ -114,18 +126,19 @@ export default function MyBudget({ navigation }) {
     }
   }
 
-  if (daysLeft > 10 && monthlyReport === 'true') {
+  if (daysLeft > 10 && monthlyReport === "true") {
     return (
       <View
         style={{
           flex: 1,
-          flexDirection: 'column',
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: colors.main,
         }}
       >
-          <Text style={{
+        <Text
+          style={{
             alignContent: "center",
             justifyContent: "center",
             position: "relative",
@@ -133,139 +146,160 @@ export default function MyBudget({ navigation }) {
             fontSize: 30,
             fontFamily: "Rubik_400Regular_Italic",
             paddingHorizontal: 10,
-            textAlign: 'center',
-            flex: .25,
-          }}>Your monthly report for {lastMonth} is here, click below to see how you did</Text>
-          <TouchableScale onPress={() => {
-                // Create Object containing all budget data from last month
-                var budgetData = {
-                  month: lastMonth,
-                  budget: myBudget,
-                  spent: myBudget - currentBudget,
-                  transactions: transactionsArray,
-                };
-                // Push last months data object to the global month budget array
-                budgetsArray.push(budgetData);
-                // Add this months transaction array to the history array
-                historyArray = transactionsArray.concat(historyArray)
-                // Add extra saved money to stash transaction
-                createTransaction = true;
-                stashTransaction.type = "stash";
-                stashTransaction.date = lastMonth;
-                stashTransaction.amount = Number(budgetData.budget - budgetData.spent).toFixed(2);
-                stashTransaction.name = monthNames[lastMonth.substring(0, 1)];
-                stashTotal = stashTotal + parseFloat(stashTransaction.amount);
-                //push stash transaction to stash array and update stash total
-                if (createTransaction && stashTransaction.type === "stash") {
-                  // Give stash transaction a unique key
-                  stashTransaction.key = shortid.generate();
-                  // Push stash transaction to array
-                  stashArray.unshift(stashTransaction);
-                  // Adds month results to history array as a transaction
-                  historyArray.unshift(stashTransaction);
-                  // SAVE current data
-                  saveData();
-                  // Clear stash transaction variable
-                  stashTransaction = {
-                    name: "",
-                    amount: 0,
-                    type: "expense",
-                    key: "",
-                  };
-                  createTransaction = false;
-                }
-                // Save Budget Data to local storage
-                saveBudgetsArray();
-                // Clear Current Budget and Array
-                transactionsArray = [];
-                currentBudget = myBudget;
-                saveData();
-                // Navigate to new screen showing last months spending
-                navigation.navigate("MonthlyReportScreen");
-                // Reset
-                monthlyReport = false
-                // save to local storage
-                saveMonthlyReport();
-              }} style={{
-              position: "relative",
-              justifyContent: 'center',
-              alignContent: "center",
-              flex: .25,
-            }}>
-          <Image source={Mail} style={{resizeMode: 'center', height: '100%', width: '100%', flex: 1, alignSelf: 'center', justifyContent: 'center', paddingHorizontal: '20%',}}/>
-          </TouchableScale>
-          
-          
-          <View
+            textAlign: "center",
+            flex: 0.25,
+          }}
+        >
+          Your monthly report for {lastMonth} is here, click below to see how
+          you did
+        </Text>
+        <TouchableScale
+          onPress={() => {
+            // Create Object containing all budget data from last month
+            var budgetData = {
+              month: lastMonth,
+              budget: myBudget,
+              spent: myBudget - currentBudget,
+              transactions: transactionsArray,
+            };
+            // Push last months data object to the global month budget array
+            budgetsArray.push(budgetData);
+            // Add this months transaction array to the history array
+            historyArray = transactionsArray.concat(historyArray);
+            // Add extra saved money to stash transaction
+            createTransaction = true;
+            stashTransaction.type = "stash";
+            stashTransaction.date = lastMonth;
+            stashTransaction.amount = Number(
+              budgetData.budget - budgetData.spent
+            ).toFixed(2);
+            stashTransaction.name = monthNames[lastMonth.substring(0, 1)];
+            stashTotal = stashTotal + parseFloat(stashTransaction.amount);
+            //push stash transaction to stash array and update stash total
+            if (createTransaction && stashTransaction.type === "stash") {
+              // Give stash transaction a unique key
+              stashTransaction.key = shortid.generate();
+              // Push stash transaction to array
+              stashArray.unshift(stashTransaction);
+              // Adds month results to history array as a transaction
+              historyArray.unshift(stashTransaction);
+              // SAVE current data
+              saveData();
+              // Clear stash transaction variable
+              stashTransaction = {
+                name: "",
+                amount: 0,
+                type: "expense",
+                key: "",
+              };
+              createTransaction = false;
+            }
+            // Save Budget Data to local storage
+            saveBudgetsArray();
+            // Clear Current Budget and Array
+            transactionsArray = [];
+            currentBudget = myBudget;
+            saveData();
+            // Navigate to new screen showing last months spending
+            navigation.navigate("MonthlyReportScreen");
+            // Reset
+            monthlyReport = false;
+            // save to local storage
+            saveMonthlyReport();
+          }}
+          style={{
+            position: "relative",
+            justifyContent: "center",
+            alignContent: "center",
+            flex: 0.25,
+          }}
+        >
+          <Image
+            source={Mail}
             style={{
-              position: "relative",
-              justifyContent: 'center',
-              alignContent: "center",
-              flex: .1,
-              paddingHorizontal: 15
+              resizeMode: "center",
+              height: "100%",
+              width: "100%",
+              flex: 1,
+              alignSelf: "center",
+              justifyContent: "center",
+              paddingHorizontal: "20%",
             }}
-          >
-            <SetBudgetButton
-              title='See Results'
-              onPress={() => {
-                // Create Object containing all budget data from last month
-                var budgetData = {
-                  month: lastMonth,
-                  budget: myBudget,
-                  spent: myBudget - currentBudget,
-                  transactions: transactionsArray,
-                };
-                // Push last months data object to the global month budget array
-                budgetsArray.push(budgetData);
-                // Add this months transaction array to the history array
-                historyArray = transactionsArray.concat(historyArray)
-                // Add extra saved money to stash transaction
-                createTransaction = true;
-                stashTransaction.type = "stash";
-                stashTransaction.date = lastMonth;
-                stashTransaction.amount = Number(budgetData.budget - budgetData.spent).toFixed(2);
-                stashTransaction.name = monthNames[lastMonth.substring(0, 1)];
-                stashTotal = stashTotal + parseFloat(stashTransaction.amount);
-                //push stash transaction to stash array and update stash total
-                if (createTransaction && stashTransaction.type === "stash") {
-                  // Give stash transaction a unique key
-                  stashTransaction.key = shortid.generate();
-                  // Push stash transaction to array
-                  stashArray.unshift(stashTransaction);
-                  // SAVE current data
-                  saveData();
-                  // Clear stash transaction variable
-                  stashTransaction = {
-                    name: "",
-                    amount: 0,
-                    type: "expense",
-                    key: "",
-                  };
-                  createTransaction = false;
-                }
-                // Save Budget Data to local storage
-                saveBudgetsArray();
-                // Clear Current Budget and Array
-                transactionsArray = [];
-                currentBudget = myBudget;
+          />
+        </TouchableScale>
+
+        <View
+          style={{
+            position: "relative",
+            justifyContent: "center",
+            alignContent: "center",
+            flex: 0.1,
+            paddingHorizontal: 15,
+          }}
+        >
+          <SetBudgetButton
+            title="See Results"
+            onPress={() => {
+              // Create Object containing all budget data from last month
+              var budgetData = {
+                month: lastMonth,
+                budget: myBudget,
+                spent: myBudget - currentBudget,
+                transactions: transactionsArray,
+              };
+              // Push last months data object to the global month budget array
+              budgetsArray.push(budgetData);
+              // Add this months transaction array to the history array
+              historyArray = transactionsArray.concat(historyArray);
+              // Add extra saved money to stash transaction
+              createTransaction = true;
+              stashTransaction.type = "stash";
+              stashTransaction.date = lastMonth;
+              stashTransaction.amount = Number(
+                budgetData.budget - budgetData.spent
+              ).toFixed(2);
+              stashTransaction.name = monthNames[lastMonth.substring(0, 1)];
+              stashTotal = stashTotal + parseFloat(stashTransaction.amount);
+              //push stash transaction to stash array and update stash total
+              if (createTransaction && stashTransaction.type === "stash") {
+                // Give stash transaction a unique key
+                stashTransaction.key = shortid.generate();
+                // Push stash transaction to array
+                stashArray.unshift(stashTransaction);
+                // SAVE current data
                 saveData();
-                // Navigate to new screen showing last months spending
-                navigation.navigate("MonthlyReportScreen");
-                // Reset
-                monthlyReport = false
-                // save to local storage
-                saveMonthlyReport();
-              }} />
-          </View>
+                // Clear stash transaction variable
+                stashTransaction = {
+                  name: "",
+                  amount: 0,
+                  type: "expense",
+                  key: "",
+                };
+                createTransaction = false;
+              }
+              // Save Budget Data to local storage
+              saveBudgetsArray();
+              // Clear Current Budget and Array
+              transactionsArray = [];
+              currentBudget = myBudget;
+              saveData();
+              // Navigate to new screen showing last months spending
+              navigation.navigate("MonthlyReportScreen");
+              // Reset
+              monthlyReport = false;
+              // save to local storage
+              saveMonthlyReport();
+            }}
+          />
+        </View>
       </View>
     );
-  }
-  else if (transactionsArray.length === 0) {
+  } else if (transactionsArray.length === 0) {
     return (
       <View
         style={{
           flex: 1,
-          flexDirection: 'column',
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "flex-start",
           backgroundColor: colors.main,
@@ -276,7 +310,7 @@ export default function MyBudget({ navigation }) {
           style={{
             position: "relative",
             width: "100%",
-            paddingTop: 5
+            paddingTop: 5,
           }}
           onLongPress={() => {
             navigation.navigate("SetBudget");
@@ -317,27 +351,33 @@ export default function MyBudget({ navigation }) {
         >
           ${Number(currentBudget).toFixed(2)}
         </Text>
-        <View style={{
-          border: true,
-          borderWidth: 2,
-          flex: .98,
-          width: '95%',
-          borderColor: '#E8F8F5',
-          opacity: .5,
-          justifyContent: 'center',
-          alignContent: 'center',
-          borderRadius: 15
-        }}>
-          <Text style={{
-            alignContent: "center",
+        <View
+          style={{
+            border: true,
+            borderWidth: 2,
+            flex: 0.98,
+            width: "95%",
+            borderColor: "#E8F8F5",
+            opacity: 0.5,
             justifyContent: "center",
-            position: "relative",
-            color: colors.text,
-            fontSize: 20,
-            fontFamily: "Rubik_400Regular_Italic",
-            paddingHorizontal: 10,
-            textAlign: 'center'
-          }} >it's empty here...</Text>
+            alignContent: "center",
+            borderRadius: 15,
+          }}
+        >
+          <Text
+            style={{
+              alignContent: "center",
+              justifyContent: "center",
+              position: "relative",
+              color: colors.text,
+              fontSize: 20,
+              fontFamily: "Rubik_400Regular_Italic",
+              paddingHorizontal: 10,
+              textAlign: "center",
+            }}
+          >
+            it's empty here...
+          </Text>
         </View>
       </View>
     );
@@ -346,7 +386,7 @@ export default function MyBudget({ navigation }) {
       <View
         style={{
           flex: 1,
-          flexDirection: 'column',
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "flex-start",
           backgroundColor: colors.main,
@@ -357,7 +397,7 @@ export default function MyBudget({ navigation }) {
           style={{
             position: "relative",
             width: "100%",
-            paddingTop: 5
+            paddingTop: 5,
           }}
           onLongPress={() => {
             navigation.navigate("SetBudget");
@@ -398,7 +438,13 @@ export default function MyBudget({ navigation }) {
         >
           ${Number(currentBudget).toFixed(2)}
         </Text>
-        <View style={{ flex: 1, justifyContent: 'flex-start', backgroundColor: colors.main }}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "flex-start",
+            backgroundColor: colors.main,
+          }}
+        >
           <FlatList
             style={styles.flatList}
             data={transactionsArray}
@@ -408,7 +454,17 @@ export default function MyBudget({ navigation }) {
                 <TouchableScale
                   activeScale={0.9}
                   onPress={() => {
-                    setIsVisible(true)}}
+                    setCurrentPosition(
+                      JSON.stringify(
+                        transactionsArray
+                          .map(function (e) {
+                            return e.key;
+                          })
+                          .indexOf(item.key)
+                      )
+                    );
+                    setIsVisible(true);
+                  }}
                   onLongPress={() => {
                     Alert.alert(
                       "Do you want to delete this transaction?",
@@ -441,7 +497,7 @@ export default function MyBudget({ navigation }) {
                         },
                         {
                           text: "Cancel, Dont Delete",
-                          onPress: () => { },
+                          onPress: () => {},
                           style: "cancel",
                         },
                       ],
@@ -451,13 +507,37 @@ export default function MyBudget({ navigation }) {
                     //Alert.alert(pos)
                   }}
                 >
+                  <Overlay
+                    backdropStyle={{opacity: .7}}
+                    isVisible={isVisible}
+                    ModalComponent={Modal}
+                    onBackdropPress={() => setIsVisible(!isVisible)}
+                    overlayStyle={styles.transactionItemExpanded}
+                  >
+                    <Text style={styles.itemDateExpanded }>{transactionsArray[currentPosition].date}</Text>
+                    <ScrollView>
+                      <Text style={styles.itemNameExpanded }>{transactionsArray[currentPosition].name}</Text>
+                    </ScrollView>
+                    <Text style={styles.itemAmountExpanded }>-${transactionsArray[currentPosition].amount}</Text>
+                    <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
+                      <Text style={{ color: "white" }}>Click to close</Text>
+                    </TouchableOpacity>
+                  </Overlay>
                   <View style={styles.transactionItem}>
                     <Text style={styles.itemDate}>{item.date}</Text>
-                    <Text style={styles.itemName}>{item.name.length < 15
-                      ? `${item.name}`
-                      : `${item.name.substring(0, 12)}...`}</Text>
+                    <Text style={styles.itemName}>
+                      {item.name.length < 15
+                        ? `${item.name}`
+                        : `${item.name.substring(0, 12)}...`}
+                    </Text>
                     <View style={styles.buffer}>
-                      <Text style={item.amount.length < 7 ? styles.itemAmountExpense : styles.itemAmountExpenseLarge} >
+                      <Text
+                        style={
+                          item.amount.length < 7
+                            ? styles.itemAmountExpense
+                            : styles.itemAmountExpenseLarge
+                        }
+                      >
                         -${item.amount}
                       </Text>
                     </View>
@@ -499,7 +579,7 @@ export default function MyBudget({ navigation }) {
                         },
                         {
                           text: "Cancel, Dont Delete",
-                          onPress: () => { },
+                          onPress: () => {},
                           style: "cancel",
                         },
                       ],
@@ -517,11 +597,25 @@ export default function MyBudget({ navigation }) {
                         : `${item.name.substring(0, 12)}...`}
                     </Text>
                     <View style={styles.buffer}>
-                      <Text style={item.amount.length < 6 ? styles.itemAmountDeposit : styles.itemAmountDepositLarge}>{
-                        item.amount.length < 7
+                      <Text
+                        style={
+                          item.amount.length < 6
+                            ? styles.itemAmountDeposit
+                            : styles.itemAmountDepositLarge
+                        }
+                      >
+                        {item.amount.length < 7
                           ? `$${item.amount}`
-                          : `$${item.amount.substring(0, item.amount.length - 3).substring(0, item.amount.length - 6)},${item.amount.substring(item.amount.length - 6, item.amount.length - 3)}`
-                      }</Text>
+                          : `$${item.amount
+                              .substring(0, item.amount.length - 3)
+                              .substring(
+                                0,
+                                item.amount.length - 6
+                              )},${item.amount.substring(
+                              item.amount.length - 6,
+                              item.amount.length - 3
+                            )}`}
+                      </Text>
                     </View>
                   </View>
                 </TouchableScale>
@@ -532,7 +626,6 @@ export default function MyBudget({ navigation }) {
       </View>
     );
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -550,12 +643,12 @@ const styles = StyleSheet.create({
     maxWidth: "95%",
     width: 375,
     flex: 1,
-    maxHeight: '100%',
+    maxHeight: "100%",
   },
 
   itemName: {
     alignContent: "center",
-    textAlign: 'left',
+    textAlign: "left",
     paddingLeft: 5,
     marginTop: 10,
     fontSize: 22,
@@ -566,7 +659,7 @@ const styles = StyleSheet.create({
 
   itemDate: {
     alignContent: "center",
-    textAlign: 'right',
+    textAlign: "right",
     paddingRight: 10,
     marginTop: 10,
     fontSize: 15,
@@ -577,29 +670,29 @@ const styles = StyleSheet.create({
 
   itemAmountDeposit: {
     alignContent: "center",
-    textAlign: 'justify',
+    textAlign: "justify",
     marginTop: 10,
     fontSize: 30,
     color: colors.text,
     fontFamily: "Rubik_500Medium",
     bottom: 25,
-    marginLeft: 13
+    marginLeft: 13,
   },
 
   itemAmountDepositLarge: {
     alignContent: "center",
-    textAlign: 'justify',
+    textAlign: "justify",
     marginTop: 10,
     fontSize: 25,
     color: colors.text,
     fontFamily: "Rubik_500Medium",
     bottom: 25,
-    marginLeft: 0
+    marginLeft: 0,
   },
 
   itemAmountExpense: {
     alignContent: "center",
-    textAlign: 'right',
+    textAlign: "right",
     marginTop: 10,
     fontSize: 30,
     color: colors.text,
@@ -611,7 +704,7 @@ const styles = StyleSheet.create({
 
   itemAmountExpenseLarge: {
     alignContent: "center",
-    textAlign: 'right',
+    textAlign: "right",
     marginTop: 10,
     fontSize: 25,
     color: colors.text,
@@ -635,10 +728,45 @@ const styles = StyleSheet.create({
     borderColor: colors.text,
     backgroundColor: "#464646",
   },
+  transactionItemExpanded: {
+    borderWidth: 4,
+    borderRadius: 20,
+    borderTopWidth: 25,
+    height: 300,
+    marginTop: 10,
+    borderColor: colors.text,
+    backgroundColor: "#464646",
+    width: '90%'
+  },
+
+  itemNameExpanded: {
+    alignContent: "center",
+    textAlign: "left",
+    marginTop: 10,
+    fontSize: 22,
+    fontFamily: "Rubik_400Regular",
+    color: colors.text,
+  },
+
+  itemAmountExpanded: {
+    alignContent: "center",
+    justifyContent: 'center',
+    textAlign: "right",
+    marginTop: 10,
+    fontSize: 40,
+    color: colors.text,
+    fontFamily: "Rubik_500Medium",
+  },
+
+  itemDateExpanded: {
+    alignContent: "center",
+    textAlign: "center",
+    marginTop: 5,
+    fontSize: 25,
+    fontFamily: "Rubik_700Bold",
+    color: colors.text,
+  },
 });
-
-
-
 
 // OLD Logic for transaction amount displayed on transaction item
 /*
