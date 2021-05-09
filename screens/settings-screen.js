@@ -20,6 +20,7 @@ import MyBudget from "./my-budget-screen";
 import { Overlay } from "react-native-elements";
 import alex from "../assets/alex-profile.jpg";
 
+
 export default function SettingsScreen({ route, navigation }) {
   const isFocused = useIsFocused();
 
@@ -214,6 +215,14 @@ export default function SettingsScreen({ route, navigation }) {
         }}
       >
         <Text style={styles.itemText}>Reset</Text>
+      </TouchableScale>
+      <TouchableScale
+        style={styles.item}
+        onPress={() => {
+          navigation.navigate("Vintage");
+        }}
+      >
+        <Text style={styles.itemText}>Vintage</Text>
       </TouchableScale>
       <TouchableScale
         style={styles.item}

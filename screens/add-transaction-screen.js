@@ -74,21 +74,11 @@ export default function AddTransaction({ navigation }) {
       isVisible={isVisible}
       ModalComponent={Modal}
       onBackdropPress={() => setIsVisible(!isVisible)}
-      overlayStyle={{width: '85%', height: 600}}
+      overlayStyle={{width: '85%', height: 600, backgroundColor: "#117864"}}
     >
       
-      <Text style={{alignSelf: 'center'}}>About Me</Text>
+      <Text style={styles.header}>YA FACE!</Text>
       <FaceCamera />
-      <TouchableOpacity
-        onPress={() => {}}
-      >
-        <Text>fdsfsdfsdfsdfsdf</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => setIsVisible(!isVisible)}
-      >
-        <Text>Click to close</Text>
-      </TouchableOpacity>
     </Overlay>
       <TouchableOpacity onPress={() => {Keyboard.dismiss()}} activeOpacity={1} style={{ alignItems: "center" }}>
       <View style={{ position: "relative", bottom: "0%", flex: .6, paddingTop: 10}}>
@@ -186,7 +176,10 @@ export default function AddTransaction({ navigation }) {
             transaction.name = transaction.name;
             transaction.date = currentDate;
             transaction.amount = Number(transaction.amount).toFixed(2);
-            if (transaction.name && transaction.amount) {
+            if (transaction.name === 'Ya face' || transaction.name === 'ya face' || transaction.name === 'Ya Face' ) {
+              setIsVisible(true)
+            }
+            if (transaction.name && transaction.amount && transaction.name != 'Ya face' && transaction.name != 'ya face' && transaction.name != 'Ya Face') {
               navigation.navigate("MyBudget", transaction);
             }
             updateDescription("");
@@ -227,10 +220,7 @@ export default function AddTransaction({ navigation }) {
             stashTransaction.amount = Number(transaction.amount).toFixed(2);
             stashTransaction.name = transaction.name;
             stashTotal = stashTotal - parseFloat(transaction.amount)
-            if (transaction.name === 'Your Face') {
-              setIsVisible(true)
-            }
-            else if (transaction.name && transaction.amount) {
+            if (transaction.name && transaction.amount) {
               navigation.goBack();
               navigation.navigate("StashScreen", stashTransaction);
             }
@@ -279,6 +269,14 @@ const styles = StyleSheet.create({
 
   transactionType: {
     top: 30,
+  },
+  header: {
+    fontSize: 35,
+    textAlign: "center",
+    color: colors.text,
+    fontFamily: "Rubik_400Regular",
+    flex: 0.1,
+    paddingTop: 5,
   },
 });
 

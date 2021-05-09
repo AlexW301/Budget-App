@@ -100,7 +100,7 @@ export default function MyBudget({ navigation }) {
       saveMonthlyReport();
     }
 
-    if (createTransaction) {
+    if (createTransaction && transaction.name != 'Ya face' && transaction.name != 'ya face' && transaction.name != 'Ya Face') {
       // Give transaction unique id
       transaction.key = shortid.generate();
       // Push transaction to begining of array
