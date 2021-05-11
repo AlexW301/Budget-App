@@ -34,7 +34,7 @@ export default function FaceCamera() {
       type={type}
       ref={(ref) => (this.camera = ref)}
       onCameraReady={async () => {
-        let yourFace = await this.camera
+        await this.camera
           .takePictureAsync()
           .then((face) => {
             setYourFacePic(face.uri)

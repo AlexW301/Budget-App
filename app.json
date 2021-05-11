@@ -2,8 +2,8 @@
   "backgroundColor": "#0E6251",
   "expo": {
     "name": "Simple Saver",
-    "slug": "budgetapptest",
-    "version": "1.4.2",
+    "slug": "simplesaver",
+    "version": "1.5.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -19,9 +19,9 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.alex301.budgetapp",
+      "bundleIdentifier": "com.alex301.simplesaver",
       "googleServicesFile": "./GoogleService-Info.plist",
-      "buildNumber": "1.4.2"
+      "buildNumber": "1.5.0"
     },
     "android": {
       "adaptiveIcon": {
@@ -29,7 +29,7 @@
         "backgroundColor": "#0E6251"
       },
       "softwareKeyboardLayoutMode": "pan",
-      "package": "com.alex301.budgetapp",
+      "package": "com.alex301.simplesaver",
       "googleServicesFile": "./google-services.json"
     },
     "web": {

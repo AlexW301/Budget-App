@@ -88,7 +88,7 @@ export default function SettingsScreen({ route, navigation }) {
   const save = () => {
     Alert.alert(
       "WARNING: Do you wish to save your budget?",
-      "This will clear your current transactions from your home screen and save them to the history page",
+      "This will clear your current transactions from your home screen and save them to the history page. Your budget is automatically saved to the history page at the begining of a new month, only use this option if you need to.",
       [
         {
           text: "Yes, Save!",
@@ -108,6 +108,8 @@ export default function SettingsScreen({ route, navigation }) {
             currentBudget = myBudget;
             // Save changes
             saveData();
+            // Show changes (fixes the bug where first stash transaction after saving monthly budget replaces the month total item in history array)
+            displayData();
             // alert
             alert("Budget Saved!");
           },
@@ -206,7 +208,7 @@ export default function SettingsScreen({ route, navigation }) {
           save();
         }}
       >
-        <Text style={styles.itemText}>Save</Text>
+        <Text style={styles.itemText}>Save Monthly Budget</Text>
       </TouchableScale>
       <TouchableScale
         style={styles.item}
@@ -215,14 +217,6 @@ export default function SettingsScreen({ route, navigation }) {
         }}
       >
         <Text style={styles.itemText}>Reset</Text>
-      </TouchableScale>
-      <TouchableScale
-        style={styles.item}
-        onPress={() => {
-          navigation.navigate("Vintage");
-        }}
-      >
-        <Text style={styles.itemText}>Vintage</Text>
       </TouchableScale>
       <TouchableScale
         style={styles.item}

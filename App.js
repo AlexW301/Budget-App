@@ -39,7 +39,6 @@ import icon from './assets/adaptive-icon.png'
 import * as firebase from 'firebase';
 import ApiKeys from './constants/ApiKeys';
 import * as Analytics from 'expo-firebase-analytics';
-import Vintage from '../Budget-App/screens/budget-app-vintage';
 
   // Initialize Firebase
 
@@ -228,17 +227,6 @@ function SetBudgetScreen({ navigation, route }) {
         <Stack.Screen
           name="Settings"
           component={SettingsScreen}
-          options={{
-            headerTitle: () => 
-                <Header title="Settings" navigation={navigation}/>,
-            headerStyle: styles.header,
-            headerTitleStyle: styles.headerTitle,
-            headerTitleAlign: "center",
-          }}
-        />
-        <Stack.Screen
-          name="Vintage"
-          component={Vintage}
           options={{
             headerTitle: () => 
                 <Header title="Settings" navigation={navigation}/>,

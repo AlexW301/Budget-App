@@ -201,7 +201,7 @@ export default function AddTransaction({ navigation }) {
             stashTotal = stashTotal + parseFloat(transaction.amount)
             if (transaction.name && transaction.amount) {
               navigation.goBack();
-              navigation.navigate("StashScreen", stashTransaction);
+              navigation.navigate("StashScreen");
             }
             updateDescription("");
             updateAmount();

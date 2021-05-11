@@ -20,7 +20,7 @@ export default function HistoryScreen({ route, navigation }) {
 
 
   if (isFocused) {
-      
+    
   }
   if (historyArray.length === 0) {
     return (
@@ -171,7 +171,7 @@ export default function HistoryScreen({ route, navigation }) {
                     <ScrollView>
                       <Text style={styles.itemNameExpanded }>{historyArray[currentPosition].name}</Text>
                     </ScrollView>
-                    <Text style={styles.itemAmountExpanded }>{historyArray[currentPosition].type = "expense" ? "-$" : "$"}{historyArray[currentPosition].amount < 0 ? JSON.stringify(historyArray[currentPosition].amount).substring(2, historyArray[currentPosition].amount.length + 1) : historyArray[currentPosition].amount}</Text>
+                    <Text style={styles.itemAmountExpanded }>{historyArray[currentPosition].date.length < 7 ? historyArray[currentPosition].amount < 0 ? `-$${JSON.stringify(historyArray[currentPosition].amount).substring(2, historyArray[currentPosition].amount.length + 1)}` : `$${historyArray[currentPosition].amount}` : `-$${historyArray[currentPosition].amount}`}</Text>
                     <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
                       <Text style={{ color: "white" }}>Click to close</Text>
                     </TouchableOpacity>
@@ -182,7 +182,7 @@ export default function HistoryScreen({ route, navigation }) {
                     ? `${item.name}`
                     : `${item.name.substring(0, 12)}...`}</Text>
                 <View style={styles.buffer}>
-                  <Text style={item.amount.length < 7 ? styles.itemAmountHistory : styles.itemAmountHistoryLarge}>{historyArray[currentPosition].type = "expense" ? "-$" : "$"}{item.amount < 0 ? JSON.stringify(item.amount).substring(2, item.amount.length + 1) : item.amount}
+                  <Text style={item.amount.length < 7 ? styles.itemAmountHistory : styles.itemAmountHistoryLarge}>{item.date.length < 7 ? item.amount < 0 ? `-$${JSON.stringify(item.amount).substring(2, item.amount.length + 1)}` : `$${item.amount}` : `-$${item.amount}`}
                       </Text>
                 </View>
               </View>
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderColor: colors.text,
     backgroundColor: "#464646",
-    width: '90%'
+    width: '92%'
   },
 
   itemNameExpanded: {
