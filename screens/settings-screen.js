@@ -197,6 +197,22 @@ export default function SettingsScreen({ route, navigation }) {
       <TouchableScale
         style={styles.item}
         onPress={() => {
+          setIsVisible(true);
+        }}
+      >
+        <Text style={styles.itemText}>About Me</Text>
+      </TouchableScale>
+      <TouchableScale
+        style={styles.item}
+        onPress={() => {
+          Linking.openURL('https://venmo.com/code?user_id=2192143212871680281');
+        }}
+      >
+        <Text style={styles.itemText}>Support the Developer</Text>
+      </TouchableScale>
+      <TouchableScale
+        style={styles.item}
+        onPress={() => {
           navigation.navigate("SetBudget");
         }}
       >
@@ -211,20 +227,12 @@ export default function SettingsScreen({ route, navigation }) {
         <Text style={styles.itemText}>Save Monthly Budget</Text>
       </TouchableScale>
       <TouchableScale
-        style={styles.item}
+        style={styles.resetItem}
         onPress={() => {
           resetApp();
         }}
       >
-        <Text style={styles.itemText}>Reset</Text>
-      </TouchableScale>
-      <TouchableScale
-        style={styles.item}
-        onPress={() => {
-          setIsVisible(true);
-        }}
-      >
-        <Text style={styles.itemText}>About Me</Text>
+        <Text style={styles.resetItemText}>Reset</Text>
       </TouchableScale>
     </View>
   );
@@ -240,12 +248,12 @@ const styles = StyleSheet.create({
     paddingTop: 5,
   },
   item: {
-    flex: 0.07,
+    flex: 0.08,
     borderWidth: 2,
     borderColor: "white",
     justifyContent: "center",
     width: "90%",
-    marginBottom: 5,
+    marginBottom: 7,
     opacity: 1,
   },
   itemText: {
@@ -285,5 +293,21 @@ const styles = StyleSheet.create({
     fontFamily: "Rubik_700Bold",
     opacity: 1,
     marginTop: 15,
+  },
+  resetItem: {
+    flex: 0.08,
+    borderWidth: 2,
+    borderColor: "red",
+    justifyContent: "center",
+    width: "90%",
+    marginBottom: 7,
+    opacity: 1,
+  },
+  resetItemText: {
+    fontSize: 25,
+    textAlign: "center",
+    color: 'red',
+    fontFamily: "Rubik_400Regular",
+    opacity: 1,
   },
 });

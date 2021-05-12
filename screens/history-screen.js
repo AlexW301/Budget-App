@@ -68,7 +68,7 @@ export default function HistoryScreen({ route, navigation }) {
               paddingHorizontal: 10,
               textAlign: 'center',
               paddingBottom: 40
-            }} >You don't have any past transactions yet... they will start showing up here at the end of the month when you recieve your monthly report.</Text>
+            }} >You don't have any past transactions yet... they will start showing up here at the beginning of a new month when you recieve your monthly report.</Text>
             <Text style={{
               alignContent: "center",
               justifyContent: "center",
@@ -78,7 +78,7 @@ export default function HistoryScreen({ route, navigation }) {
               fontFamily: "Rubik_400Regular_Italic",
               paddingHorizontal: 10,
               textAlign: 'center'
-            }} >If you need to you can also manually save all your transactions to the history from the settings page using the "Save" button.</Text>
+            }} >If you need to you can also manually save all your transactions to the history from the settings page using the "Save Monthly Budget" button.</Text>
           </View>
          
         </View>

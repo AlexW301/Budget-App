@@ -187,7 +187,7 @@ function SetBudgetScreen({ navigation, route }) {
           component={SetBudget}
           options={{
             headerTitle: () => 
-                <Header title="Set My Budget" navigation={navigation}/>,
+                <Header title="Set Budget" navigation={navigation}/>,
             headerStyle: styles.header,
             headerTitleStyle: styles.headerTitle,
             headerTitleAlign: "center",
