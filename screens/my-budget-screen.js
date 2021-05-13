@@ -640,8 +640,8 @@ const styles = StyleSheet.create({
   },
 
   flatList: {
-    maxWidth: "95%",
-    width: 375,
+    maxWidth: "97%",
+    width: 425,
     flex: 1,
     maxHeight: "100%",
   },
@@ -727,6 +727,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderColor: colors.text,
     backgroundColor: "#464646",
+    width: '95%',
+    alignSelf: 'center'
   },
   transactionItemExpanded: {
     borderWidth: 4,

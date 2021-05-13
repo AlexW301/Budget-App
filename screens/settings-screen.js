@@ -306,7 +306,7 @@ const styles = StyleSheet.create({
   resetItemText: {
     fontSize: 25,
     textAlign: "center",
-    color: 'red',
+    color: 'white',
     fontFamily: "Rubik_400Regular",
     opacity: 1,
   },

@@ -277,7 +277,7 @@ function TabScreens() {
           name="MyBudget"
           component={HomeScreen}
           options={{ title: "My Budget", tabBarVisible: true,  tabBarIcon:({focused})=>(  
-            <Image source={icon} style={{width: focused ? 125 : 100, height: focused ? 125 : 100}}/>  
+            <Image source={icon} style={{width: focused ? 125 : 100, height: focused ? 135 : 100}}/>  
         )  
       }  }
         />
@@ -285,7 +285,7 @@ function TabScreens() {
           name="AddTransaction"
           component={AddTransactionScreen}
           options={{ title: "Add Transaction", tabBarIcon:({focused})=>(  
-            <Icon name="card-outline" color='#E8F8F5' size={focused ? 40 : 30}/>  
+            <Icon name="card-outline" color='#E8F8F5' size={focused ? 45 : 30}/>  
         )  
        }}
         />
@@ -328,6 +328,12 @@ export default function App() {
           // https://docs.expo.io/versions/latest/sdk/firebase-analytics/
           // Change this line to use another Mobile analytics SDK
           //await Analytics.setCurrentScreen(currentRouteName);
+          /*
+          await analytics().logScreenView({
+            screen_name: currentRouteName,
+            screen_class: currentRouteName
+          });
+          */
         }
 
         // Save the current route name for later comparison
@@ -336,14 +342,19 @@ export default function App() {
     >
       <Drawer.Navigator HeaderTitle="My Budget Screen" drawerType="slide" drawerStyle={{
     backgroundColor: "#0E6251",
-    width: 225,
+    width: 275
   }} drawerContentOptions={{
     activeTintColor: '#E8F8F5',
     activeBackgroundColor: '#0B5345',
     inactiveTintColor: '#E8F8F5',
     inactiveBackgroundColor: '#148F77',
+    style: {
+      width: '100%',
+    },
     labelStyle:{
-      marginLeft:5
+      marginLeft:5,
+      fontFamily: fontsLoaded ? 'Rubik_500Medium' : '',
+      fontSize: 19
     }
   }}>
       <Drawer.Screen name="Home" component={TabScreens} />
