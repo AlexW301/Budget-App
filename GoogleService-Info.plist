@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>721394073342-b3c0oligp3t24o6fq3jimjrfcs6kpifa.apps.googleusercontent.com</string>
+	<string>1098537456189-snioomjig2djg2j8diqtgkkhcj67uijp.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.721394073342-b3c0oligp3t24o6fq3jimjrfcs6kpifa</string>
+	<string>com.googleusercontent.apps.1098537456189-snioomjig2djg2j8diqtgkkhcj67uijp</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAPSTFknxwLaksOM8Dk7L4IRsB0y9T8QfA</string>
+	<string>AIzaSyAlZxEYwDAFe5o_qOMQEgcQh7e0KppENLI</string>
 	<key>GCM_SENDER_ID</key>
-	<string>721394073342</string>
+	<string>1098537456189</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.alex301.simplesaver</string>
 	<key>PROJECT_ID</key>
-	<string>budget-app-firebase-e606f</string>
+	<string>simple-saver</string>
 	<key>STORAGE_BUCKET</key>
-	<string>budget-app-firebase-e606f.appspot.com</string>
+	<string>simple-saver.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:721394073342:ios:47671fe569ae0bb312efaf</string>
+	<string>1:1098537456189:ios:f52a3801815b2412f2d054</string>
 </dict>
 </plist>

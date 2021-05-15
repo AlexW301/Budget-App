@@ -297,7 +297,7 @@ const styles = StyleSheet.create({
   resetItem: {
     flex: 0.08,
     borderWidth: 2,
-    borderColor: "red",
+    borderColor: "#ff6347",
     justifyContent: "center",
     width: "90%",
     marginBottom: 7,
@@ -306,7 +306,7 @@ const styles = StyleSheet.create({
   resetItemText: {
     fontSize: 25,
     textAlign: "center",
-    color: 'white',
+    color: '#ff6347',
     fontFamily: "Rubik_400Regular",
     opacity: 1,
   },

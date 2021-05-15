@@ -100,7 +100,12 @@ export default function MyBudget({ navigation }) {
       saveMonthlyReport();
     }
 
-    if (createTransaction && transaction.name != 'Ya face' && transaction.name != 'ya face' && transaction.name != 'Ya Face') {
+    if (
+      createTransaction &&
+      transaction.name != "Ya face" &&
+      transaction.name != "ya face" &&
+      transaction.name != "Ya Face"
+    ) {
       // Give transaction unique id
       transaction.key = shortid.generate();
       // Push transaction to begining of array
@@ -176,7 +181,7 @@ export default function MyBudget({ navigation }) {
             stashTransaction.name = monthNames[lastMonth.substring(0, 1)];
             stashTotal = stashTotal + parseFloat(stashTransaction.amount);
             //push stash transaction to stash array and update stash total
-            if (createTransaction && stashTransaction.type === "stash") {
+            if (createTransaction) {
               // Give stash transaction a unique key
               stashTransaction.key = shortid.generate();
               // Push stash transaction to array
@@ -261,11 +266,12 @@ export default function MyBudget({ navigation }) {
               stashTransaction.name = monthNames[lastMonth.substring(0, 1)];
               stashTotal = stashTotal + parseFloat(stashTransaction.amount);
               //push stash transaction to stash array and update stash total
-              if (createTransaction && stashTransaction.type === "stash") {
+              if (createTransaction) {
                 // Give stash transaction a unique key
                 stashTransaction.key = shortid.generate();
                 // Push stash transaction to array
                 stashArray.unshift(stashTransaction);
+                historyArray.unshift(stashTransaction);
                 // SAVE current data
                 saveData();
                 // Clear stash transaction variable
@@ -508,17 +514,23 @@ export default function MyBudget({ navigation }) {
                   }}
                 >
                   <Overlay
-                    backdropStyle={{opacity: .7}}
+                    backdropStyle={{ opacity: 0.7 }}
                     isVisible={isVisible}
                     ModalComponent={Modal}
                     onBackdropPress={() => setIsVisible(!isVisible)}
                     overlayStyle={styles.transactionItemExpanded}
                   >
-                    <Text style={styles.itemDateExpanded }>{transactionsArray[currentPosition].date}</Text>
+                    <Text style={styles.itemDateExpanded}>
+                      {transactionsArray[currentPosition].date}
+                    </Text>
                     <ScrollView>
-                      <Text style={styles.itemNameExpanded }>{transactionsArray[currentPosition].name}</Text>
+                      <Text style={styles.itemNameExpanded}>
+                        {transactionsArray[currentPosition].name}
+                      </Text>
                     </ScrollView>
-                    <Text style={styles.itemAmountExpanded }>-${transactionsArray[currentPosition].amount}</Text>
+                    <Text style={styles.itemAmountExpanded}>
+                      -${transactionsArray[currentPosition].amount}
+                    </Text>
                     <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
                       <Text style={{ color: "white" }}>Click to close</Text>
                     </TouchableOpacity>
@@ -727,8 +739,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderColor: colors.text,
     backgroundColor: "#464646",
-    width: '95%',
-    alignSelf: 'center'
+    width: "95%",
+    alignSelf: "center",
   },
   transactionItemExpanded: {
     borderWidth: 4,
@@ -738,7 +750,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderColor: colors.text,
     backgroundColor: "#464646",
-    width: '92%'
+    width: "92%",
   },
 
   itemNameExpanded: {
@@ -752,7 +764,7 @@ const styles = StyleSheet.create({
 
   itemAmountExpanded: {
     alignContent: "center",
-    justifyContent: 'center',
+    justifyContent: "center",
     textAlign: "right",
     marginTop: 10,
     fontSize: 40,

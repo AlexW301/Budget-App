@@ -277,7 +277,7 @@ function TabScreens() {
           name="MyBudget"
           component={HomeScreen}
           options={{ title: "My Budget", tabBarVisible: true,  tabBarIcon:({focused})=>(  
-            <Image source={icon} style={{width: focused ? 125 : 100, height: focused ? 135 : 100}}/>  
+            <Image source={icon} style={{width: focused ? 135 : 100, height: focused ? 135 : 100}}/>  
         )  
       }  }
         />
@@ -285,7 +285,7 @@ function TabScreens() {
           name="AddTransaction"
           component={AddTransactionScreen}
           options={{ title: "Add Transaction", tabBarIcon:({focused})=>(  
-            <Icon name="card-outline" color='#E8F8F5' size={focused ? 45 : 30}/>  
+            <Icon name="card-outline" color='#E8F8F5' size={focused ? 45 : 35}/>  
         )  
        }}
         />
