@@ -63,7 +63,7 @@ export default function StashScreen({ route, navigation }) {
             fontSize: 50,
             fontFamily: "Rubik_700Bold",
             color: colors.text,
-          }}>${Number(stashTotal).toFixed(2)}</Text>
+          }}>{stashTotal >= 0 ? `$${Number(stashTotal).toFixed(2)}` : `-$${Number(JSON.stringify(stashTotal).replace('-','')).toFixed(2)}`}</Text>
 
 <View style={{
               border: true,
@@ -131,7 +131,7 @@ export default function StashScreen({ route, navigation }) {
             fontSize: 50,
             fontFamily: "Rubik_700Bold",
             color: colors.text,
-          }}>${Number(stashTotal).toFixed(2)}</Text>
+          }}>{stashTotal >= 0 ? `$${Number(stashTotal).toFixed(2)}` : `-$${Number(JSON.stringify(stashTotal).replace('-','')).toFixed(2)}`}</Text>
         <View style={{ flex: 1, justifyContent: 'flex-start', backgroundColor: colors.main}}> 
         <FlatList
         style={styles.flatList}

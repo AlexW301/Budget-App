@@ -355,7 +355,7 @@ export default function MyBudget({ navigation }) {
             color: colors.text,
           }}
         >
-          ${Number(currentBudget).toFixed(2)}
+          {currentBudget >= 0 ? `$${Number(currentBudget).toFixed(2)}` : `-$${Number(JSON.stringify(currentBudget).replace('-','')).toFixed(2)}`}
         </Text>
         <View
           style={{
@@ -442,7 +442,7 @@ export default function MyBudget({ navigation }) {
             color: colors.text,
           }}
         >
-          ${Number(currentBudget).toFixed(2)}
+          {currentBudget >= 0 ? `$${Number(currentBudget).toFixed(2)}` : `-$${Number(JSON.stringify(currentBudget).replace('-','')).toFixed(2)}`}
         </Text>
         <View
           style={{

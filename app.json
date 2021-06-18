@@ -3,7 +3,7 @@
   "expo": {
     "name": "Simple Saver",
     "slug": "simplesaver",
-    "version": "1.5.2",
+    "version": "2.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -21,7 +21,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.alex301.simplesaver",
       "googleServicesFile": "./GoogleService-Info.plist",
-      "buildNumber": "1.5.2"
+      "buildNumber": "2.0.2"
     },
     "android": {
       "adaptiveIcon": {
@@ -30,6 +30,7 @@
       },
       "softwareKeyboardLayoutMode": "pan",
       "package": "com.alex301.simplesaver",
+      "versionCode": 5,
       "googleServicesFile": "./google-services.json"
     },
     "web": {

@@ -36,8 +36,8 @@ export default function AddTransaction({ navigation }) {
   const [currentDate, setCurrentDate] = useState("");
   const [isVisible, setIsVisible] = React.useState(false);
 
-  const [hasPermission, setHasPermission] = useState(null);
-    const [type, setType] = useState(Camera.Constants.Type.back);
+  //const [hasPermission, setHasPermission] = useState(null);
+  // const [type, setType] = useState(Camera.Constants.Type.back);
 
   useEffect(() => {
     var date = new Date().getDate(); //Current Date
@@ -47,12 +47,12 @@ export default function AddTransaction({ navigation }) {
     var min = new Date().getMinutes(); //Current Minutes
     var sec = new Date().getSeconds(); //Current Seconds
     setCurrentDate(month + "/" + date + "/" + year);
-
+    /*
     (async () => {
       const { status } = await Camera.requestPermissionsAsync();
       setHasPermission(status === 'granted');
     })();
-
+    */
   }, []);
 
   var date = new Date().getDate(); //Current Date
@@ -69,17 +69,6 @@ export default function AddTransaction({ navigation }) {
     <View
       style={{ flex: 1, alignItems: "center", backgroundColor: colors.main }}
     >
-      <Overlay
-      backdropStyle={{}}
-      isVisible={isVisible}
-      ModalComponent={Modal}
-      onBackdropPress={() => setIsVisible(!isVisible)}
-      overlayStyle={{width: '85%', height: 600, backgroundColor: "#117864"}}
-    >
-      
-      <Text style={styles.header}>YA FACE!</Text>
-      <FaceCamera />
-    </Overlay>
       <TouchableOpacity onPress={() => {Keyboard.dismiss()}} activeOpacity={1} style={{ alignItems: "center" }}>
       <View style={{ position: "relative", bottom: "0%", flex: .6, paddingTop: 10}}>
         <Text
@@ -176,10 +165,8 @@ export default function AddTransaction({ navigation }) {
             transaction.name = transaction.name;
             transaction.date = currentDate;
             transaction.amount = Number(transaction.amount).toFixed(2);
-            if (transaction.name === 'Ya face' || transaction.name === 'ya face' || transaction.name === 'Ya Face' ) {
-              setIsVisible(true)
-            }
-            if (transaction.name && transaction.amount && transaction.name != 'Ya face' && transaction.name != 'ya face' && transaction.name != 'Ya Face') {
+  
+            if (transaction.name && transaction.amount) {
               navigation.navigate("MyBudget", transaction);
             }
             updateDescription("");
@@ -298,4 +285,24 @@ const styles = StyleSheet.create({
             updateAmount();
           }}
         />
+
+
+
+if (transaction.name === 'Ya face' || transaction.name === 'ya face' || transaction.name === 'Ya Face' ) {
+              setIsVisible(true)
+            }
+
+
+          <Overlay
+      backdropStyle={{}}
+      isVisible={isVisible}
+      ModalComponent={Modal}
+      onBackdropPress={() => setIsVisible(!isVisible)}
+      overlayStyle={{width: '85%', height: 600, backgroundColor: "#117864"}}
+    >
+      
+      <Text style={styles.header}>YA FACE!</Text>
+      <FaceCamera />
+    </Overlay>
+
 */
