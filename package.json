@@ -12,7 +12,7 @@
     "@expo-google-fonts/rubik": "^0.1.0",
     "@firebase/app": "^0.6.20",
     "@firebase/util": "^0.4.1",
-    "@react-native-async-storage/async-storage": "^1.13.2",
+    "@react-native-async-storage/async-storage": "^1.15.3",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/bottom-tabs": "^5.11.7",
     "@react-navigation/drawer": "^5.12.4",
